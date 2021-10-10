@@ -19,19 +19,21 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" id="home" href="/">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="logout" href="/logout">Logout</a>
               </li>
-              
+              {% else %}
               <li class="nav-item">
                 <a class="nav-link" id="login" href="/login">Login</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="signUp" href="/signup">Sign Up</a>
               </li>
+              {% endif %}
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
