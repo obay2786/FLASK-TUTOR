@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -22,6 +22,13 @@ def home():
 
     return render_template("home.html", user=current_user)
 
+@views.route('/history', methods=['GET', 'POST'])
+@login_required
+def history():
+
+    return render_template("history.html", user=current_user)
+
+
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
@@ -34,3 +41,7 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+@views.route("/assets/<path:path>")
+def css(path):
+    return send_from_directory('assets', path)

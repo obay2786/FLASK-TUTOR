@@ -1,185 +1,285 @@
 
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <div class="container-xl">
-        <div class="row row-cards">
-            <div class="col-12">
-            </div>
-            <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Approval</h3>
-                  </div>
-                  <div class="card-body border-bottom py-3">
-                    <div class="d-flex">
-                      <div class="text-muted">
-                        Show
-                        <div class="mx-2 d-inline-block">
-                          <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                        </div>
-                        entries
-                      </div>
-                      <div class="ms-auto text-muted">
-                        Search:
-                        <div class="ms-2 d-inline-block">
-                          <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatable">
-                      <thead>
-                        <tr>
-                          
-                          <th>Location</th>
-                          <th>Company Name</th>
-                          <th>Requestor Name</th>
-                          <th>NIK</th>
-                          <th>Purpose</th>
-                          <th>Date</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-               
-                          <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>SELECT LOCATION</option>
-                            <option value="1">Loby A</option>
-                            <option value="2">Medan Room</option>
-                            <option value="3">Loby B</option>
-                          </select></td>
-                          <td>
-                            <span class="flag flag-country-us"></span>
-                            PT. Dharma Pasific
-                          </td>
-                          <td>
-                            Subiyanto
-                          </td>
-                          <td>
-                            2134123412
-                          </td>
-                          <td>
-                            <span class="badge bg-success me-1"></span> Working
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Status
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  View Detail
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>SELECT LOCATION</option>
-                            <option value="1">Loby A</option>
-                            <option value="2">Medan Room</option>
-                            <option value="3">Loby B</option>
-                          </select></td>
-                          <td>
-                            <span class="flag flag-country-gb"></span>
-                            CV. SIV Furniture
-                          </td>
-                          <td>
-                            Ayong
-                          </td>
-                          <td>
-                            23412341234
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Meeting
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                            <option selected>SELECT LOCATION</option>
-                            <option value="1">Loby A</option>
-                            <option value="2">Medan Room</option>
-                            <option value="3">Loby B</option>
-                          </select></td>
-                          <td>
-                            <span class="flag flag-country-de"></span>
-                            Bluewolf
-                          </td>
-                          <td>
-                            test
-                          </td>
-                          <td>
-                            123413243124123
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Overtime
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        
-                        
-                      </tbody>
-                    </table>
-                  </div>
-                  <div class="card-footer d-flex align-items-center">
-                    <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
-                    <ul class="pagination m-0 ms-auto">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                          <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
-                          prev
-                        </a>
+    <!--breadcrumb-->
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Pages</div>
+        <div class="ps-3">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+              <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+            </ol>
+          </nav>
+        </div>
+        
+      </div>
+      <!--end breadcrumb-->
+
+        <div class="card shadow-sm radius-10 border-0 mb-3">
+          <div class="card-body">
+            <div class="row g-3 align-items-center">
+              <div class="col-9">
+                <h5 class="mb-0">Transaction History</h5>
+              </div>
+              <div class="col-3">
+                <div class="d-flex">
+                  <div class="dropdown ms-auto">
+                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="javascript:;">Action</a>
                       </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#">5</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">
-                          next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
-                        </a>
+                      <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="javascript:;">Something else here</a>
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
+           </div>
+           <div class="table-responsive mt-4">
+            <table class="table align-middle mb-0 table-hover" id="Transaction-History">
+              <thead class="table-light">
+                <tr>
+                  <th>Payment Name</th>
+                  <th>Date & Time</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Michle Jhon</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #8547846</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 10, 2021</td>
+                  <td>+256.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Pauline Bird</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #9653248</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 12, 2021</td>
+                  <td>+566.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-warning text-dark w-100">In Progress</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Ralph Alva</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #7689524</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 14, 2021</td>
+                  <td>+636.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-danger w-100">Declined</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from John Roman</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #8335884</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 15, 2021</td>
+                  <td>+246.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from David Buckley</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #7865986</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 16, 2021</td>
+                  <td>+876.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-warning text-dark w-100">In Progress</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-8.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Lewis Cruz</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #8576420</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 18, 2021</td>
+                  <td>+536.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-9.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from James Caviness</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #3775420</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 18, 2021</td>
+                  <td>+536.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-10.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Peter Costanzo</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #3768920</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 19, 2021</td>
+                  <td>+536.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-11.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Johnny Seitz</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #9673520</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 20, 2021</td>
+                  <td>+86.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-danger w-100">Declined</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-12.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Lewis Cruz</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #8576420</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 18, 2021</td>
+                  <td>+536.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-13.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from David Buckley</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #8576420</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 22, 2021</td>
+                  <td>+854.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-warning text-dark w-100">In Progress</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="">
+                        <img src="assets/images/avatars/avatar-14.png" class="rounded-circle" width="46" height="46" alt="" />
+                      </div>
+                      <div class="ms-2">
+                        <h6 class="mb-1 font-14">Payment from Thomas Wheeler</h6>
+                        <p class="mb-0 font-13 text-secondary">Refrence Id #4278620</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Jan 18, 2021</td>
+                  <td>+536.00</td>
+                  <td>
+                    <div class="badge rounded-pill alert-success w-100">Completed</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <div class="card-body">
+              <h4>Where does it come from?</h4>
+              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.</p>
+              <h4>Where can I get some?</h4>
+              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+              <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable.</p>
+          </div>
         </div>
-    </div>
     {% endblock %}
