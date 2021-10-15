@@ -13,7 +13,7 @@ def create_app():
 
     from .models import User, Note
     db.create_all(app=app)
-    
+    #db.drop_all(app=app)
     from .views import views
     from .auth import auth
 

@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% block title %}signup{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <h3 align="center">Daftar</h3>
+    
+        <div class="form-group">
+            <label class="form-label">Images</label>
+            <input name="photo" required="required" class="form-control" accept="image/jpeg" type="file">
+        </div>
+        <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+</form>
+
+{% endblock %}

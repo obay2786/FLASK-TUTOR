@@ -113,8 +113,7 @@ $(function() {
 	})
 
 
-	new PerfectScrollbar(".header-message-list")
-    new PerfectScrollbar(".header-notifications-list")
+
 
 
 

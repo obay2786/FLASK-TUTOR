@@ -12,7 +12,12 @@ class Note(db.Model):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
+    userName = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
+    firstName = db.Column(db.String(150))
+    role = db.Column(db.String(150))
+    empID = db.Column(db.String(150),unique=True)
+    badgeID = db.Column(db.String(150))
+    depart = db.Column(db.String(150))
+    photo = db.Column(db.String(3000))
     notes = db.relationship('Note')

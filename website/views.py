@@ -6,9 +6,12 @@ import json
 
 views = Blueprint('views', __name__)
 
+
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+   
     if request.method == 'POST':
         note = request.form.get('note')
 
@@ -29,6 +32,19 @@ def history():
     return render_template("history.html", user=current_user)
 
 
+@views.route('/visitor', methods=['GET', 'POST'])
+@login_required
+def adminIndex():
+
+    return render_template("adminvisitordata.html", user=current_user)
+
+@views.route('/staff', methods=['GET', 'POST'])
+@login_required
+def staff():
+    if current_user.role == 'Admin':
+        return render_template("staff.html", user=current_user)
+    else:
+        return render_template("login.html", user=current_user)
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
