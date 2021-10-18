@@ -1,195 +1,237 @@
 
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Dashboard</div>
-        
-        
-      </div>
-      <!--end breadcrumb-->
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-4">
-        <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-secondary">Total Visitor Today</p>
-                        <h4 class="my-1">4805</h4>
-                        
-                    </div>
-                    <div class="widget-icon-large bg-gradient-purple text-white ms-auto"><i class="bi bi-basket2-fill"></i>
-                    </div>
-                </div>
-            </div>
-          </div>
-         </div>
-         <div class="col">
-            <div class="card radius-10">
-              <div class="card-body">
-                  <div class="d-flex align-items-center">
-                      <div>
-                          <p class="mb-0 text-secondary">This Months Visitor</p>
-                          <h4 class="my-1">24K</h4>
-                          
-                      </div>
-                      <div class="widget-icon-large bg-gradient-success text-white ms-auto"><i class="bi bi-currency-exchange"></i>
-                      </div>
-                  </div>
-              </div>
-          </div>
-         </div>
-         <div class="col">
-          <div class="card radius-10">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <p class="mb-0 text-secondary">Last Months Visitor</p>
-                        <h4 class="my-1">5.8K</h4>
-                        
-                    </div>
-                    <div class="widget-icon-large bg-gradient-danger text-white ms-auto"><i class="bi bi-people-fill"></i>
-                    </div>
-                </div>
-            </div>
-         </div>
-         </div>
-         
-      </div> <!--end row-->
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-             <h5 class="mb-0">Recent Visitors</h5>
-              <form class="ms-auto position-relative">
-                <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                <input class="form-control ps-5" type="text" placeholder="search">
-              </form>
-          </div>
-          <div class="table-responsive mt-3">
-            <table class="table align-middle">
-              <thead class="table-secondary">
-                <tr>
-                 <th>Status</th>
-                 <th>Visitor Name</th>
-                 <th>Purpose</th>
-                 <th>Host</th>
-                 <th>Time In</th>
-                 <th>Time Out</th>
-                 <th>Company Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                 <td><span class="badge bg-success">CHECKED IN</span></td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Thomas Hardy</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>89 Chicago UK</td>
-                  <td>Chicago</td>
-                  <td>8574201</td>
-                  <td>United Kingdom</td>
-                  <td>
-                    dharma
-                  </td>
-                </tr>
-                <tr>
-                 <td><span class="badge bg-success">CHECKED IN</span></td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Victoria Hardy</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>77 New York UK</td>
-                  <td>New York</td>
-                  <td>8956370</td>
-                  <td>United Kingdom</td>
-                  <td>
-                    89 Chicago UK
-                 </td>
-                </tr>
-                <tr>
-                 <td><span class="badge bg-danger">CHECKED OUT</span></td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Maria Anders</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>56 Poland UK</td>
-                  <td>Poland</td>
-                  <td>3265840</td>
-                  <td>United Kingdom</td>
-                  <td>
-                    89 Chicago UK
-                 </td>
-                </tr>
-                <tr>
-                 <td><span class="badge bg-danger">CHECKED OUT</span></td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Maria Anders</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>47-A Delhi India</td>
-                  <td>Delhi</td>
-                  <td>6535420</td>
-                  <td>India</td>
-                  <td>
-                    89 Chicago UK
-                 </td>
-                </tr>
-                <tr>
-                 <td>5</td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-5.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Martin Loother</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>37 B Columbo Shri Lanka</td>
-                  <td>Columbo</td>
-                  <td>9645230</td>
-                  <td>Shri Lanka</td>
-                  <td>
-                    89 Chicago UK
-                 </td>
-                </tr>
-                <tr>
-                 <td>6</td>
-                  <td>
-                    <div class="d-flex align-items-center gap-3 cursor-pointer">
-                       <img src="assets/images/avatars/avatar-6.png" class="rounded-circle" width="44" height="44" alt="">
-                       <div class="">
-                         <p class="mb-0">Martin Loother</p>
-                       </div>
-                    </div>
-                  </td>
-                  <td>68 New York UK</td>
-                  <td>New York</td>
-                  <td>7854230</td>
-                  <td>United Kingdom</td>
-                  <td>
-                   89 Chicago UK
-                 </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    <div class="pagetitle">
+      <div class="d-flex">
+        <div>
+          <h1>Dashboard</h1>
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </nav>
         </div>
+
+        
       </div>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+
+
+
+            <!-- Card -->
+            <div class="col-md-3">
+              <div class="card info-card monthly-card">
+                <div class="card-body">
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon d-flex align-items-center justify-content-center">
+                      <i class="bi bi-card-checklist"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>150</h6>
+                      <span class="small pt-2 ps-1">This Month Visitors</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Card -->
+
+            <!-- Card -->
+            <div class="col-md-3">
+              <div class="card info-card daily-card">
+                <div class="card-body">
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon d-flex align-items-center justify-content-center">
+                      <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>15</h6>
+                      <span class="small pt-2 ps-1">Daily Avg. Visitors</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Card -->
+
+            <!-- Card -->
+            <div class="col-md-3">
+              <div class="card info-card last-month-card">
+                <div class="card-body">
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon d-flex align-items-center justify-content-center">
+                      <i class="bi bi-clipboard-data"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>250</h6>
+                      <span class="small pt-2 ps-1">last Month's Visitors</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End Card -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="d-flex p-5">
+                <h3 class="me-auto">Recent Visitors</h3>
+
+                <div class="row w-75 ms-auto">
+                  
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <input class="form-control border-end-0 border" type="search" placeholder="Search Visitor" id="example-search-input">
+                      <span class="input-group-append">
+                          <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
+                              <i class="bi bi-search"></i>
+                          </button>
+                      </span>
+                    </div>
+                    <!-- <div class="form-group has-feedback has-feedback-left">
+                      <input type="text" class="form-control" placeholder="Search Visitor">
+                      <i class="bi bi-search form-control-feedback"></i>
+                    </div> -->
+                  </div>
+                  <div class="col-md-3 d-flex">
+                    <div class="my-auto mx-auto">
+                      <i class="bi bi-chevron-left"></i>
+                      <span class="mx-2">Sept. 10, 2018</span>
+                      <i class="bi bi-chevron-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+             
+              <!-- Table with stripped rows -->
+              <table class="table datatable" id="table-visitors">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <select class="form-select" aria-label="Default select example">
+                      <option selected>Status</option>
+                      <option value="1">CHECKED OUT</option>
+                      <option value="2">CHECKEN IN</option>
+                    
+                      </select>
+                    </th>
+                    <th scope="col">Visitor Name</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Time Out</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <select class="selectpicker form-control">
+                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
+                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
+                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19">EXPECTED</option>
+                      </select>                      
+                    </td>
+                    <td>
+                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> Brandon Jacob</span>
+                    </td>
+                    <td>Designer</td>
+                    <td>Darma</td>
+                    <td>2016-05-25</td>
+                    <td>2016-05-25</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select class="selectpicker form-control">
+                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
+                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
+                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19">EXPECTED</option>
+                      </select>
+                    </td>
+                    <td>
+                      <img src="assets/img/messages-1.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> Bridie Kessler</span>
+                    </td>
+                    <td>Developer</td>
+                    <td>Dharma</td>
+                    <td>2014-12-05</td>
+                    <td>2014-12-05</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select class="selectpicker form-control">
+                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
+                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey" selected>CHECKED OUT</option>
+                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19">EXPECTED</option>
+                      </select>
+                    </td>
+                    <td>
+                      <img src="assets/img/messages-2.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> Ashleigh Langosh</span>
+                    </td>
+                    <td>Finance</td>
+                    <td>Dharma</td>
+                    <td>2011-08-12</td>
+                    <td>2011-08-12</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select class="selectpicker form-control">
+                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
+                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
+                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19" selected>EXPECTED</option>
+                      </select>
+                    </td>
+                    <td>
+                      <img src="assets/img/messages-3.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> Angus Grady</span>
+                    </td>
+                    <td>HR</td>
+                    <td>34</td>
+                    <td>2012-06-11</td>
+                    <td>2012-06-11</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select class="selectpicker form-control">
+                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
+                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
+                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19" selected>EXPECTED</option>
+                      </select>
+                    </td>
+                    <td>
+                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> Raheem Lehner</span>
+                    </td>
+                    <td>Dynamic Division Officer</td>
+                    <td>47</td>
+                    <td>2011-04-19</td>
+                    <td>2011-04-19</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
     {% endblock %}

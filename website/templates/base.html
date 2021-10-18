@@ -1,166 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <!-- Required meta tags -->
+
+<head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="assets/images/favicon-32x32.png" type="image/png" />
-  <!--plugins-->
-  <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
-  <link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
-  <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
-  <!-- Bootstrap CSS -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/css/bootstrap-extended.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-  <link href="assets/css/icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <!-- loader-->
-	<link href="assets/css/pace.min.css" rel="stylesheet" />
+  <title>{% block title %}Home{% endblock %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!--Theme Styles-->
-  <link href="assets/css/dark-theme.css" rel="stylesheet" />
-  <link href="assets/css/light-theme.css" rel="stylesheet" />
-  <link href="assets/css/semi-dark.css" rel="stylesheet" />
-  <link href="assets/css/header-colors.css" rel="stylesheet" />
-    <title>{% block title %}Home{% endblock %}</title>
-  </head>
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@800&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+    
+  
   <style>
  
   </style>
   <body>
 
     <!--start wrapper-->
-    <div class="wrapper">
-      <!--start top header-->
-      <header class="top-header">        
-        <nav class="navbar navbar-expand">
-          <div class="mobile-toggle-icon d-xl-none">
-              <i class="bi bi-list"></i>
-            </div>
-            <div class="top-navbar d-none d-xl-block">
-            <h1 style="font-weight: 900;">VISITOR MANAGEMENT SYSTEM</h1>
+    <header id="header" class="header fixed-top d-flex align-items-center">
 
-            </div>
-            <div class="search-toggle-icon d-xl-none ms-auto">
-              <i class="bi bi-search"></i>
-            </div>
-            <form class="searchbar d-none d-xl-flex ms-auto">
-                <div class="position-absolute top-50 translate-middle-y search-icon ms-3"></div>
-               
-                <div class="position-absolute top-50 translate-middle-y d-block d-xl-none search-close-icon"><i class="bi bi-x-lg"></i></div>
-            </form>
-            <div class="top-navbar-right ms-3">
-              <ul class="navbar-nav align-items-center">
-              <li class="nav-item dropdown dropdown-large">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-                  <div class="user-setting d-flex align-items-center gap-1">
-                    <img src="assets/images/avatars/avatar-1.png" class="user-img" alt="">
-                    <div class="user-name d-none d-sm-block">{{ user.firstName}}</div>
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                     <a class="dropdown-item" href="#">
-                       <div class="d-flex align-items-center">
-                          <img src="assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="60" height="60">
-                          <div class="ms-3">
-                            <h6 class="mb-0 dropdown-user-name">{{ user.firstName}}</h6>
-                            <small class="mb-0 dropdown-user-designation text-secondary">{{ user.role }}</small>
-                          </div>
-                       </div>
-                     </a>
-                   </li>
-                   <li><hr class="dropdown-divider"></li>
-                   
-                    <li>
-                      <a class="dropdown-item" href="./logout">
-                         <div class="d-flex align-items-center">
-                           <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
-                           <div class="setting-text ms-3"><span>Logout</span></div>
-                         </div>
-                       </a>
-                    </li>
-                </ul>
-              </li>
-              
-              
-              </ul>
-              </div>
-        </nav>
-      </header>
-         <!--end top header-->
+      <div class="d-flex align-items-center justify-content-between">
+        <div>
+          <a href="./" class="logo d-flex align-items-center">
+            <img src="./assets/images/pn.svg" alt="">
+            
+          </a>
+          <h6 id="clock" class="mt-2"></h6>
+        </div>
+        <i class="bi bi-list toggle-sidebar-btn d-lg-none"></i>
+      </div><!-- End Logo -->
   
-         <!--start sidebar -->
-         <aside class="sidebar-wrapper" data-simplebar="true">
-            <div class="sidebar-header">
-              <div>
-                <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-              </div>
-              <div>
-                <h4 class="logo-text">VMS</h4>
-              </div>
-              <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
-              </div>
-            </div>
-            <!--navigation-->
-            <ul class="metismenu" id="menu">
-              <li>
-                <a href="/">
-                  <div class="parent-icon"><i class="bi bi-file-earmark-code"></i>
-                  </div>
-                  <div class="menu-title">Dashboard</div>
-                </a>
+      <nav class="header-nav ms-auto w-100">
+        <ul class="d-flex align-items-center w-100">
+  
+          <li class="nav-item d-none d-lg-block mx-auto">
+            <h2 class="mb-0 main-title">VISITOR MANAGEMENT SYSTEM</h2>
+          </li>
+  
+         
+  
+        
+  
+          <li class="nav-item dropdown pe-3">
+  
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <span class="d-none d-md-block dropdown-toggle ps-2">Samual Smith</span>
+            </a><!-- End Profile Iamge Icon -->
+  
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <li class="dropdown-header">
+                <h6>Samual Smith</h6>
+                <span>Front Desk Officer</span>
               </li>
               <li>
-                <a href="#" target="_blank">
-                  <div class="parent-icon"><i class="bi bi-headset"></i>
-                  </div>
-                  <div class="menu-title">Approval</div>
-                </a>
+                <hr class="dropdown-divider">
               </li>
-              <li>
-                <a href="#" target="_blank">
-                  <div class="parent-icon"><i class="bi bi-headset"></i>
-                  </div>
-                  <div class="menu-title">Report</div>
-                </a>
-              </li>
-              <li>
-                <a href="./visitor">
-                  <div class="parent-icon"><i class="bi bi-headset"></i>
-                  </div>
-                  <div class="menu-title">Visitors</div>
-                </a>
-              </li>
-              {% if user.is_authenticated and user.role == 'Admin' %}
-              <li>
-                <a href="./staff">
-                  <div class="parent-icon"><i class="bi bi-headset"></i>
-                  </div>
-                  <div class="menu-title">Admin</div>
-                </a>
-              </li>
-              {% endif %}
-              <li>
-                <a href="#" target="_blank">
-                  <div class="parent-icon"><i class="bi bi-headset"></i>
-                  </div>
-                  <div class="menu-title">Settings</div>
-                </a>
-              </li>
+  
               
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+  
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                  <i class="bi bi-gear"></i>
+                  <span>Account Settings</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+  
               
-            </ul>
-            <!--end navigation-->
-         </aside>
-         <!--end sidebar -->
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+  
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sign Out</span>
+                </a>
+              </li>
+  
+            </ul><!-- End Profile Dropdown Items -->
+          </li><!-- End Profile Nav -->
+  
+        </ul>
+      </nav><!-- End Icons Navigation -->
+  
+    </header><!-- End Header -->
+  
+          <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="./">
+          <!-- <i class="bi bi-grid"></i> -->
+          <center>
+            <img class="img-sidebar" src="assets/img/speedometer.png" alt="">
+            <span class="">Dashboard</span>
+          </center>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <center>
+            <img class="img-sidebar" src="assets/img/waiting-list.png" alt="">
+            <span class="">Waiting&nbsp;List</span>
+          </center>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <center>
+            <img class="img-sidebar" src="assets/img/stats.png" alt="">
+            <span class="">Reports</span>
+          </center>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link " href="./visitor">
+          <center>
+            <img class="img-sidebar" src="assets/img/group.png" alt="">
+            <span class="">Visitors</span>
+          </center>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="./staff">
+          <center>
+            <img class="img-sidebar" src="assets/img/user.png" alt="">
+            <span class="">Staff&nbsp;&nbsp;</span>
+          </center>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="#">
+          <center>
+            <img class="img-sidebar" src="assets/img/settings.png" alt="">
+            <span class="">Settings</span>
+          </center>
+        </a>
+      </li>
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
   
          <!--start content-->
-            <main class="page-content">
+         <main id="main" class="main">
               {% block content %} {% endblock %}
               
   
@@ -169,29 +184,64 @@
          <!--end page main-->
   
   
-         <!--start overlay-->
-          <div class="overlay nav-toggle-icon"></div>
-         <!--end overlay-->
-  
-          <!--Start Back To Top Button-->
-          <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-          <!--End Back To Top Button-->
-          
-          
-  
-    </div>
-    <!--end wrapper-->
-  
-  <!-- Bootstrap bundle JS -->
-  <script src="assets/js/bootstrap.bundle.min.js"></script>
-  <!--plugins-->
-  <script src="assets/js/jquery.min.js"></script>
-  <script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
-  <script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
-  <script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-  <script src="assets/js/pace.min.js"></script>
-  <!--app-->
-  <script src="assets/js/app.js"></script>
+    
+    
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span></span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.min.js" integrity="sha512-he8U4ic6kf3kustvJfiERUpojM8barHoz0WYpAUDWQVn61efpm3aVAD8RWL8OloaDDzMZ1gZiubF9OSdYBqHfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+<script>
+  setInterval(function() {
+      var momentNow = moment();
+      $('#clock').html(momentNow.format('DD MMMM YYYY | hh:mm:ss'));
+  }, 100);
+
+  var table_main = new simpleDatatables.DataTable("#table-visitors", {
+    searchable: false,
+    perPageSelect: false,
+    sortable: false
+  })
+
+  $('.selectpicker').selectpicker({'iconBase': 'bi' });
+
+  $('.selectpicker').on('change', function(e){
+    var color = $(this).find("option:selected").data('color');
+
+    $(this).next().find(".filter-option").css('color', color);
+  });
+
+  $('.selectpicker').each(function(i, obj) {
+      var color = $(this).find("option:selected").data('color');
+
+      $(this).next().find(".filter-option").css('color', color);
+      $(this).next().find(":after").css('color', color);
+
+  });
+    
+</script>
+
   
   </body>
 </html>

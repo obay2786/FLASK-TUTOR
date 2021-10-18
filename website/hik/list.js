@@ -65,7 +65,7 @@ function log(label, data) {
 
 const appKey = '24020018';
 const appSecret = '0iQIxRvSrg3KtVoZN2Ow';
-const baseUrl = 'https://10.89.1.7';
+const baseUrl = 'https://10.89.1.70';
 const openApi = new HikOpenapi({ appKey, appSecret, baseUrl, debug: true});
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 1;
 

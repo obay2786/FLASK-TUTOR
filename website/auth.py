@@ -109,19 +109,30 @@ def gambar():
 @auth.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        ok = uploadImages(request.files['photo'])
-        
-        hik.Add.add(current_app.root_path+'/hik/',ok)
-        
-        #return(ok)
-    else:
         personID = hik.List.list(current_app.root_path+'/hik/')
         #hik.Delete.delete(current_app.root_path+'/hik/',ok)
-        
+
         if personID['data']['total'] == 0:
             pass
         else:
             for perid in personID['data']['list']:
                 hik.Delete.delete(current_app.root_path+'/hik/',perid['personId'])
+                hik.Apply.apply(current_app.root_path+'/hik/')
+                print(perid['personId'])
+        ok = uploadImages(request.files['photo'])
+        
+        hik.Add.add(current_app.root_path+'/hik/',ok)
+        hik.Apply.apply(current_app.root_path+'/hik/')
+        #return(ok)
+    else:
+        personID = hik.List.list(current_app.root_path+'/hik/')
+        #hik.Delete.delete(current_app.root_path+'/hik/',ok)
+
+        if personID['data']['total'] == 0:
+            pass
+        else:
+            for perid in personID['data']['list']:
+                hik.Delete.delete(current_app.root_path+'/hik/',perid['personId'])
+                hik.Apply.apply(current_app.root_path+'/hik/')
                 print(perid['personId'])
     return render_template("gambar.html", user=current_user)

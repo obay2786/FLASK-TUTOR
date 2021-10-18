@@ -42,7 +42,7 @@ def adminIndex():
 @login_required
 def staff():
     if current_user.role == 'Admin':
-        return render_template("staff.html", user=current_user)
+        return render_template("addaccount.html", user=current_user)
     else:
         return render_template("login.html", user=current_user)
 

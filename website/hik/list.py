@@ -5,7 +5,7 @@ import requests
 class List:
   @staticmethod 
   def list(path):
-      baseUrl = 'https://10.89.1.7'
+      baseUrl = 'https://192.168.100.20'
 
 
       url = '/artemis/api/resource/v1/person/personList'
