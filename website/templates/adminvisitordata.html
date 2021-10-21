@@ -2,14 +2,8 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
   %}
   <div class="pagetitle">
-    <h1>Form Elements</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item">Forms</li>
-        <li class="breadcrumb-item active">Elements</li>
-      </ol>
-    </nav>
+    <h1>Visitors</h1>
+    
   </div><!-- End Page Title -->
 
   <section class="section">
@@ -57,18 +51,19 @@
                     </tr>
                   </thead>
                   <tbody>
+                    {% for datas in data.items %}
                     <tr>
-                      <td>#8562</td>
+                      <td>{{datas.id}}</td>
                       <td>
                         <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
+                           <img src="data:image/png;base64,{{ datas.photo }}" class="rounded-circle" width="44" height="44" alt="">
                            <div class="">
-                             <p class="mb-0">Thomas Hardy</p>
+                             <p class="mb-0">{{datas.nama}}</p>
                            </div>
                         </div>
                       </td>
-                      <td>$854.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
+                      <td>{{datas.nik}}</td>
+                      <td>{{datas.namaVendor}}</td>
                     
                       <td>
                         <div class="d-flex align-items-center gap-3 fs-6">
@@ -77,206 +72,27 @@
                           <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                         </div>
                       </td>
+                      
                     </tr>
-                    <tr>
-                      <td>#7568</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Victoria Hardy</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$653.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
-               
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#3265</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Maria Anders</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$152.00</td>
-                      <td><span class="badge rounded-pill alert-danger">Failed</span></td>
-               
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#8965</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Martin Loother</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$185.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
-             
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#4256</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-5.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Thomas Hardy</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$452.00</td>
-                      <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-       
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#3245</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-6.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Victoria Hardy</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$352.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
-      
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#6589</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Maria Anders</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$452.00</td>
-                      <td><span class="badge rounded-pill alert-danger">Failed</span></td>
-  
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#7542</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-8.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Martin Loother</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$254.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
-           
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#6850</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-9.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Victoria Hardy</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$145.00</td>
-                      <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-          
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#6534</td>
-                      <td>
-                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                           <img src="assets/images/avatars/avatar-10.png" class="rounded-circle" width="44" height="44" alt="">
-                           <div class="">
-                             <p class="mb-0">Thomas Hardy</p>
-                           </div>
-                        </div>
-                      </td>
-                      <td>$105.00</td>
-                      <td><span class="badge rounded-pill alert-success">Paid</span></td>
-            
-                      <td>
-                        <div class="d-flex align-items-center gap-3 fs-6">
-                          <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                          <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                          <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                        </div>
-                      </td>
-                    </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
              </div>
              <nav class="float-end mt-3">
               <ul class="pagination">
-                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item {% if data.page == 1 %} disabled {% endif %}"><a class="page-link" href="{{ url_for('views.visitor', page=data.prev_num) }}">Previous</a></li>
+                {% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                {% if data.page == page_num %}
+                <li class="page-item active"><a class="page-link" href="{{ url_for('views.visitor', page=page_num) }}">{{ page_num }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('views.visitor', page=page_num) }}">{{ page_num }}</a></li>
+                {% endif %}
+                {% else %}
+                ...
+                {% endif %}
+                {% endfor %}
+                <li class="page-item {% if data.page == data.pages %} disabled {% endif %}"><a class="page-link" href="{{ url_for('views.visitor', page=data.next_num) }}">Next</a></li>
               </ul>
             </nav>
           </div>

@@ -67,13 +67,13 @@
   
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle ps-2">Samual Smith</span>
+              <span class="d-none d-md-block dropdown-toggle ps-2">{{user.firstName}}</span>
             </a><!-- End Profile Iamge Icon -->
   
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li class="dropdown-header">
-                <h6>Samual Smith</h6>
-                <span>Front Desk Officer</span>
+                <h6>{{user.firstName}}</h6>
+                <span>{{user.role}}</span>
               </li>
               <li>
                 <hr class="dropdown-divider">
@@ -85,7 +85,7 @@
               </li>
   
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <a class="dropdown-item d-flex align-items-center" href="#">
                   <i class="bi bi-gear"></i>
                   <span>Account Settings</span>
                 </a>
@@ -100,7 +100,7 @@
               </li>
   
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="./signout">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
                 </a>
@@ -120,7 +120,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="./">
+        <a class="nav-link" href="./">
           <!-- <i class="bi bi-grid"></i> -->
           <center>
             <img class="img-sidebar" src="assets/img/speedometer.png" alt="">
@@ -137,7 +137,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link " href="./report">
           <center>
             <img class="img-sidebar" src="assets/img/stats.png" alt="">
             <span class="">Reports</span>
@@ -211,7 +211,10 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
-
+<script
+      type="text/javascript"
+      src="{{ url_for('static', filename='index.js') }}"
+    ></script>
 <script>
   setInterval(function() {
       var momentNow = moment();

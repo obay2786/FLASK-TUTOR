@@ -21,3 +21,16 @@ class User(db.Model, UserMixin):
     depart = db.Column(db.String(150))
     photo = db.Column(db.String(3000))
     notes = db.relationship('Note')
+
+class Visitor(db.Model):
+    
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    nik = db.Column(db.String(150),unique=True)
+    nama = db.Column(db.String(150))
+    namaVendor = db.Column(db.String(150))
+    asalVendor = db.Column(db.String(150))
+    email = db.Column(db.String(150))
+    gender = db.Column(db.String(150))
+    jabatan = db.Column(db.String(150))
+    photo = db.Column(db.Text())

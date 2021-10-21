@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, Visitor
 from . import db
 import json
-
+from sqlalchemy import asc, desc
 views = Blueprint('views', __name__)
 
 
@@ -31,32 +31,38 @@ def history():
 
     return render_template("history.html", user=current_user)
 
-
-@views.route('/visitor', methods=['GET', 'POST'])
+ROWS_PER_PAGE = 5
+@views.route('/visitor',methods=['GET', 'POST'])
 @login_required
-def adminIndex():
-
-    return render_template("adminvisitordata.html", user=current_user)
+def visitor():
+    
+    page = request.args.get('page', 1, type=int)
+    print(page)
+    #data = Visitor.query.paginate(page=page, per_page=ROWS_PER_PAGE)
+    data = Visitor.query.order_by('id').paginate(page=page, per_page=ROWS_PER_PAGE)
+    #print(data.reverse())
+    return render_template("adminvisitordata.html", user=current_user,data=data)
 
 @views.route('/staff', methods=['GET', 'POST'])
 @login_required
 def staff():
     if current_user.role == 'Admin':
-        return render_template("addaccount.html", user=current_user)
+        return render_template("staff.html", user=current_user)
     else:
         return render_template("login.html", user=current_user)
 
-@views.route('/delete-note', methods=['POST'])
-def delete_note():
-    note = json.loads(request.data)
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
-
-    return jsonify({})
+@views.route('/report')
+@login_required
+def report():
+    if current_user.role == 'Admin' or current_user.role == 'Security':
+        return render_template("report.html", user=current_user)
+    else:
+        return render_template("login.html", user=current_user)
+@views.route('/nama')
+@login_required
+def namadelete_note():
+    nama = {"nama":"novel martin harianto"}
+    return jsonify(nama)
 
 @views.route("/assets/<path:path>")
 def css(path):
