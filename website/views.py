@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory
+from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect
 from flask_login import login_required, current_user
-from .models import Note, Visitor
+from .models import Note, Visitor,User
 from . import db
 import json
-from sqlalchemy import asc, desc
+from sqlalchemy import asc, desc,text
 views = Blueprint('views', __name__)
 
 
@@ -39,17 +39,12 @@ def visitor():
     page = request.args.get('page', 1, type=int)
     print(page)
     #data = Visitor.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-    data = Visitor.query.order_by('id').paginate(page=page, per_page=ROWS_PER_PAGE)
-    #print(data.reverse())
+    data = Visitor.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    #data.reverse()
+    #data.items.reverse()
     return render_template("adminvisitordata.html", user=current_user,data=data)
 
-@views.route('/staff', methods=['GET', 'POST'])
-@login_required
-def staff():
-    if current_user.role == 'Admin':
-        return render_template("staff.html", user=current_user)
-    else:
-        return render_template("login.html", user=current_user)
+
 
 @views.route('/report')
 @login_required
@@ -67,3 +62,11 @@ def namadelete_note():
 @views.route("/assets/<path:path>")
 def css(path):
     return send_from_directory('assets', path)
+
+@views.route("/kiosk/<path:path>")
+def kiosk(path):
+    return send_from_directory('kiosk', path)
+
+@views.route("/kiosk/")
+def kioskindex():
+    return redirect("./index.html", code=302)

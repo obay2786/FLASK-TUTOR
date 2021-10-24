@@ -40,7 +40,9 @@ def getImage(url):
     r = requests.get(url)
     return saveB(BytesIO(r.content))
     
-
+def delSub(id):
+    r = requests.delete(f"https://api.jotform.com/submission/{id}?apiKey={jfToken}")
+    print(r.text)
 
 def insertData(data):
     engine = create_engine("mssql+pymssql://sa:123456@10.89.1.50:1433/VMS",future=True)
@@ -51,17 +53,30 @@ def insertData(data):
             data
             )
         conn.commit()
-
-        print(data)
-
+        delSub(data['id'])
+        print("inserttttttt")
+def updateData(data):
+    engine = create_engine("mssql+pymssql://sa:123456@10.89.1.50:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        conn.execute(
+            text("UPDATE visitor SET date=:date, nik=:nik, nama=:nama, namaVendor=:namaVendor, asalVendor=:asalVendor, email=:email, gender=:gender, jabatan=:jabatan, photo=:photo WHERE nik=:nik"),
+            data
+            )
+        conn.commit()
+        delSub(data['id'])
+        print('update'+data['nik']+ data['nama'])
 def getJFvisitor():
     r = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
     print(hasil)
     
     dictJF = {}
+    listJF =[]
     for data in hasil['content']:
         if data['status'] == 'ACTIVE':
+            dictJF['id'] = data['id']
+            print(dictJF['id'])
             dictJF['date'] = datetime.datetime.now()
             dictJF['nik'] = data['answers']['96']['answer']      
             print(data['answers']['96']['answer'])
@@ -88,10 +103,23 @@ def getJFvisitor():
             dictJF['photo'] = getImage(data['answers']['100']['answer'])
             print(data['answers']['100']['answer'])
             print('============================')
+            listJF.append(dictJF.copy())
+
             try:
-                insertData(dictJF)   
+                insertData(dictJF)
             except:
-                pass
+                updateData(dictJF)
+             
+            
+           
+            
+            
+    #listJF.reverse()  
+    #for hasil in listJF:
+        
+        #updateData(hasil)
+
+
 getJFvisitor()
 
 

@@ -16,10 +16,11 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     firstName = db.Column(db.String(150))
     role = db.Column(db.String(150))
+    email = db.Column(db.String(150))
     empID = db.Column(db.String(150),unique=True)
     badgeID = db.Column(db.String(150))
     depart = db.Column(db.String(150))
-    photo = db.Column(db.String(3000))
+    photo = db.Column(db.Text())
     notes = db.relationship('Note')
 
 class Visitor(db.Model):

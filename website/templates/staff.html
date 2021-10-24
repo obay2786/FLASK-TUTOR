@@ -11,7 +11,7 @@
       </button>
     </div><!-- End Page Title -->
 
-<!-- Modal -->
+<!-- Modal Add account-->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -22,67 +22,78 @@
             <h5 class="card-title">Add Account</h5>
 
             <!-- General Form Elements -->
-            <form>
-              <div class="row mb-3">
-                <label for="inputText" class="col-sm-2 col-form-label">Nama</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control">
-                </div>
-              </div>
+            <form method="post" enctype="multipart/form-data">
+              
               <div class="row mb-3">
                 <label for="inputText" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" id="userName" name="userName" placeholder="Enter user">
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" id="password1" name="password1">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Nama</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control"  id="name" name="name" placeholder="Enter Name">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control">
+                  <input type="email" class="form-control" id="email" name="email" >
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <label for="inputText" class="col-sm-2 col-form-label">Employee (ID)</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control">
+                  <input type="text" class="form-control" id="empID" name="empID" >
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <label for="inputText" class="col-sm-2 col-form-label">No Badge (ID)</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control">
+                  <input type="text" class="form-control" id="badgeID" name="badgeID" >
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Department</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control"  id="depart" name="depart">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Role</label>
+                <div class="col-sm-10">
+                  <select class="form-select" aria-label="Default select example" id="role" name="role" >
+                    <option selected>Silahkan Pilih Role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Host">Host</option>
+                    <option value="Security">Security</option>
+                  </select>
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="file" id="formFile">
+                  <input type="file"  class="form-control" id="photo" name="photo" accept="image/*" >
                 </div>
               </div>
               
 
-              
-             
-              
-
-             
-
               <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Role</label>
-                <div class="col-sm-10">
-                  <select class="form-select" aria-label="Default select example">
-                    <option selected>Silahkan Pilih Role</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Host</option>
-                    <option value="3">Security</option>
-                  </select>
-                </div>
-              </div>
-
-              
-
-              <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Submit Button</label>
+                
                 <div class="col-sm-10">
                   <button type="submit" class="btn btn-primary">Submit Form</button>
                 </div>
@@ -112,41 +123,41 @@
             <h5 class="card-title" id="editData">Edit Account</h5>
 
             <!-- General Form Elements -->
-            <form>
+            <form >
               <div class="row mb-3">
                 <label for="inputText" class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-group">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputText" class="col-sm-2 col-form-label">Username</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-group">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                  <input type="email" class="form-control">
+                  <input type="email" class="form-group">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control">
+                  <input type="password" class="form-group">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                  <input type="password" class="form-control">
+                  <input type="password" class="form-group">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                 <div class="col-sm-10">
-                  <input class="form-control" type="file" id="formFile">
+                  <input class="form-group" type="file" id="formFile">
                 </div>
               </div>
               
@@ -160,7 +171,7 @@
               <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Role</label>
                 <div class="col-sm-10">
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-group" aria-label="Default select example">
                     <option selected>Silahkan Pilih Role</option>
                     <option value="1">Admin</option>
                     <option value="2">Host</option>
@@ -193,9 +204,9 @@
 
     <section class="section">
       <div class="row">
-        
-        <div class="col-lg-10">
-
+      
+        <div class="col-lg-8">
+  
           <div class="card">
             <div class="card-header py-3">
               <div class="row g-3">
@@ -229,51 +240,32 @@
                     <thead class="table-light">
                       <tr>
                         <th>#ID</th>
-                        <th>Staff Name</th>
-                        <th>Username</th>
-                        <th>Role</th>
-                        <th>Department</th>
-                        <th>Reset Password</th>
-                        <th>Action</th>
+                      <th>Name</th>
+                      <th>User Name</th>
+                      <th>EMP ID</th>
+                      <th>Badge No</th>
+                      <th>Role</th>
+                      <th>Department</th>
+                      <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {% for datas in data.items %}
                       <tr>
-                        <td>#8562</td>
+                        <td>{{datas.id}}</td>
                         <td>
                           <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
+                             <img src="data:image/png;base64,{{ datas.photo }}" class="rounded-circle" width="44" height="44" alt="">
                              <div class="">
-                               <p class="mb-0">Thomas Hardy</p>
+                               <p class="mb-0">{{datas.firstName}}</p>
                              </div>
                           </div>
                         </td>
-                        <td>$854.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>14 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" onClick="nama()" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit"title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#7568</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-2.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Victoria Hardy</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$653.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>16 Apr 2020</td>
+                        <td>{{datas.userName}}</td>
+                        <td>{{datas.empID}}</td>
+                        <td>{{datas.badgeID}}</td>
+                        <td>{{datas.role}}</td>
+                        <td>{{datas.depart}}</td>
                         <td>
                           <div class="d-flex align-items-center gap-3 fs-6">
                             <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
@@ -281,200 +273,34 @@
                             <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
                           </div>
                         </td>
+                        
                       </tr>
-                      <tr>
-                        <td>#3265</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-3.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Maria Anders</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$152.00</td>
-                        <td><span class="badge rounded-pill alert-danger">Failed</span></td>
-                        <td>Master Card</td>
-                        <td>18 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#8965</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-4.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Martin Loother</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$185.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>19 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#4256</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-5.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Thomas Hardy</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$452.00</td>
-                        <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                        <td>Master Card</td>
-                        <td>20 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#3245</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-6.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Victoria Hardy</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$352.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>22 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#6589</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-7.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Maria Anders</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$452.00</td>
-                        <td><span class="badge rounded-pill alert-danger">Failed</span></td>
-                        <td>Master Card</td>
-                        <td>25 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#7542</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-8.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Martin Loother</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$254.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>28 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#6850</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-9.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Victoria Hardy</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$145.00</td>
-                        <td><span class="badge rounded-pill alert-warning">Pending</span></td>
-                        <td>Master Card</td>
-                        <td>30 Apr 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#6534</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 cursor-pointer">
-                             <img src="assets/images/avatars/avatar-10.png" class="rounded-circle" width="44" height="44" alt="">
-                             <div class="">
-                               <p class="mb-0">Thomas Hardy</p>
-                             </div>
-                          </div>
-                        </td>
-                        <td>$105.00</td>
-                        <td><span class="badge rounded-pill alert-success">Paid</span></td>
-                        <td>Master Card</td>
-                        <td>01 May 2020</td>
-                        <td>
-                          <div class="d-flex align-items-center gap-3 fs-6">
-                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-                          </div>
-                        </td>
-                      </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                </div>
                <nav class="float-end mt-3">
                 <ul class="pagination">
-                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  <li class="page-item {% if data.page == 1 %} disabled {% endif %}"><a class="page-link" href="{{ url_for('auth.staff', page=data.prev_num) }}">Previous</a></li>
+                  {% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                  {% if page_num %}
+                  {% if data.page == page_num %}
+                  <li class="page-item active"><a class="page-link" href="{{ url_for('auth.staff', page=page_num) }}">{{ page_num }}</a></li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="{{ url_for('auth.staff', page=page_num) }}">{{ page_num }}</a></li>
+                  {% endif %}
+                  {% else %}
+                  ...
+                  {% endif %}
+                  {% endfor %}
+                  <li class="page-item {% if data.page == data.pages %} disabled {% endif %}"><a class="page-link" href="{{ url_for('auth.staff', page=data.next_num) }}">Next</a></li>
                 </ul>
               </nav>
             </div>
           </div>
-
+  
         </div>
-
+  
       
       </div>
     </section
