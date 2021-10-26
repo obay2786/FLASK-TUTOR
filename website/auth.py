@@ -116,45 +116,50 @@ ROWS_PER_PAGE = 5
 def staff():
     if current_user.role == 'Admin':
         if request.method == 'POST':
-            userName = request.form.get('userName')
-            password = request.form.get('password')
-            password1 = request.form.get('password1')
-            name = request.form.get('name')
-            email = request.form.get('email')
-            empID = request.form.get('empID')
-            badgeID = request.form.get('badgeID')
-            depart = request.form.get('depart')
-            role = request.form.get('role')
-            photo = request.files['photo']
-            print(request.form)
-
-            user = User.query.filter_by(userName=userName).first()
-            if user:
-                flash('Username already exists.', category='error')
-            elif len(email) < 4:
-                flash('Email must be greater than 3 characters.', category='error')
-            elif len(name) < 2:
-                flash('Name must be greater than 1 character.', category='error')
-            elif password != password1:
-                flash('Passwords don\'t match.', category='error')
-            elif role == '':
-                flash('Role Wajib dipilih.', category='error')
-            elif len(empID) < 4:
-                flash('Employee ID must be greater than 3 characters.', category='error')
-            elif len(badgeID) < 4:
-                flash('Badge ID must be greater than 3 characters.', category='error')
-            elif len(depart) < 4:
-                flash('Department must be greater than 3 characters.', category='error')
-            elif photo == None:
-                flash('Department must be greater than 3 characters.', category='error')
+            if request.form.get('formEdit') == 'edit':
+                print('okeeeee')
             else:
-                photo = saveB(request.files['photo'])
-                new_user = User(userName=userName, firstName=name, email=email,role=role,empID=empID,badgeID=badgeID,depart=depart,photo=photo, password=generate_password_hash(
-                password, method='sha256'))
-                db.session.add(new_user)
-                db.session.commit()
-                flash('Account created!', category='success')
-                return redirect(url_for('auth.staff'))
+
+                userName = request.form.get('userName')
+                password = request.form.get('password')
+                password1 = request.form.get('password1')
+                name = request.form.get('name')
+                email = request.form.get('email')
+                empID = request.form.get('empID')
+                badgeID = request.form.get('badgeID')
+                depart = request.form.get('depart')
+                role = request.form.get('role')
+                photo = request.files['photo']
+                print(request.form)
+                print(photo.content_length)
+
+                user = User.query.filter_by(userName=userName).first()
+                if user:
+                    flash('Username already exists.', category='error')
+                elif len(email) < 4:
+                    flash('Email must be greater than 3 characters.', category='error')
+                elif len(name) < 2:
+                    flash('Name must be greater than 1 character.', category='error')
+                elif password != password1:
+                    flash('Passwords don\'t match.', category='error')
+                elif role == '':
+                    flash('Role Wajib dipilih.', category='error')
+                elif len(empID) < 6:
+                    flash('Employee ID must be greater than 3 characters.', category='error')
+                elif len(badgeID) < 6:
+                    flash('Badge ID must be greater than 3 characters.', category='error')
+                elif len(depart) < 2:
+                    flash('Department must be greater than 3 characters.', category='error')
+                elif photo.content_length == 1:
+                    flash('Photo harus diisi', category='error')
+                else:
+                    photo = saveB(request.files['photo'])
+                    new_user = User(userName=userName, firstName=name, email=email,role=role,empID=empID,badgeID=badgeID,depart=depart,photo=photo, password=generate_password_hash(
+                    password, method='sha256'))
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash('Account created!', category='success')
+                    return redirect(url_for('auth.staff'))
         
             
         page = request.args.get('page', 1, type=int)

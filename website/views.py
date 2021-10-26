@@ -70,3 +70,34 @@ def kiosk(path):
 @views.route("/kiosk/")
 def kioskindex():
     return redirect("./index.html", code=302)
+
+
+@views.route('/delstaff', methods=['POST'])
+def delStaff():
+    data = json.loads(request.data)
+    staffID= data['id']
+    print(staffID)
+    staff = User.query.filter_by(id=staffID).first()
+    #if staff:
+       # db.session.delete(staff)
+        #db.session.commit()
+    print(staff.id)
+    return jsonify({})
+
+@views.route('/getstaff', methods=['POST'])
+def getStaff():
+    data = json.loads(request.data)
+    staffID = data['id']
+    print(staffID)
+    staff = User.query.filter_by(id=staffID).first()
+    data = {}
+    data['id'] = staff.id
+    data['userName'] = staff.userName
+    data['firstName'] = staff.firstName
+    data['email'] = staff.email
+    data['empID'] = staff.empID
+    data['badgeID'] = staff.badgeID
+    data['role'] = staff.role
+    data['depart'] = staff.depart
+    data['photo'] = staff.photo
+    return jsonify(data)
