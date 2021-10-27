@@ -20,7 +20,8 @@ function getStaff(id){
     return response.json()
   }).then((data) => {
     
-    document.getElementById("editH").innerHTML = data.userName;
+    document.getElementById("editH").innerHTML = "Username : " + data.userName;
+    document.getElementById("userNamee").value = data.userName;
     document.getElementById("namee").value = data.firstName;
     document.getElementById("emaile").value = data.email;
     document.getElementById("rolee").innerHTML = `<option value="${data.role}">${data.role}</option>
@@ -32,3 +33,18 @@ function getStaff(id){
     document.getElementById("departe").value = data.depart;
   });
 }
+function editPhoto(id){
+  fetch("/getstaff", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    
+    document.getElementById("editPhoto").src = "data:image/png;base64,"+data.photo;
+    document.getElementById("editH2").innerHTML = "Username : " + data.userName;
+    document.getElementById("userNamePhoto").value = data.userName;
+    
+  });
+}
+//data:image/png;base64,{{ user.photo }}

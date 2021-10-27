@@ -117,6 +117,38 @@ def staff():
     if current_user.role == 'Admin':
         if request.method == 'POST':
             if request.form.get('formEdit') == 'edit':
+                print(request.form)
+                data ={}
+                data['userName'] = request.form.get('userNamee')
+                
+                data['name'] = request.form.get('name')
+                data['email'] = request.form.get('email')
+                data['empID'] = request.form.get('empID')
+                data['badgeID'] = request.form.get('badgeID')
+                data['depart'] = request.form.get('depart')
+                data['role'] = request.form.get('role')
+                print(data)
+                dataQ = User.query.filter_by(userName=data['userName']).first()
+                dataQ.firstName = data['name']
+                dataQ.email = data['email']
+                dataQ.empID = data['empID']
+                dataQ.badgeID = data['badgeID']
+                dataQ.depart = data['depart']
+                dataQ.role = data['role'] 
+                db.session.commit()
+                print('okeeeee')
+            elif request.form.get('formEdit') == 'editPhoto':
+                print(request.form)
+                data ={}
+                data['userName'] = request.form.get('userNamee')
+                data['photo'] = saveB(request.files['photo'])
+                
+                
+                print(data)
+                dataQ = User.query.filter_by(userName=data['userName']).first()
+                dataQ.photo = data['photo']
+                
+                db.session.commit()
                 print('okeeeee')
             else:
 

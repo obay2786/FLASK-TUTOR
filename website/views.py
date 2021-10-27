@@ -78,9 +78,9 @@ def delStaff():
     staffID= data['id']
     print(staffID)
     staff = User.query.filter_by(id=staffID).first()
-    #if staff:
-       # db.session.delete(staff)
-        #db.session.commit()
+    if staff:
+        db.session.delete(staff)
+        db.session.commit()
     print(staff.id)
     return jsonify({})
 

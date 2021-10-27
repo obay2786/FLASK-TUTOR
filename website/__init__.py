@@ -7,7 +7,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'kunci rahasia'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mssql+pymssql://sa:123456@10.89.1.50:1433/VMS'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
