@@ -9,6 +9,13 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class Transaksi(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timeCheckin = db.Column(db.DateTime(timezone=True), default=func.now())
+    timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
+    badge = db.Column(db.String(150))
+    nik = db.Column(db.String(150), db.ForeignKey('visitor.nik'))
+    
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,3 +42,4 @@ class Visitor(db.Model):
     gender = db.Column(db.String(150))
     jabatan = db.Column(db.String(150))
     photo = db.Column(db.Text())
+    transaksi = db.relationship('Transaksi')

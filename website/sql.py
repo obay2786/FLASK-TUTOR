@@ -45,7 +45,7 @@ def delSub(id):
     print(r.text)
 
 def insertData(data):
-    engine = create_engine("mssql+pymssql://sa:123456@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(

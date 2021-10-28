@@ -48,3 +48,18 @@ function editPhoto(id){
   });
 }
 //data:image/png;base64,{{ user.photo }}
+
+function editPass(id){
+  fetch("/getstaff", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    
+    
+    document.getElementById("editH3").innerHTML = "Username : " + data.userName;
+    document.getElementById("userNamePass").value = data.userName;
+    
+  });
+}

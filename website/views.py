@@ -71,6 +71,17 @@ def kiosk(path):
 def kioskindex():
     return redirect("./index.html", code=302)
 
+@views.route("/checked/<path:path>")
+def cek(path):
+    return send_from_directory('checked', path)
+
+@views.route("/check-in")
+def kcheckin():
+    return redirect("./checked/check-in.html", code=302)
+
+@views.route("/check-out")
+def kcheckout():
+    return redirect("./checked/check-out.html", code=302)
 
 @views.route('/delstaff', methods=['POST'])
 def delStaff():
@@ -100,4 +111,20 @@ def getStaff():
     data['role'] = staff.role
     data['depart'] = staff.depart
     data['photo'] = staff.photo
+    return jsonify(data)
+
+@views.route('/getvisitor', methods=['POST'])
+def getVisitor():
+    data = json.loads(request.data)
+    nik = data['nik']
+    print(nik)
+    visitor = Visitor.query.filter_by(nik=nik).first()
+    print(visitor)
+    data = {}
+    data['nik'] = visitor.nik
+    data['nama'] = visitor.nama
+    data['badge'] = '111'
+    data['company'] = visitor.namaVendor
+    data['photo'] = visitor.photo
+    
     return jsonify(data)
