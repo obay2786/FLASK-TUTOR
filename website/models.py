@@ -15,6 +15,7 @@ class Transaksi(db.Model):
     timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
     badge = db.Column(db.String(150))
     nik = db.Column(db.String(150), db.ForeignKey('visitor.nik'))
+    status = db.Column(db.String(150))
     
 
 class User(db.Model, UserMixin):
