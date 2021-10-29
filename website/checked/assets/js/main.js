@@ -111,7 +111,9 @@
 
 
 })();
-
+function rl(){
+  location.reload(); 
+}
 function getVisitor(nik){
   fetch("/getvisitor", {
     method: "POST",
@@ -130,6 +132,20 @@ function getVisitor(nik){
     var today = new Date();
     var time = today.toTimeString().split(' ')[0];
     document.getElementById("time1").innerHTML = time;
-     
+
+    document.getElementById("statusA1").innerHTML = "Visitor need to scan their face at thermal \<br\> camera to check temperature";
+    document.getElementById("imgA1").src = "assets/img/step2A.png";
+    document.getElementById("imgB1").src = "assets/img/step2B.png";
+    document.getElementById("statusB1").innerHTML = "Scan wajah anda pada \<br\> Thermal Camera \<br\> untuk cek suhu";
+    document.getElementById("imgC1").src = "";
+    
+    document.getElementById("bubble-1").classList.remove('green-text');
+    document.getElementById("step-1").classList.remove('current');
+    document.getElementById("bubble-2").classList.add('green-text');
+    document.getElementById("step-2").classList.add('current');
+    document.getElementById('txtBox1').id = "txtBox2";
+    setTimeout(rl,10000)
+
+    
   });
 }

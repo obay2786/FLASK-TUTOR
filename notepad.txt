@@ -1,0 +1,38 @@
+Step2
+ID:statusA1		Visitor need to scan their face at thermal
+			<br>camera to check temperature
+
+ID:imgA1  		group-therapy-illustration_74855-5516.jpg change to step2A.png
+
+ID:imgB1		qr-code.png change to step2B.png
+
+
+ID:statusB1		Scan wajah anda pada
+			<br>Thermal Canera
+			<br>untuk cek suhu
+
+ID:imgC1		Remove/disable
+
+
+
+          id="bubble-1"
+          Visitor need to scan QR code
+              
+  
+                <div class="speech-bubble ms-auto" id="bubble-3">
+                  Visitor has been checked in!
+                </div>
+              </div>
+  
+              <div class="arrow-steps clearfix">
+                <div class="step current" id="step-1" data-step="1"> <span> Step 1</span> </div>
+                <div class="step" id="step-2" data-step="2"> <span>Step 2</span> </div>
+                <div class="step" id="step-3" data-step="3"> <span> Step 3</span> </div>
+              </div>
+  
+              <div class="bottom-bubble mt-4">
+                <div class="speech-bubble-bottom green-text" id="bubble-2">
+                  Visitor need to scan face at thermal camera to check temperature
+                </div>
+              </div>
+

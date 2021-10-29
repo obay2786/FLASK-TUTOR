@@ -33,9 +33,7 @@
 
     
   
-  <style>
- 
-  </style>
+  
   <body>
 
     <!--start wrapper-->
@@ -115,10 +113,11 @@
     </header><!-- End Header -->
   
           <!-- ======= Sidebar ======= -->
+          
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
-
+      {% if user.role == "Admin" or user.role == "Security"  %}
       <li class="nav-item">
         <a class="nav-link" href="./">
           <!-- <i class="bi bi-grid"></i> -->
@@ -129,7 +128,7 @@
         </a>
       </li><!-- End Dashboard Nav -->
       <li class="nav-item">
-        <a class="nav-link " href="#">
+        <a class="nav-link " href="./waiting">
           <center>
             <img class="img-sidebar" src="assets/img/waiting-list.png" alt="">
             <span class="">Waiting&nbsp;List</span>
@@ -153,6 +152,27 @@
           </center>
         </a>
       </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="./">
+          <!-- <i class="bi bi-grid"></i> -->
+          <center>
+            <img class="img-sidebar" src="assets/img/speedometer.png" alt="">
+            <span class="">Approval</span>
+          </center>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      <li class="nav-item">
+        <a class="nav-link " href="./history">
+          <center>
+            <img class="img-sidebar" src="assets/img/stats.png" alt="">
+            <span class="">Aproval History</span>
+          </center>
+        </a>
+      </li>
+      {% endif  %}
+      
+      {% if user.role == "Admin" %}
       <li class="nav-item">
         <a class="nav-link " href="./staff">
           <center>
@@ -161,6 +181,8 @@
           </center>
         </a>
       </li>
+      
+      {% endif %}
       <li class="nav-item">
         <a class="nav-link " href="#">
           <center>

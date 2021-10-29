@@ -4,7 +4,9 @@ from .models import Note, Visitor,User
 from . import db
 import json
 from sqlalchemy import asc, desc,text
+import requests
 views = Blueprint('views', __name__)
+
 
 
 
@@ -24,6 +26,12 @@ def home():
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
+
+@views.route('/waiting', methods=['GET', 'POST'])
+@login_required
+def waiting():
+
+    return render_template("waiting.html", user=current_user)
 
 @views.route('/history', methods=['GET', 'POST'])
 @login_required
@@ -128,3 +136,4 @@ def getVisitor():
     data['photo'] = visitor.photo
     
     return jsonify(data)
+
