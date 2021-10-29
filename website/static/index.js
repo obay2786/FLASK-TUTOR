@@ -63,3 +63,46 @@ function editPass(id){
     
   });
 }
+
+//getvisitor
+function getVisitor(nik){
+  
+  fetch("/getvisitor", {
+    method: "POST",
+    body: JSON.stringify({ nik: nik }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    
+    document.getElementById("idVisitor").value = data.id;
+    document.getElementById("nameedit").value = data.nama;
+    document.getElementById("nikedit").value = data.nik;
+    document.getElementById("companyedit").value = data.company;
+
+  });
+}
+
+function delVisitor(id) {
+ 
+  fetch("/delvisitor", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((_res) => {
+    window.location.href = "/visitor";
+  });
+}
+
+function editPhotoV(id){
+  fetch("/getvisitor", {
+    method: "POST",
+    body: JSON.stringify({ nik: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    
+    document.getElementById("editPhoto").src = "data:image/png;base64,"+data.photo;
+    document.getElementById("editH2").innerHTML = "Username : " + data.nama;
+    document.getElementById("visitorID").value = data.id;
+    
+  });
+}

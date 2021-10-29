@@ -83,12 +83,15 @@ def getJFvisitor():
 
             dictJF['nama'] = data['answers']['95']['answer'] 
             print(data['answers']['95']['answer'])
+            if data['answers']['115']['answer'] == 'OTHER':
 
-            dictJF['namaVendor'] = data['answers']['20']['answer'] 
-            print(data['answers']['20']['answer'])
+                dictJF['namaVendor'] = data['answers']['20']['answer'] 
+            else:
+                dictJF['namaVendor'] = data['answers']['115']['answer'] 
+            print(data['answers']['115']['answer'])
 
-            dictJF['asalVendor'] = data['answers']['21']['answer'] 
-            print(data['answers']['21']['answer'])
+            dictJF['asalVendor'] = data['answers']['117']['answer'] 
+            print(data['answers']['117']['answer'])
 
             dictJF['email'] = data['answers']['93']['answer'] 
             print(data['answers']['93']['answer'])

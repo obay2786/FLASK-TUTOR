@@ -3,8 +3,11 @@ from flask_login import login_required, current_user
 from .models import Note, Visitor,User
 from . import db
 import json
+import base64
 from sqlalchemy import asc, desc,text
 import requests
+from PIL import Image, ImageOps
+from io import BytesIO
 views = Blueprint('views', __name__)
 
 
@@ -39,11 +42,54 @@ def history():
 
     return render_template("history.html", user=current_user)
 
+def saveB(photo):
+  
+    img = Image.open(photo)
+    img = ImageOps.exif_transpose(img)
+    output_size = (600, 600)
+    img.thumbnail(output_size)
+    buffered = BytesIO()
+    img.save(buffered, format="JPEG")
+    img_str = base64.b64encode(buffered.getvalue())
+    
+    return img_str
+
+
 ROWS_PER_PAGE = 5
 @views.route('/visitor',methods=['GET', 'POST'])
 @login_required
 def visitor():
-    
+    if request.method == 'POST':
+        if request.form.get('formEdit') == 'edit':
+            print(request.form)
+            data ={}
+            
+            data['id'] = request.form.get('id')
+            data['nama'] = request.form.get('nama')
+            data['nik'] = request.form.get('nik')
+            data['company'] = request.form.get('company')
+            
+            print(data)
+            dataQ = Visitor.query.filter_by(id=data['id']).first()
+            dataQ.nama = data['nama']
+            dataQ.nik = data['nik']
+            dataQ.namaVendor = data['company']
+           
+            db.session.commit()
+            print('okeeeee')
+        elif request.form.get('formEdit') == 'editPhoto':
+            print(request.form)
+            data ={}
+            data['id'] = request.form.get('id')
+            data['photo'] = saveB(request.files['photo'])
+            
+            
+            print(data)
+            dataQ = Visitor.query.filter_by(id=data['id']).first()
+            dataQ.photo = data['photo']
+            
+            db.session.commit()
+            print('okeeeee')
     page = request.args.get('page', 1, type=int)
     print(page)
     #data = Visitor.query.paginate(page=page, per_page=ROWS_PER_PAGE)
@@ -129,6 +175,7 @@ def getVisitor():
     visitor = Visitor.query.filter_by(nik=nik).first()
     print(visitor)
     data = {}
+    data['id'] = visitor.id
     data['nik'] = visitor.nik
     data['nama'] = visitor.nama
     data['badge'] = '111'
@@ -137,3 +184,14 @@ def getVisitor():
     
     return jsonify(data)
 
+@views.route('/delvisitor', methods=['POST'])
+def delVisitor():
+    data = json.loads(request.data)
+    visitorID= data['id']
+    print(visitorID)
+    visitorD = Visitor.query.filter_by(id=visitorID).first()
+    if visitorD:
+        db.session.delete(visitorD)
+        db.session.commit()
+    
+    return jsonify({})

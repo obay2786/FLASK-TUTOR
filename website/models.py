@@ -14,7 +14,7 @@ class Transaksi(db.Model):
     timeCheckin = db.Column(db.DateTime(timezone=True), default=func.now())
     timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
     badge = db.Column(db.String(150))
-    nik = db.Column(db.String(150), db.ForeignKey('visitor.nik'))
+    nik = db.Column(db.String(150))
     status = db.Column(db.String(150))
     
 
@@ -43,4 +43,4 @@ class Visitor(db.Model):
     gender = db.Column(db.String(150))
     jabatan = db.Column(db.String(150))
     photo = db.Column(db.Text())
-    transaksi = db.relationship('Transaksi')
+   

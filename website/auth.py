@@ -9,6 +9,7 @@ from PIL import Image, ImageOps
 import base64
 from io import BytesIO
 from .hik import hik
+from sqlalchemy import asc, desc,text
 auth = Blueprint('auth',__name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -214,10 +215,11 @@ def staff():
             
         page = request.args.get('page', 1, type=int)
         print(page)
+       
         #data = Visitor.query.paginate(page=page, per_page=ROWS_PER_PAGE)
-        data = User.query.order_by('id').paginate(page=page, per_page=ROWS_PER_PAGE)
+        data = User.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         #data.reverse()
-        data.items.reverse()
+        
         return render_template("staff.html", user=current_user,data=data)
     else:
         return render_template("login.html", user=current_user)
