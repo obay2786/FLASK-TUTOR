@@ -19,11 +19,21 @@ class Transaksi(db.Model):
 
 class Permit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timeCheckin = db.Column(db.DateTime(timezone=True), default=func.now())
-    timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
-    badge = db.Column(db.String(150))
-    nik = db.Column(db.String(150))
-    status = db.Column(db.String(150))
+    subDate = db.Column(db.DateTime(timezone=True)   
+    namaVendor = db.Column(db.String(150))
+    startDate = db.Column(db.DateTime(timezone=True)
+    endDate = db.Column(db.DateTime(timezone=True)
+    purpose = db.Column(db.String(100))
+    location = db.Column(db.String(100))
+    supplyBarang = db.Column(db.String(500)) #dict
+    permitNo = db.Column(db.String(150))
+    desk = db.Column(db.String(150))
+    anggota = db.Column(db.String(1000)) #dict
+    email = db.Column(db.String(150))
+    host = db.Column(db.String(150))
+    bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
+    barangBawaan = db.Column(db.String(500)) #dict
+    sign = db.Column(db.Text())
     
 
 class User(db.Model, UserMixin):
