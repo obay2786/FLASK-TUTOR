@@ -169,7 +169,67 @@ def getJFpermit():
                 updateData(dictJF)
              
             
-           
+def getJFpermit():
+    r = requests.get(f'https://api.jotform.com/form/213014916686458/submissions?apiKey={jfToken}')
+    hasil = json.loads(r.text)
+    print(hasil)
+    
+    dictJF = {}
+    listJF =[]
+    for data in hasil["content"]:
+        if data['status'] == 'ACTIVE':
+            dictJF['id'] = data['id']
+            print(dictJF['id'])
+            
+            if data['answers']['59']['answer'] == 'WORKING' or data['answers']['59']['answer'] == 'OVERTIME':
+                dictJF['permitNo'] = data['answers']['15']['answer'] 
+                print(data['answers']['15']['answer'])
+
+                dictJF['desk'] = data['answers']['16']['answer'] 
+                print(data['answers']['16']['answer'])
+
+            dictJF['email'] = data['answers']['28']['answer'] 
+            print(data['answers']['28']['answer'])
+
+            dictJF['startDate'] = data['answers']['46']['prettyFormat'] 
+            print(data['answers']['46']['prettyFormat'])
+
+            dictJF['sign'] = data['answers']['47']['answer'] 
+            print(data['answers']['47']['answer'])
+
+            dictJF['anggota'] = data['answers']['51']['answer'] 
+            print(data['answers']['51']['answer'])
+
+            dictJF['bawaBarang'] = data['answers']['54']['answer'] 
+            print(data['answers']['54']['answer'])
+
+            if data['answers']['54']['answer'] == "YA":
+                dictJF['barangbawaan'] = data['answers']['55']['answer'] 
+                print(data['answers']['55']['answer'])
+            else:
+                dictJF['barangbawaan'] = ""
+
+            dictJF['endDate'] = data['answers']['56']['prettyFormat'] 
+            print(data['answers']['56']['prettyFormat'])
+
+            dictJF['purpose'] = data['answers']['59']['answer'] 
+            print(data['answers']['59']['answer'])
+
+            dictJF['namaVendor'] = data['answers']['63']['answer'] 
+            print(data['answers']['63']['answer'])
+            
+            if data['answers']['59']['answer'] == 'SUPPLY':
+                dictJF['location'] = data['answers']['64']['answer']
+                dictJF['host'] = data['answers']['65']['answer'] 
+                print(data['answers']['64']['answer'])
+                print(data['answers']['65']['answer'])
+            else:
+                dictJF['location'] = ""
+                dictJF['host'] = ""
+
+            listJF.append(dictJF.copy())
+
+    print(listJF[0])
             
             
     #listJF.reverse()  
