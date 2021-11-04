@@ -19,10 +19,10 @@ class Transaksi(db.Model):
 
 class Permit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    subDate = db.Column(db.DateTime(timezone=True)   
+    subDate = db.Column(db.DateTime(timezone=True))
     namaVendor = db.Column(db.String(150))
-    startDate = db.Column(db.DateTime(timezone=True)
-    endDate = db.Column(db.DateTime(timezone=True)
+    startDate = db.Column(db.DateTime(timezone=True))
+    endDate = db.Column(db.DateTime(timezone=True))
     purpose = db.Column(db.String(100))
     location = db.Column(db.String(100))
     supplyBarang = db.Column(db.String(500)) #dict
