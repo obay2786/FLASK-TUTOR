@@ -121,7 +121,7 @@ def getJFvisitor():
     #for hasil in listJF:
         
         #updateData(hasil)
-def getJFpermit():
+def getJFvisitor():
     r = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
     print(hasil)
