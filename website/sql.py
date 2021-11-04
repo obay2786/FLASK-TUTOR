@@ -19,7 +19,7 @@ def saveB(photo):
     img_str = base64.b64encode(buffered.getvalue())
     
     return img_str
-
+'''
 def saveImages(nik,photo):
     
     
@@ -31,7 +31,7 @@ def saveImages(nik,photo):
     img.thumbnail(output_size)
     img.save(picturePath)
     return pictureFn
-
+'''
 
 
 jfToken = '1c003a23731a647ba58829de69911ea8'
@@ -121,7 +121,61 @@ def getJFvisitor():
     #for hasil in listJF:
         
         #updateData(hasil)
+def getJFpermit():
+    r = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
+    hasil = json.loads(r.text)
+    print(hasil)
+    
+    dictJF = {}
+    listJF =[]
+    for data in hasil['content']:
+        if data['status'] == 'ACTIVE':
+            dictJF['id'] = data['id']
+            print(dictJF['id'])
+            dictJF['date'] = datetime.datetime.now()
+            dictJF['nik'] = data['answers']['96']['answer']      
+            print(data['answers']['96']['answer'])
 
+            dictJF['nama'] = data['answers']['95']['answer'] 
+            print(data['answers']['95']['answer'])
+            if data['answers']['115']['answer'] == 'OTHER':
+
+                dictJF['namaVendor'] = data['answers']['20']['answer'] 
+            else:
+                dictJF['namaVendor'] = data['answers']['115']['answer'] 
+            print(data['answers']['115']['answer'])
+
+            dictJF['asalVendor'] = data['answers']['117']['answer'] 
+            print(data['answers']['117']['answer'])
+
+            dictJF['email'] = data['answers']['93']['answer'] 
+            print(data['answers']['93']['answer'])
+            
+            dictJF['gender'] = data['answers']['97']['answer'] 
+            print(data['answers']['97']['answer'])
+
+            dictJF['jabatan'] = data['answers']['98']['answer'] 
+            print(data['answers']['98']['answer'])
+            
+
+            dictJF['photo'] = getImage(data['answers']['100']['answer'])
+            print(data['answers']['100']['answer'])
+            print('============================')
+            listJF.append(dictJF.copy())
+
+            try:
+                insertData(dictJF)
+            except:
+                updateData(dictJF)
+             
+            
+           
+            
+            
+    #listJF.reverse()  
+    #for hasil in listJF:
+        
+        #updateData(hasil)
 
 getJFvisitor()
 

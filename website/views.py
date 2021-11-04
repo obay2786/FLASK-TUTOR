@@ -41,6 +41,11 @@ def waiting():
 def history():
 
     return render_template("history.html", user=current_user)
+@views.route('/approval', methods=['GET', 'POST'])
+@login_required
+def approval():
+
+    return render_template("approval.html", user=current_user)
 
 def saveB(photo):
   

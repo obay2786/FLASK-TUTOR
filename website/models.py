@@ -16,6 +16,14 @@ class Transaksi(db.Model):
     badge = db.Column(db.String(150))
     nik = db.Column(db.String(150))
     status = db.Column(db.String(150))
+
+class Permit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    timeCheckin = db.Column(db.DateTime(timezone=True), default=func.now())
+    timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
+    badge = db.Column(db.String(150))
+    nik = db.Column(db.String(150))
+    status = db.Column(db.String(150))
     
 
 class User(db.Model, UserMixin):

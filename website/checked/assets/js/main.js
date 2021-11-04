@@ -114,6 +114,46 @@
 function rl(){
   location.reload(); 
 }
+
+function upload(photo,nama) {
+ 
+  fetch("/upload", {
+    method: "POST",
+    body: JSON.stringify({ photo: photo,nama: nama }),
+  }).then((_res) => {
+    
+  });
+}
+
+function ok(){
+
+
+  document.getElementById("statusA1").innerHTML = "";
+  document.getElementById("imgA1").src = "assets/img/checked.png";
+  document.getElementById("imgA1").style.height = "210px"
+  var image_x = document.getElementById('imgB1');
+  image_x.parentNode.removeChild(image_x)
+  document.getElementById("statusB1").innerHTML = "Data anda telah \<br\> tersimpan,silahkan \<br\> menuju ke loket \<br\> sekuriti ";
+  document.getElementById("statusB1").style.fontSize = "5rem"
+  document.getElementById("imgC1").src = "";
+  
+  
+  document.getElementById("bubble-2").classList.remove('green-text');
+  document.getElementById("step-2").classList.remove('current');
+  document.getElementById("bubble-3").classList.add('green-text');
+  document.getElementById("step-3").classList.add('current');
+
+  fetch("/sukses", {
+    method: "POST",
+    body: JSON.stringify({ photo: 'ok'}),
+  }).then((_res) => {
+    
+  });
+  setTimeout(rl,10000)
+
+
+}
+
 function getVisitor(nik){
   fetch("/getvisitor", {
     method: "POST",
@@ -121,7 +161,7 @@ function getVisitor(nik){
   }).then((response) => {
     return response.json()
   }).then((data) => {
-    
+    upload(data.photo,data.nama)
     document.getElementById("name1").innerHTML = data.nama;
     document.getElementById("nik1").innerHTML = data.nik;
     document.getElementById("vendor1").innerHTML = data.company
@@ -137,6 +177,7 @@ function getVisitor(nik){
     document.getElementById("imgA1").src = "assets/img/step2A.png";
     document.getElementById("imgB1").src = "assets/img/step2B.png";
     document.getElementById("statusB1").innerHTML = "Scan wajah anda pada \<br\> Thermal Camera \<br\> untuk cek suhu";
+    document.getElementById("statusB1").style.fontSize = "5rem"
     document.getElementById("imgC1").src = "";
     
     document.getElementById("bubble-1").classList.remove('green-text');
@@ -144,8 +185,11 @@ function getVisitor(nik){
     document.getElementById("bubble-2").classList.add('green-text');
     document.getElementById("step-2").classList.add('current');
     document.getElementById('txtBox1').id = "txtBox2";
+    document.getElementById('txtBox2').onchange =  function () { ok(); };
     setTimeout(rl,10000)
 
     
   });
 }
+
+

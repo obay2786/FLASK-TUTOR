@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for,current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for,current_app, jsonify
 import secrets
+import json
 import os
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -230,7 +231,7 @@ def gambar():
         phname= saveImages(request.files['photo'])
         return('berhasil')
     return render_template("gambar.html", user=current_user)
-
+''''
 @auth.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -261,3 +262,48 @@ def upload():
                 hik.Apply.apply(current_app.root_path+'/hik/')
                 print(perid['personId'])
     return render_template("gambar.html", user=current_user)
+'''
+
+@auth.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        print('tesssssssssssssss')
+        data = json.loads(request.data)
+        photo= data['photo']
+        nama = data['nama']
+        personID = hik.List.list(current_app.root_path+'/hik/')
+        #hik.Delete.delete(current_app.root_path+'/hik/',ok)
+
+        if personID['data']['total'] == 0:
+            pass
+        else:
+            for perid in personID['data']['list']:
+                hik.Delete.delete(current_app.root_path+'/hik/',perid['personId'])
+                hik.Apply.apply(current_app.root_path+'/hik/')
+                print(perid['personId'])
+        
+        
+        hik.Add.add(current_app.root_path+'/hik/',photo,nama)
+        hik.Apply.apply(current_app.root_path+'/hik/')
+
+    return jsonify({})
+
+@auth.route('/sukses', methods=['GET', 'POST'])
+def sukses():
+    if request.method == 'POST':
+        print('tesssssssssssssss')
+
+        personID = hik.List.list(current_app.root_path+'/hik/')
+        #hik.Delete.delete(current_app.root_path+'/hik/',ok)
+
+        if personID['data']['total'] == 0:
+            pass
+        else:
+            for perid in personID['data']['list']:
+                hik.Delete.delete(current_app.root_path+'/hik/',perid['personId'])
+                hik.Apply.apply(current_app.root_path+'/hik/')
+                print(perid['personId'])
+        
+    
+
+    return jsonify({})

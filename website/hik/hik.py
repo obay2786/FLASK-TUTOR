@@ -5,7 +5,7 @@ baseUrl = 'https://10.89.1.7'
 
 class Add:
   @staticmethod 
-  def add(path,photo):
+  def add(path,photo,nama):
       
 
 
@@ -39,8 +39,8 @@ class Add:
 
       data = {
           "personCode": "213123",
-          "personFamilyName": "subi",
-          "personGivenName": "darma",
+          "personFamilyName": "_",
+          "personGivenName": nama,
           "gender": 1,
           "orgIndexCode": "1",
           "remark": "Grunge",

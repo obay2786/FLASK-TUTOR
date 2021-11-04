@@ -1,20 +1,14 @@
 
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <div class="pagetitle">
+    <section class="section dashboard">
+      {% if user.role == "Admin" or user.role == "Security"  %}
+      <div class="pagetitle">
       <div class="d-flex">
         <div>
           <h1>Dashboard</h1>
-         
-          
         </div>
-
-        
       </div>
-    </div><!-- End Page Title -->
-
-    <section class="section dashboard">
-      {% if user.role == "Admin" or user.role == "Security"  %}
       <div class="row">
 
         <!-- Left side columns -->
@@ -245,17 +239,10 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">History</h3>
+              <h3 class="card-title">Approval</h3>
             </div>
             <div class="card-body border-bottom py-3">
               <div class="d-flex">
-                <div class="text-muted">
-                  Show
-                  <div class="mx-2 d-inline-block">
-                    <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                  </div>
-                  entries
-                </div>
                 <div class="ms-auto text-muted">
                   Search:
                   <div class="ms-2 d-inline-block">
@@ -301,18 +288,13 @@
                       <span class="badge bg-success me-1"></span> Working
                     </td>
                     <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td class="text-end">
-                      <span class="dropdown">
-                        <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <a class="dropdown-item" href="#">
-                            Status
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            View Detail
-                          </a>
-                        </div>
+                    <td >
+                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
+                        
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
+                        
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -337,18 +319,13 @@
                       <span class="badge bg-warning me-1"></span> Meeting
                     </td>
                     <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td class="text-end">
-                      <span class="dropdown">
-                        <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <a class="dropdown-item" href="#">
-                            Action
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            Another action
-                          </a>
-                        </div>
+                    <td >
+                      <span data-bs-toggle="modal" data-bs-target="#staticBackdropPhoto">
+                        
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Upload Aproval" aria-label="Views"><span class="badge rounded-pill bg-success">Upload Approval</span></a>
                       </span>
+                        
+                      </div>
                     </td>
                   </tr>
                   <tr>
@@ -373,18 +350,13 @@
                       <span class="badge bg-warning me-1"></span> Overtime
                     </td>
                     <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td class="text-end">
-                      <span class="dropdown">
-                        <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <a class="dropdown-item" href="#">
-                            Action
-                          </a>
-                          <a class="dropdown-item" href="#">
-                            Another action
-                          </a>
-                        </div>
+                    <td >
+                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
+                        
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
+                        
+                      </div>
                     </td>
                   </tr>
                   
@@ -393,7 +365,7 @@
               </table>
             </div>
             <div class="card-footer d-flex align-items-center">
-              <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+              
               <ul class="pagination m-0 ms-auto">
                 <li class="page-item disabled">
                   <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
@@ -420,6 +392,268 @@
         
         
       </div>
+       <!-- Modal Approval -->
+       <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Extra Large Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Aproval Detail</h5>
+                  <div class="text-end">
+                  <p style="color: red;font-weight:900;">Waiting approval from HR Dept</p>
+                </div>
+                  <!-- Small tables -->
+                  <div class="col-lg-8">
+                    <table class="table table-borderless">
+    
+                      <tbody>
+                        <tr>
+                          <th scope="row" style="width:150px">Nama Company</th>
+                          <td scope="row" style="width:3px">:</td>
+                          <td>PANASONIC</td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Date</th>
+                          <td scope="row">:</td>
+                          <td>7 September 2021</td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Purpose</th>
+                          <td scope="row">:</td>
+                          <td>Meeting</td>
+    
+                        </tr>
+    
+                      </tbody>
+                    </table>
+                    <!-- End small tables -->
+                    </div>
+                  <div class="col-lg-10">
+                    <h5 class="card-title">List Anggota Kerja</h5>
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Jabatan</th>
+                        <th scope="col">NIK</th>
+                        <th scope="col">Registrasi</th>
+                        <th scope="col">Self Assessment Risiko COVID-19</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Brandon Jacob</td>
+                        <td>Designer</td>
+                        <td>2832423456543134</td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Bridie Kessler</td>
+                        <td>Developer</td>
+                        <td>35</td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Ashleigh Langosh</td>
+                        <td>Finance</td>
+                        <td>45</td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Angus Grady</td>
+                        <td>HR</td>
+                        <td>34</td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Raheem Lehner</td>
+                        <td>Dynamic</td>
+                        <td>47</td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- End small tables -->
+                  <div class="col-lg-5">
+                    <h5 class="card-title">Bring Recordable Media :</h5>
+                  <table class="table table-borderless col-lg-3" >
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Controlled Items</th>
+                        <th scope="col">Detail</th>
+    
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Brandon Jacob</td>
+                        <td>Designer</td>
+    
+    
+                      </tr>
+    
+                    </tbody>
+                  </table>
+                </div>
+                  <div class="text-end">
+                    <span data-bs-toggle="modal" data-bs-target="#staticApprovalDecline">
+                        
+                      <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Upload Aproval" aria-label="Views"><span class="badge rounded-pill bg-danger">Decline</span></a>
+                    </span>
+                  
+                  <span class="badge rounded-pill bg-success">Generate</span>
+                  
+                </div>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             
+            </div>
+          </div>
+        </div>
+      </div><!-- End Extra Large Modal-->
+       <!-- Modal Approval Keterangan -->
+<div class="modal fade" id="staticApprovalDecline" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <h5 id ="edit" class="card-title">Please enter the reason for the rejection of approval</h5>
+            
+            
+            <!-- General Form Elements -->
+            <form method="POST" enctype="multipart/form-data">
+              <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
+              
+              <div class="row mb-3">
+                
+                <div class="col-sm-10">
+                  <textarea class="form-control" style="height: 100px"></textarea>
+                </div>
+              </div>
+          
+
+              <div class="row mb-3">
+                
+                <div class="col-sm-10">
+                  <button type="submit" name="formEdit" value="editPhoto"class="btn btn-danger">Decline Approval</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+     
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Modal Approval Sukses -->
+    <div class="modal fade" id="staticApprovalSuccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-body">
+                <h4 id ="edit" class="card-title text-center pb-0 fs-4"">Approval has been uploaded successfully.</h4>
+                <h3 id ="edit2" class="card-title text-center pb-0 fs-4"">The QR code has been sent to the requestor's email.</h3>
+                
+                
+                
+              
+    
+               
+    
+               
+    
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- Modal editphoto -->
+<div class="modal fade" id="staticBackdropPhoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <h5 id ="edit" class="card-title">Upload Aproval</h5>
+            
+            
+            <!-- General Form Elements -->
+            <form method="POST" enctype="multipart/form-data">
+              <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
+              
+              <div class="row mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                <div class="col-sm-10">
+                  <input type="file"  class="form-control" id="photo" name="photo" accept=".jpg, .jpeg" required>
+                </div>
+              </div>
+          
+
+              <div class="row mb-3">
+                
+                <div class="col-sm-10">
+                  <!--
+                  <button type="submit" name="formEdit" value="editPhoto"class="btn btn-primary">Submit Form</button>
+                  -->
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticApprovalSuccess">
+                    Submit Approval
+                  </button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+     
+      </div>
+    </div>
+  </div>
+</div>
       {% endif %}
     </section>
     {% endblock %}

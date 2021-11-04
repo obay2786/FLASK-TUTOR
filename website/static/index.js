@@ -78,9 +78,11 @@ function getVisitor(nik){
     document.getElementById("nameedit").value = data.nama;
     document.getElementById("nikedit").value = data.nik;
     document.getElementById("companyedit").value = data.company;
-
+    upload(data.photo)
   });
 }
+
+
 
 function delVisitor(id) {
  
@@ -92,6 +94,7 @@ function delVisitor(id) {
   });
 }
 
+
 function editPhotoV(id){
   fetch("/getvisitor", {
     method: "POST",
@@ -99,10 +102,14 @@ function editPhotoV(id){
   }).then((response) => {
     return response.json()
   }).then((data) => {
-    
+   
     document.getElementById("editPhoto").src = "data:image/png;base64,"+data.photo;
     document.getElementById("editH2").innerHTML = "Username : " + data.nama;
     document.getElementById("visitorID").value = data.id;
     
+    
+    
   });
 }
+
+

@@ -1,0 +1,17 @@
+    document.getElementById("statusA1").innerHTML = "DATA TERSIMPAN";
+    document.getElementById("imgA1").src = "assets/img/checked.png";
+    document.getElementById("imgB1").src = "";
+    document.getElementById("statusB1").innerHTML = "Data anda telah \<br\> tersimpan,silahkan \<br\> menuju ke loket \<br\> sekuriti ";
+    document.getElementById("imgC1").src = "";
+    
+    document.getElementById("bubble-1").classList.remove('green-text');
+    document.getElementById("step-1").classList.remove('current');
+    document.getElementById("bubble-2").classList.add('green-text');
+    document.getElementById("step-2").classList.add('current');
+    document.getElementById("bubble-3").classList.add('green-text');
+    document.getElementById("step-3").classList.add('current');
+    document.getElementById('txtBox2').id = remove element
+
+
+
+
