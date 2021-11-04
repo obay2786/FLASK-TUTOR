@@ -182,15 +182,58 @@ def getJFpermit():
 
             listJF.append(dictJF.copy())
 
-    print(listJF[0])
+    print(listJF)
             
+      
+def getJFcovid():
+    r = requests.get(f'https://api.jotform.com/form/212706072902045/submissions?apiKey={jfToken}')
+    hasil = json.loads(r.text)
+    print(hasil)
+    
+    dictJF = {}
+    listJF =[]
+    for data in hasil["content"]:
+        if data['status'] == 'ACTIVE':
+            dictJF['id'] = data['id']
+            print(dictJF['id'])
+            
+            dictJF['nama'] = data['answers']['2']['answer'] 
+            
+            dictJF['nik'] = data['answers']['3']['answer'] 
+
+            dictJF['q1'] = data['answers']['23']['answer'] 
+
+            dictJF['q2'] = data['answers']['24']['answer'] 
+            
+            dictJF['q3'] = data['answers']['25']['answer'] 
+
+            if data['answers']['25']['answer']  == "YA":
+                dictJF['q3b'] = data['answers']['16']['answer']
+            else:
+                dictJF['q3b'] = ""
+            
+            dictJF['q4'] = data['answers']['26']['answer'] 
+            
+            dictJF['q5'] = data['answers']['27']['answer'] 
+            
+            dictJF['q6'] = data['answers']['28']['answer']
+
+            dictJF['sign'] = data['answers']['15']['answer'] 
+
+            
+    listJF.append(dictJF.copy())
+
+    print(listJF)
+    
+    
+    
             
     #listJF.reverse()  
     #for hasil in listJF:
         
         #updateData(hasil)
 
-getJFvisitor()
+# getJFvisitor()
 
 
 
