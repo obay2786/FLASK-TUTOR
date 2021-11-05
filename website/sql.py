@@ -243,15 +243,6 @@ def getJFcovid():
     print(listJF)
     
     
-    
-            
-    #listJF.reverse()  
-    #for hasil in listJF:
-        
-        #updateData(hasil)
-
-# getJFvisitor()
-
 
 
 
