@@ -78,8 +78,19 @@ def insertPermit(data):
             )
         conn.commit()
         # delSub(data['id'])
-        print("permit inserted")
+        print("Data Inserted")
 
+def insertCovid(data):
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        conn.execute(
+            text("INSERT INTO permit (nik, nama, q1, q2, q3, q3b, q4, q5 , q6, sign ) VALUES (:nik, :nama, :q1, :q2, :q3, :q3b, :q4, :q5 , :q6, :sign)"),
+            data
+            )
+        conn.commit()
+        delSub(data['id'])
+        print("data inserted")
 
 
 
