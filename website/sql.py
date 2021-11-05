@@ -184,8 +184,20 @@ def getJFpermit():
             dictJF['sign'] = data['answers']['47']['answer'] 
             print(data['answers']['47']['answer'])
 
-            dictJF['anggota'] = data['answers']['51']['answer'] 
-            print(data['answers']['51']['answer'])
+            anggota = json.loads(data['answers']['51']['answer'])
+            listAnggota = []
+            for a in range(10):
+                if a >= len(anggota):
+                    listAnggota.append({"Nama":"","NIK":""})
+                else:
+                    listAnggota.append(anggota[a])
+            # print("dari sini")
+            # print(listAnggota)
+            # print("sampai sini")
+
+
+            dictJF['anggota'] = json.dumps(listAnggota)
+            print(dictJF['anggota'])
 
             dictJF['bawaBarang'] = data['answers']['54']['answer'] 
             print(data['answers']['54']['answer'])
@@ -218,12 +230,8 @@ def getJFpermit():
                 dictJF['location'] = ""
                 dictJF['supplyBarang'] = ""
 
-            listJF.append(dictJF.copy())
-
             insertPermit(dictJF)
            
-
-    print(listJF)
             
       
 def getJFcovid():

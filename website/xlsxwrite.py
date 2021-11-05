@@ -27,7 +27,7 @@ def isiformexcel():
 	sheet['C7'] = company
 	sheet['C9'] = date
 	sheet['C10'] = timeFrom
-	sheet['E10'] = timeTo
+	sheet['E10'] = timeTo 
 	sheet['A11'] = purpose 
 
 	wb.save(sourcefile)
