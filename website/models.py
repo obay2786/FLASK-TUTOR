@@ -73,3 +73,4 @@ class Covid(db.Model):
     q4 = db.Column(db.String(10),unique=True)
     q5 = db.Column(db.String(10),unique=True)
     q6 = db.Column(db.String(10),unique=True)
+    sign = db.Column(db.Text())
