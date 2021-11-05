@@ -53,7 +53,7 @@ def insertData(data):
             data
             )
         conn.commit()
-        delSub(data['id'])
+        # delSub(data['id'])
         print("inserttttttt")
 
 
@@ -66,7 +66,7 @@ def updateData(data):
             data
             )
         conn.commit()
-        delSub(data['id'])
+        # delSub(data['id'])
         print('update'+data['nik']+ data['nama'])
 
 def insertCovid(data):
@@ -74,11 +74,11 @@ def insertCovid(data):
     with engine.connect() as conn:
         
         conn.execute(
-            text("INSERT INTO permit (nik, nama, q1, q2, q3, q3b, q4, q5 , q6, sign ) VALUES (:nik, :nama, :q1, :q2, :q3, :q3b, :q4, :q5 , :q6, :sign)"),
+            text("INSERT INTO covid (nik, nama, q1, q2, q3, q3b, q4, q5 , q6, sign ) VALUES (:nik, :nama, :q1, :q2, :q3, :q3b, :q4, :q5 , :q6, :sign)"),
             data
             )
         conn.commit()
-        delSub(data['id'])
+        # delSub(data['id'])
         print("data inserted")
 
 
@@ -236,12 +236,14 @@ def getJFcovid():
 
             dictJF['sign'] = data['answers']['15']['answer'] 
 
+           
+            insertCovid(dictJF)
+            
             
     listJF.append(dictJF.copy())
 
     print(listJF)
-    
-    
+
     
             
     #listJF.reverse()  
