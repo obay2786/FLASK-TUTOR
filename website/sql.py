@@ -69,6 +69,18 @@ def updateData(data):
         # delSub(data['id'])
         print('update'+data['nik']+ data['nama'])
 
+def insertPermit(data):
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        conn.execute(
+            text("INSERT INTO permit (subDate, namaVendor, startDate, endDate, purpose, location, supplyBarang, permitNo, desk, anggota, email, host, bawaBarang, barangBawaan, sign) VALUES (:subDate, :namaVendor, :startDate, :endDate, :purpose, :location, :supplyBarang, :permitNo,:desk,:anggota,:email,:host,:bawaBarang,:barangBawaan,:sign)"),
+            data
+            )
+        conn.commit()
+        # delSub(data['id'])
+        print("permit inserted")
+
 def insertCovid(data):
     engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
@@ -148,7 +160,10 @@ def getJFpermit():
     for data in hasil["content"]:
         if data['status'] == 'ACTIVE':
             dictJF['id'] = data['id']
-            print(dictJF['id'])
+
+
+            dictJF['subDate'] = data['created_at']
+            
             
             if data['answers']['59']['answer'] == 'WORKING' or data['answers']['59']['answer'] == 'OVERTIME':
                 dictJF['permitNo'] = data['answers']['15']['answer'] 
@@ -156,6 +171,9 @@ def getJFpermit():
 
                 dictJF['desk'] = data['answers']['16']['answer'] 
                 print(data['answers']['16']['answer'])
+            else:
+                dictJF['permitNo'] = ""
+                dictJF['desk'] = ""
 
             dictJF['email'] = data['answers']['28']['answer'] 
             print(data['answers']['28']['answer'])
@@ -173,10 +191,10 @@ def getJFpermit():
             print(data['answers']['54']['answer'])
 
             if data['answers']['54']['answer'] == "YA":
-                dictJF['barangbawaan'] = data['answers']['55']['answer'] 
+                dictJF['barangBawaan'] = data['answers']['55']['answer'] 
                 print(data['answers']['55']['answer'])
             else:
-                dictJF['barangbawaan'] = ""
+                dictJF['barangBawaan'] = ""
 
             dictJF['endDate'] = data['answers']['56']['prettyFormat'] 
             print(data['answers']['56']['prettyFormat'])
@@ -186,17 +204,24 @@ def getJFpermit():
 
             dictJF['namaVendor'] = data['answers']['63']['answer'] 
             print(data['answers']['63']['answer'])
+
+            dictJF['host'] = data['answers']['66']['answer'] 
+            print(data['answers']['66']['answer'])
             
+
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
-                dictJF['host'] = data['answers']['65']['answer'] 
+                dictJF['supplyBarang'] = data['answers']['65']['answer'] 
                 print(data['answers']['64']['answer'])
                 print(data['answers']['65']['answer'])
             else:
                 dictJF['location'] = ""
-                dictJF['host'] = ""
+                dictJF['supplyBarang'] = ""
 
             listJF.append(dictJF.copy())
+
+            insertPermit(dictJF)
+           
 
     print(listJF)
             
@@ -253,9 +278,9 @@ def getJFcovid():
 
 # getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-
+getJFpermit()
 
 
 
