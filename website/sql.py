@@ -104,36 +104,35 @@ def getJFvisitor():
     for data in hasil['content']:
         if data['status'] == 'ACTIVE':
             dictJF['id'] = data['id']
-            print(dictJF['id'])
+    
             dictJF['date'] = datetime.datetime.now()
+
             dictJF['nik'] = data['answers']['96']['answer']      
-            print(data['answers']['96']['answer'])
 
             dictJF['nama'] = data['answers']['95']['answer'] 
-            print(data['answers']['95']['answer'])
+
             if data['answers']['115']['answer'] == 'OTHER':
 
                 dictJF['namaVendor'] = data['answers']['20']['answer'] 
             else:
                 dictJF['namaVendor'] = data['answers']['115']['answer'] 
-            print(data['answers']['115']['answer'])
+
 
             dictJF['asalVendor'] = data['answers']['117']['answer'] 
-            print(data['answers']['117']['answer'])
+ 
 
             dictJF['email'] = data['answers']['93']['answer'] 
-            print(data['answers']['93']['answer'])
+
             
             dictJF['gender'] = data['answers']['97']['answer'] 
-            print(data['answers']['97']['answer'])
+
 
             dictJF['jabatan'] = data['answers']['98']['answer'] 
-            print(data['answers']['98']['answer'])
+
             
 
             dictJF['photo'] = getImage(data['answers']['100']['answer'])
-            print(data['answers']['100']['answer'])
-            print('============================')
+
             listJF.append(dictJF.copy())
 
             try:
@@ -141,48 +140,32 @@ def getJFvisitor():
             except:
                 updateData(dictJF)
              
-            
-           
-            
-            
-    #listJF.reverse()  
-    #for hasil in listJF:
-        
-        #updateData(hasil)
+
             
 def getJFpermit():
     r = requests.get(f'https://api.jotform.com/form/213014916686458/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
-    print(hasil)
-    
     dictJF = {}
     listJF =[]
+
     for data in hasil["content"]:
         if data['status'] == 'ACTIVE':
             dictJF['id'] = data['id']
 
-
             dictJF['subDate'] = data['created_at']
-            
             
             if data['answers']['59']['answer'] == 'WORKING' or data['answers']['59']['answer'] == 'OVERTIME':
                 dictJF['permitNo'] = data['answers']['15']['answer'] 
-                print(data['answers']['15']['answer'])
-
                 dictJF['desk'] = data['answers']['16']['answer'] 
-                print(data['answers']['16']['answer'])
             else:
                 dictJF['permitNo'] = ""
                 dictJF['desk'] = ""
 
             dictJF['email'] = data['answers']['28']['answer'] 
-            print(data['answers']['28']['answer'])
 
             dictJF['startDate'] = data['answers']['46']['prettyFormat'] 
-            print(data['answers']['46']['prettyFormat'])
 
             dictJF['sign'] = data['answers']['47']['answer'] 
-            print(data['answers']['47']['answer'])
 
             anggota = json.loads(data['answers']['51']['answer'])
             listAnggota = []
@@ -191,41 +174,27 @@ def getJFpermit():
                     listAnggota.append({"Nama":"","NIK":""})
                 else:
                     listAnggota.append(anggota[a])
-            # print("dari sini")
-            # print(listAnggota)
-            # print("sampai sini")
-
 
             dictJF['anggota'] = json.dumps(listAnggota)
-            print(dictJF['anggota'])
 
             dictJF['bawaBarang'] = data['answers']['54']['answer'] 
-            print(data['answers']['54']['answer'])
 
             if data['answers']['54']['answer'] == "YA":
                 dictJF['barangBawaan'] = data['answers']['55']['answer'] 
-                print(data['answers']['55']['answer'])
             else:
                 dictJF['barangBawaan'] = ""
 
             dictJF['endDate'] = data['answers']['56']['prettyFormat'] 
-            print(data['answers']['56']['prettyFormat'])
 
             dictJF['purpose'] = data['answers']['59']['answer'] 
-            print(data['answers']['59']['answer'])
 
             dictJF['namaVendor'] = data['answers']['63']['answer'] 
-            print(data['answers']['63']['answer'])
 
             dictJF['host'] = data['answers']['66']['answer'] 
-            print(data['answers']['66']['answer'])
-            
 
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
                 dictJF['supplyBarang'] = data['answers']['65']['answer'] 
-                print(data['answers']['64']['answer'])
-                print(data['answers']['65']['answer'])
             else:
                 dictJF['location'] = ""
                 dictJF['supplyBarang'] = ""
@@ -237,14 +206,12 @@ def getJFpermit():
 def getJFcovid():
     r = requests.get(f'https://api.jotform.com/form/212706072902045/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
-    print(hasil)
     
     dictJF = {}
     listJF =[]
     for data in hasil["content"]:
         if data['status'] == 'ACTIVE':
             dictJF['id'] = data['id']
-            print(dictJF['id'])
             
             dictJF['nama'] = data['answers']['2']['answer'] 
             
@@ -273,9 +240,9 @@ def getJFcovid():
             insertCovid(dictJF)
             
             
-    listJF.append(dictJF.copy())
+            listJF.append(dictJF.copy())
 
-    print(listJF)
+    # print(listJF)
 
     
             
