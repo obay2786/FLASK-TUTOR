@@ -66,6 +66,23 @@ def updateData(data):
         conn.commit()
         delSub(data['id'])
         print('update'+data['nik']+ data['nama'])
+
+
+def insertPermit(data):
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        conn.execute(
+            text("INSERT INTO permit (subDate, namaVendor, startDate, endDate, purpose, location, supplyBarang, permitNo, desk, anggota, email, host, bawaBarang, barangBawaan, sign) VALUES (:subDate, :namaVendor, :startDate, :endDate, :purpose, :location,:supplyBarang,:permitNo,:desk,:anggota,:email,:host,:bawaBarang,:barangBawaan,:sign)"),
+            data
+            )
+        conn.commit()
+        # delSub(data['id'])
+        print("permit inserted")
+
+
+
+
 def getJFvisitor():
     r = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
@@ -226,15 +243,6 @@ def getJFcovid():
     print(listJF)
     
     
-    
-            
-    #listJF.reverse()  
-    #for hasil in listJF:
-        
-        #updateData(hasil)
-
-# getJFvisitor()
-
 
 
 
