@@ -140,21 +140,27 @@ function getPermitdetail(id){
     // document.getElementById("permitDetailAnggota").innerHTML = dataAnggota
 
     let tableRef = document.getElementById('permitDetailAnggota');
-
+    let dataAnggota = "" 
+    let noUrut = 0
+    for (anggota of data.anggota) {
     // Insert a row at the end of the table
-    let newRow = tableRef.insertRow(-1);
+      let newRow = tableRef.insertRow(-1);
 
-    // Insert a cell in the row at index 0
-    let newCell = newRow.insertCell(0);
+      // Insert a cell in the row at index 0
+      let newCell = newRow.insertCell(0);
+      let newCell1 = newRow.insertCell(1);
+      let newCell2 = newRow.insertCell(2);
+      // Append a text node to the cell
+      noUrut += 1
+      let newNo = document.createTextNode(noUrut);
 
-    // Append a text node to the cell
-    let newNo = document.createTextNode('1');
-    newCell.appendChild(newNo);
-
-    let newCell1 = newRow.insertCell(1)
+      let newName = document.createTextNode(anggota.Nama);
+      let newNik = document.createTextNode(anggota.NIK);
+      newCell.appendChild(newNo);
+      newCell1.appendChild(newName);
+      newCell2.appendChild(newNik);
     
-    let newNama = document.createTextNode('Johan');
-    newCell.appendChild(newNama);
+    }
 
 
 
