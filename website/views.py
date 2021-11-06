@@ -201,10 +201,20 @@ def getPermitdetail():
     # print(visitor)
     data = {}
     data['id'] = permit.id
-    data['namaVendor'] = permit.namaVendor
-    # data['nama'] = visitor.nama
-    # data['badge'] = '111'
-    # data['company'] = visitor.namaVendor
-    # data['photo'] = visitor.photo
-    
+    data['date'] = permit.subDate
+    data['vendor'] = permit.namaVendor
+    data['startDate'] = permit.startDate
+    data['endDate'] = permit.endDate
+    data['purpose'] = permit.purpose
+    data['anggota'] = permit.anggota
+    data['permitNo'] = permit.permitNo
+    data['location'] = permit.location
+    data['supplyBarang'] = permit.supplyBarang
+    data['email'] = permit.email
+    data['host'] = permit.host
+    data['bawaBarang'] = permit.bawaBarang
+    data['barangBawaan'] = permit.barangBawaan
+    data['sign'] = permit.sign
+
+
     return jsonify(data)
