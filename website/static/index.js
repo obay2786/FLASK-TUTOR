@@ -146,17 +146,18 @@ function getPermitdetail(id){
 
     // Insert a cell in the row at index 0
     let newCell = newRow.insertCell(0);
-
     // Append a text node to the cell
     let newNo = document.createTextNode('1');
+
+
+
+    let newColumn = tableRef.insertColumn(-1)
+    let newCellColumn = newColumn.insertCell(0)
+    let newName = document.createTextNode('Johan');
+
+    newCellColumn.appendChild(newName);
+
     newCell.appendChild(newNo);
-
-    let newCell1 = newRow.insertCell(1)
-    
-    let newNama = document.createTextNode('Johan');
-    newCell.appendChild(newNama);
-
-
 
   });
 }
