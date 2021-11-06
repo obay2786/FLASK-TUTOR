@@ -154,15 +154,18 @@ function getPermitdetail(id){
       let newCell = newRow.insertCell(0);
       let newCell1 = newRow.insertCell(1);
       let newCell2 = newRow.insertCell(2);
+      let newCell3 = newRow.insertCell(2);
       // Append a text node to the cell
       noUrut += 1
       let newNo = document.createTextNode(noUrut);
 
       let newName = document.createTextNode(anggota.Nama);
       let newJabatan = document.createTextNode(anggota.Jabatan);
+      let newNik = document.createTextNode(anggota.NIK);
       newCell.appendChild(newNo);
       newCell1.appendChild(newName);
       newCell2.appendChild(newJabatan);
+      newCell2.appendChild(newNik);
     
     }
 
