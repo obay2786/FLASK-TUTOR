@@ -140,7 +140,11 @@ function getPermitdetail(id){
     // document.getElementById("permitDetailAnggota").innerHTML = dataAnggota
 
     let tableRef = document.getElementById('permitDetailAnggota');
-    let dataAnggota = "" 
+    var tableHeaderRowCount = 1;
+    var rowCount = tableRef.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        tableRef.deleteRow(tableHeaderRowCount);
+    }
     let noUrut = 0
     for (anggota of data.anggota) {
     // Insert a row at the end of the table
