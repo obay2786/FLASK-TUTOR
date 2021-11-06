@@ -290,9 +290,9 @@
                     </td>
                     <td>{{permit.startDate[0:10]}} - {{permit.endDate[0:10]}}</td>
                     <td >
-                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
+                      <span data-bs-toggle="modal" data-bs-target="#detailPermit">
                         
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
                         
                       </div>
@@ -330,7 +330,7 @@
         
       </div>
        <!--Lihat Detail -->
-       <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+       <div class="modal fade" id="detailPermit" tabindex="-1">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -352,7 +352,7 @@
                         <tr>
                           <th scope="row" style="width:150px">Nama Company</th>
                           <td scope="row" style="width:3px">:</td>
-                          <td>PANASONIC</td>
+                          <td id="permitDetailVendor">PANASONIC</td>
     
                         </tr>
                         <tr>

@@ -3,6 +3,7 @@ import base64
 from io import BytesIO
 import os 
 import secrets
+import requests
 
 
 def saveImages(photo):
@@ -17,3 +18,4 @@ def saveImages(photo):
     img.save(picturePath)
     return pictureFn
 
+curl -d '{"id":"1"}' -H "Content-Type: application/json" -X POST http://103.142.240.134/permitdetail

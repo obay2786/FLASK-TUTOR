@@ -116,23 +116,14 @@ function editPhotoV(id){
 function getPermitdetail(id){
   
   fetch("/permitdetail", {
-    
+
     method: "POST",
     body: JSON.stringify({ id: id }),
   }).then((response) => {
     return response.json()
   }).then((data) => {
     
-    document.getElementById("editH").innerHTML = "Username : " + data.userName;
-    document.getElementById("userNamee").value = data.userName;
-    document.getElementById("namee").value = data.firstName;
-    document.getElementById("emaile").value = data.email;
-    document.getElementById("rolee").innerHTML = `<option value="${data.role}">${data.role}</option>
-    <option value="Admin">Admin</option>
-    <option value="Host">Host</option>
-    <option value="Security">Security</option>`;
-    document.getElementById("empIDe").value = data.empID;
-    document.getElementById("badgeIDe").value = data.badgeID;
-    document.getElementById("departe").value = data.depart;
+    document.getElementById("permitDetailVendor").innerHTML = data.vendor
+    
   });
 }
