@@ -159,10 +159,10 @@ function getPermitdetail(id){
       let newNo = document.createTextNode(noUrut);
 
       let newName = document.createTextNode(anggota.Nama);
-      let newNik = document.createTextNode(anggota.NIK);
+      let newJabatan = document.createTextNode(anggota.Jabatan);
       newCell.appendChild(newNo);
       newCell1.appendChild(newName);
-      newCell2.appendChild(newNik);
+      newCell2.appendChild(newJabatan);
     
     }
 
