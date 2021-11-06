@@ -65,7 +65,7 @@ def findDatapermit(cari):
         permitNo.append(i[8])
     noData = permitNo.index(cari)
 
-    print(ResultSet[noData])
+    print(list(ResultSet[noData]))
 
 # readsql()
 
