@@ -263,7 +263,7 @@ def getJFcovid():
 
 # getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
 
