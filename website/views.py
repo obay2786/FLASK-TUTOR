@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect
 from flask_login import login_required, current_user
-from .models import Note, Visitor,User
+from .models import Note, Visitor,User, Permit
 from . import db
 import json
 import base64
@@ -9,26 +9,17 @@ import requests
 from PIL import Image, ImageOps
 from io import BytesIO
 views = Blueprint('views', __name__)
-
+ROWS_PER_PAGE = 5
 
 
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-   
-    if request.method == 'POST':
-        note = request.form.get('note')
+    permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
 
-        if len(note) < 1:
-            flash('Note is too short!', category='error')
-        else:
-            new_note = Note(data=note, user_id=current_user.id)
-            db.session.add(new_note)
-            db.session.commit()
-            flash('Note added!', category='success')
 
-    return render_template("home.html", user=current_user)
+    return render_template("home.html", user=current_user, permit=permit)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
@@ -60,7 +51,7 @@ def saveB(photo):
     return img_str
 
 
-ROWS_PER_PAGE = 5
+
 @views.route('/visitor',methods=['GET', 'POST'])
 @login_required
 def visitor():

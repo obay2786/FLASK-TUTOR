@@ -240,11 +240,19 @@ def getJFcovid():
             insertCovid(dictJF)
             
             
-            listJF.append(dictJF.copy())
+            # listJF.append(dictJF.copy())
 
     # print(listJF)
 
     
+
+
+        # conn.commit()
+        # # delSub(data['id'])
+        # print("permit inserted")
+
+
+
             
     #listJF.reverse()  
     #for hasil in listJF:
@@ -255,7 +263,7 @@ def getJFcovid():
 
 # getJFcovid()
 
-getJFpermit()
+# getJFpermit()
 
 
 

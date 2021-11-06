@@ -265,9 +265,10 @@
                     <th></th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr>
-         
+                  {%for permit in permit.items %}
                     <td><select class="form-select form-select-danger" id="floatingSelect" aria-label="Floating label select example">
                       <option selected>SELECT LOCATION</option>
                       <option value="1">Loby A</option>
@@ -276,13 +277,13 @@
                     </select></td>
                     <td>
                       <span class="flag flag-country-us"></span>
-                      PT. Dharma Pasific
+                      {{permit.namaVendor}}
                     </td>
                     <td>
-                      Subiyanto
+                      {{permit.email}}
                     </td>
                     <td>
-                      2134123412
+                      {{permit.permitNo}}
                     </td>
                     <td>
                       <span class="badge bg-success me-1"></span> Working
@@ -297,68 +298,8 @@
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                   
-                    <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
-                    <td>
-                      <span class="flag flag-country-gb"></span>
-                      CV. SIV Furniture
-                    </td>
-                    <td>
-                      Ayong
-                    </td>
-                    <td>
-                      23412341234
-                    </td>
-                    <td>
-                      <span class="badge bg-warning me-1"></span> Meeting
-                    </td>
-                    <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td >
-                      <span data-bs-toggle="modal" data-bs-target="#staticBackdropPhoto">
-                        
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Upload Aproval" aria-label="Views"><span class="badge rounded-pill bg-success">Upload Approval</span></a>
-                      </span>
-                        
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                   
-                    <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
-                    <td>
-                      <span class="flag flag-country-de"></span>
-                      Bluewolf
-                    </td>
-                    <td>
-                      test
-                    </td>
-                    <td>
-                      123413243124123
-                    </td>
-                    <td>
-                      <span class="badge bg-warning me-1"></span> Overtime
-                    </td>
-                    <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td >
-                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
-                        
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
-                      </span>
-                        
-                      </div>
-                    </td>
-                  </tr>
+                  
+                  {% endfor %}
                   
                   
                 </tbody>
