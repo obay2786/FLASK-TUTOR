@@ -206,7 +206,7 @@ def getPermitdetail():
     data['startDate'] = permit.startDate
     data['endDate'] = permit.endDate
     data['purpose'] = permit.purpose
-    data['anggota'] = permit.anggota
+    data['anggota'] = json.loads(permit.anggota)
     data['permitNo'] = permit.permitNo
     data['location'] = permit.location
     data['supplyBarang'] = permit.supplyBarang
