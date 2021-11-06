@@ -160,7 +160,7 @@ function getPermitdetail(id){
       newCell.appendChild(newNo);
       newCell1.appendChild(newName);
       newCell2.appendChild(newNik);
-
+    }
   });
 }
 
