@@ -18,7 +18,7 @@ ROWS_PER_PAGE = 5
 def home():
     page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
-    
+
     return render_template("home.html", user=current_user, permit=permit)
 
 @views.route('/waiting', methods=['GET', 'POST'])
@@ -191,3 +191,20 @@ def delVisitor():
         db.session.commit()
     
     return jsonify({})
+
+@views.route('/permitdetail', methods=['POST'])
+def getPermitdetail():
+    data = json.loads(request.data)
+    permitId = data['id']
+    # print(id)
+    permit = Permit.query.filter_by(id=permitId).first()
+    # print(visitor)
+    data = {}
+    data['id'] = permit.id
+    data['namaVendor'] = permit.namaVendor
+    # data['nama'] = visitor.nama
+    # data['badge'] = '111'
+    # data['company'] = visitor.namaVendor
+    # data['photo'] = visitor.photo
+    
+    return jsonify(data)
