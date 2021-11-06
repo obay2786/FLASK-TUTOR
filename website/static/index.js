@@ -124,6 +124,7 @@ function getPermitdetail(id){
   }).then((data) => {
     
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
-    
+    document.getElementById("permitDetailDate").innerHTML = data.startDate + "-" + data.endDate
+    document.getElementById("permitDetailPurpose").innerHTML = data.purpose
   });
 }
