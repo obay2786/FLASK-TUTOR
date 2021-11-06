@@ -16,8 +16,8 @@ ROWS_PER_PAGE = 5
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
-
 
     return render_template("home.html", user=current_user, permit=permit)
 
