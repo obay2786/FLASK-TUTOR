@@ -122,9 +122,30 @@ function getPermitdetail(id){
   }).then((response) => {
     return response.json()
   }).then((data) => {
+    let dataAnggota = "" 
+    for anggota of data.anggota{
+      dataAnggota += `<tr >
+        <th scope="row">1</th>
+        <td>${anggota.nama}</td>
+        <td>Jabatan</td>
+        <td>${anggota.nik}</td>
+        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+      </tr>`
+    }
     
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
+    document.getElementById("permitDetailAnggota").innerHTML = dataAnggota
   });
 }
+
+<tr >
+  <th scope="row">1</th>
+  <td>Brandon Jacob</td>
+  <td>Designer</td>
+  <td>2832423456543134</td>
+  <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+  <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
+</tr>
