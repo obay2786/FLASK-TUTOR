@@ -148,9 +148,11 @@ function getPermitdetail(id){
     let newCell = newRow.insertCell(0);
 
     // Append a text node to the cell
-    let newText = document.createTextNode('New bottom row');
-    newCell.appendChild(newText);
+    let newNo = document.createTextNode('1');
+    newCell.appendChild(newNo);
 
+    let newNama = document.createTextNode('Johan');
+    newCell.appendChild(newNama);
 
 
 
