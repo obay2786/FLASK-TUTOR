@@ -171,7 +171,7 @@ def getJFpermit():
             listAnggota = []
             for a in range(10):
                 if a >= len(anggota):
-                    listAnggota.append({"Nama":"","NIK":""})
+                    listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
                 else:
                     listAnggota.append(anggota[a])
 
