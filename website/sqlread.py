@@ -67,7 +67,7 @@ def findDatapermit(cari):
 
     print(list(ResultSet[noData]))
 
-# readsql()
+#readsql()
 
-findDatapermit('545466791')
+#findDatapermit('545466791')
 

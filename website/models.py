@@ -6,23 +6,23 @@ from sqlalchemy.sql import func
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(8000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    date = db.Column(db.DateTime, default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Transaksi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    timeCheckin = db.Column(db.DateTime(timezone=True), default=func.now())
-    timeCheckout = db.Column(db.DateTime(timezone=True), default=func.now())
+    timeCheckin = db.Column(db.DateTime, default=func.now())
+    timeCheckout = db.Column(db.DateTime, default=func.now())
     badge = db.Column(db.String(150))
     nik = db.Column(db.String(150))
     status = db.Column(db.String(150))
 
 class Permit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    subDate = db.Column(db.String(150))
+    subDate = db.Column(db.DateTime())
     namaVendor = db.Column(db.String(150))
-    startDate = db.Column(db.String(150))
-    endDate = db.Column(db.String(150))
+    startDate = db.Column(db.DateTime())
+    endDate = db.Column(db.DateTime())
     purpose = db.Column(db.String(100))
     location = db.Column(db.String(100))
     supplyBarang = db.Column(db.String(500)) #dict
@@ -52,7 +52,7 @@ class User(db.Model, UserMixin):
 class Visitor(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    date = db.Column(db.DateTime(), default=func.now())
     nik = db.Column(db.String(150),unique=True)
     nama = db.Column(db.String(150))
     namaVendor = db.Column(db.String(150))
