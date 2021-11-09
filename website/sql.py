@@ -251,7 +251,10 @@ def getJFcovid():
 
             try:
                 insertCovid(dictJF)
+            except Exception as e:
+                print(e)
             except:
+
                 updateCovid(dictJF)
             
             
