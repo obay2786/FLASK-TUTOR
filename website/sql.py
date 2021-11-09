@@ -169,11 +169,12 @@ def getJFpermit():
 
             anggota = json.loads(data['answers']['51']['answer'])
             listAnggota = []
-            for a in range(10):
-                if a >= len(anggota):
-                    listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
-                else:
-                    listAnggota.append(anggota[a])
+            for a in anggota:
+                a['Register']=''
+                a['Covid']=''
+                    #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
+                listAnggota.append(a)
+               
 
             dictJF['anggota'] = json.dumps(listAnggota)
 

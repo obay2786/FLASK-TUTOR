@@ -65,12 +65,12 @@ class Visitor(db.Model):
 class Covid(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nik = db.Column(db.String(150),unique=True)
-    nama = db.Column(db.String(150),unique=True)
-    q1 = db.Column(db.String(10),unique=True)
-    q2 = db.Column(db.String(10),unique=True)
-    q3 = db.Column(db.String(10),unique=True)
-    q3b = db.Column(db.String(200),unique=True) #link jotform
-    q4 = db.Column(db.String(10),unique=True)
-    q5 = db.Column(db.String(10),unique=True)
-    q6 = db.Column(db.String(10),unique=True)
+    nama = db.Column(db.String(150))
+    q1 = db.Column(db.String(10))
+    q2 = db.Column(db.String(10))
+    q3 = db.Column(db.String(10))
+    q3b = db.Column(db.String(200)) #link jotform
+    q4 = db.Column(db.String(10))
+    q5 = db.Column(db.String(10))
+    q6 = db.Column(db.String(10))
     sign = db.Column(db.Text())

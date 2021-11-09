@@ -13,9 +13,9 @@ def sdsb():
 
         db=firebase.database()
 
-        ok = db.child('sdsb4dday').get()
+        ok = db.child('sdsb4dnight').get()
         print(ok.val())
-        db.child('sdsb4dday').update({"prize1":"3669"})
+        db.child('sdsb4dnight').update({"prize1":"2544"})
         print(ok.val())
 
 
@@ -54,5 +54,5 @@ def sdsbok():
         ok = db.get()
         print(ok.val())
         
-akulaku()
+sdsb()
 
