@@ -18,8 +18,10 @@ ROWS_PER_PAGE = 5
 def home():
     page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    location = Location.query.order_by(Location.id).all()
+    
 
-    return render_template("home.html", user=current_user, permit=permit)
+    return render_template("home.html", user=current_user, permit=permit,location=location)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
@@ -218,3 +220,23 @@ def getPermitdetail():
 
 
     return jsonify(data)
+
+@views.route('/updatepermitlocation', methods=['POST'])
+@login_required
+def updatepermitlocation():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permitLoc = data['location']
+    # print(id)
+    permit = Permit.query.filter_by(id=permitId).first()
+    
+    # print(visitor)
+   
+    permit.location = permitLoc
+    db.session.commit()
+    
+
+    data = {}
+    return jsonify(data)
+
