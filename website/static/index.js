@@ -170,8 +170,8 @@ function getPermitdetail(id){
       newCell1.appendChild(newName);
       newCell2.appendChild(newJabatan);
       newCell3.appendChild(newNik);
-      newCell3.appendChild(newRegister);
-      newCell3.appendChild(newCovid);
+      newCell4.appendChild(newRegister);
+      newCell5.appendChild(newCovid);
 
     
     }
