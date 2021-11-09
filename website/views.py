@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect
 from flask_login import login_required, current_user
-from .models import Note, Visitor,User, Permit
+from .models import Badge, Visitor,User, Permit, Location
 from . import db
 import json
 import base64

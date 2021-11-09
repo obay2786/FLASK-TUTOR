@@ -12,7 +12,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
 
-    from .models import User, Note
+    from .models import User
     #db.drop_all(app=app)
     db.create_all(app=app)
     

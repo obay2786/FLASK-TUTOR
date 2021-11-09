@@ -3,12 +3,15 @@ from flask_login import UserMixin
 from sqlalchemy.sql import func
 
 
-class Note(db.Model):
+class Badge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    data = db.Column(db.String(8000))
-    date = db.Column(db.DateTime, default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    rfid = db.Column(db.String(100))
+    status = db.Column(db.String(100))
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    location = db.Column(db.String(100))
+    
 class Transaksi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timeCheckin = db.Column(db.DateTime, default=func.now())
@@ -33,7 +36,6 @@ class Permit(db.Model):
     host = db.Column(db.String(150))
     bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
     barangBawaan = db.Column(db.String(500)) #dict
-    status = db.Column(db.String(150))
     sign = db.Column(db.Text())
     
 
@@ -48,7 +50,7 @@ class User(db.Model, UserMixin):
     badgeID = db.Column(db.String(150))
     depart = db.Column(db.String(150))
     photo = db.Column(db.Text())
-    notes = db.relationship('Note')
+    
 
 class Visitor(db.Model):
     
