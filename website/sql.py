@@ -56,7 +56,7 @@ def insertData(data):
             )
         conn.commit()
         # delSub(data['id'])
-        print("inserttttttt")
+        print("visitor inserted")
 
 
 def updateData(data):
@@ -190,16 +190,24 @@ def getJFpermit():
 
             listAnggota = []
             for a in anggota:
-                a['Covid']=''
+                
                     #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
                 
                 dataDbVisitor = getDbVisitor(a['NIK'])
                 if "nik" in dataDbVisitor:
-                    a['Register'] = 'Terdaftar'
+                    a['Register'] = 'ya'
                 # if a['NIK'] == dataDbVisitor['nik']:
                 else:
-                    a['Register'] = 'Tidak'
+                    a['Register'] = 'tidak'
                 
+                dataDbCovid = getDbCovid(a['NIK'])
+                if "nik" in dataDbCovid:
+                    a['Covid'] = 'ya'
+                # if a['NIK'] == dataDbVisitor['nik']:
+                else:
+                    a['Covid'] = 'tidak'
+                
+
 
                 listAnggota.append(a)
 
@@ -284,6 +292,18 @@ def getDbVisitor(nik):
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM visitor WHERE nik='{nik}'"))
+
+        for h in hasil:
+            nikVisitor = dict(h)
+
+    return nikVisitor
+
+def getDbCovid(nik):
+    nikVisitor = {}
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        hasil = conn.execute(text(f"SELECT nik FROM covid WHERE nik='{nik}'"))
 
         for h in hasil:
             nikVisitor = dict(h)
