@@ -8,6 +8,7 @@ from io import BytesIO,StringIO
 import os 
 import secrets
 
+
 def saveB(photo):
   
     img = Image.open(photo)
@@ -15,7 +16,8 @@ def saveB(photo):
     output_size = (600, 600)
     img.thumbnail(output_size)
     buffered = BytesIO()
-    img.save(buffered, format="JPEG")
+    # img.save(buffered, format="JPEG")
+    img.save(buffered, format="PNG")
     img_str = base64.b64encode(buffered.getvalue())
     
     return img_str
@@ -45,7 +47,7 @@ def delSub(id):
     print(r.text)
 
 def insertData(data):
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -58,7 +60,7 @@ def insertData(data):
 
 
 def updateData(data):
-    engine = create_engine("mssql+pymssql://sa:123456@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -118,13 +120,12 @@ def getJFvisitor():
             dictJF['id'] = data['id']
     
             dictJF['date'] = datetime.datetime.now()
-
+            
             dictJF['nik'] = data['answers']['96']['answer']      
 
             dictJF['nama'] = data['answers']['95']['answer'] 
 
             if data['answers']['115']['answer'] == 'OTHER':
-
                 dictJF['namaVendor'] = data['answers']['20']['answer'] 
             else:
                 dictJF['namaVendor'] = data['answers']['115']['answer'] 
@@ -149,6 +150,8 @@ def getJFvisitor():
 
             try:
                 insertData(dictJF)
+            # except Exception as e:
+            #     print(e)
             except:
                 updateData(dictJF)
              
@@ -180,13 +183,25 @@ def getJFpermit():
             dictJF['sign'] = data['answers']['47']['answer'] 
 
             anggota = json.loads(data['answers']['51']['answer'])
+
+
+
+
+
             listAnggota = []
             for a in anggota:
-                a['Register']=''
                 a['Covid']=''
                     #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
+                
+                dataDbVisitor = getDbVisitor(a['NIK'])
+                if dataDbVisitor != "":
+                    a['Register'] = 'Terdaftar'
+                # if a['NIK'] == dataDbVisitor['nik']:
+                else:
+                    a['Register'] = 'Tidak'
+                
+
                 listAnggota.append(a)
-               
 
             dictJF['anggota'] = json.dumps(listAnggota)
 
@@ -254,7 +269,6 @@ def getJFcovid():
             #except Exception as e:
                 #print(e)
             except:
-
                 updateCovid(dictJF)
             
             
@@ -264,21 +278,25 @@ def getJFcovid():
 
     
 
+def getDbVisitor(nik):
+    nikVisitor = {}
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        hasil = conn.execute(text(f"SELECT nik FROM visitor WHERE nik='{nik}'"))
 
-        # conn.commit()
-        # # delSub(data['id'])
-        # print("permit inserted")
+        for h in hasil:
+            nikVisitor = dict(h)
 
-
-
+    return nikVisitor
             
 
 
 # getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
 

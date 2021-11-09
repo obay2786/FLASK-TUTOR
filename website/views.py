@@ -45,7 +45,7 @@ def saveB(photo):
     output_size = (600, 600)
     img.thumbnail(output_size)
     buffered = BytesIO()
-    img.save(buffered, format="JPEG")
+    img.save(buffered, format="PNG")
     img_str = base64.b64encode(buffered.getvalue())
     
     return img_str

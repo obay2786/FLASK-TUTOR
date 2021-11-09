@@ -1,4 +1,5 @@
 import sqlalchemy as db
+from sqlalchemy import create_engine, select, table, column,text,insert
 import json
 
 
@@ -71,3 +72,17 @@ def findDatapermit(cari):
 
 #findDatapermit('545466791')
 
+
+def getNikVisitor(nik):
+    nikVisitor = {}
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+        
+        hasil = conn.execute(text(f"SELECT * FROM visitor WHERE nik='{nik}'"))
+
+        for h in hasil:
+            nikVisitor = dict(h)
+
+    print(nikVisitor)
+
+getNikVisitor('834792873489')
