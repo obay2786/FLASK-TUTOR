@@ -172,10 +172,34 @@ function getPermitdetail(id){
       newCell3.appendChild(newNik);
       newCell4.appendChild(newRegister);
       newCell5.appendChild(newCovid);
-
-    
     }
 
+    let noUrut2 = 0
+    for (barang of data.barangBawaan) {
+    // Insert a row at the end of the table
+      let newRow = tableRef.insertRow(-1);
+
+      // Insert a cell in the row at index 0
+      let newCell = newRow.insertCell(0);
+      let newCell1 = newRow.insertCell(1);
+      let newCell2 = newRow.insertCell(2);
+      let newCell3 = newRow.insertCell(3);
+
+      
+      // Append a text node to the cell
+      noUrut2 += 1
+      let newNo = document.createTextNode(noUrut2);
+
+      let newName = document.createTextNode(barang.Nama);
+      let newItem = document.createTextNode(barang['Jenis Media']);
+      let newDetail = document.createTextNode(barang.SN);
+      
+      newCell.appendChild(newNo);
+      newCell1.appendChild(newName);
+      newCell2.appendChild(newItem);
+      newCell3.appendChild(newDetail);
+  
+    }
 
 
   });

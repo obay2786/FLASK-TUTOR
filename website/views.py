@@ -213,7 +213,7 @@ def getPermitdetail():
     data['email'] = permit.email
     data['host'] = permit.host
     data['bawaBarang'] = permit.bawaBarang
-    data['barangBawaan'] = permit.barangBawaan
+    data['barangBawaan'] = json.loads(permit.barangBawaan)
     data['sign'] = permit.sign
 
 
