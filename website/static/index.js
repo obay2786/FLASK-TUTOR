@@ -196,7 +196,7 @@ function getPermitdetail(id){
       noUrut2 += 1
       let newNo = document.createTextNode(noUrut2);
 
-      let newName = document.createTextNode(barang.Nama);
+      let newName = document.createTextNode(barang.['Nama Pemilik']);
       let newItem = document.createTextNode(barang['Jenis Media']);
       let newDetail = document.createTextNode(barang.SN);
       
