@@ -211,11 +211,12 @@ function getPermitdetail(id){
   });
 }
 
-// <tr >
-//   <th scope="row">1</th>
-//   <td>Brandon Jacob</td>
-//   <td>Designer</td>
-//   <td>2832423456543134</td>
-//   <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-//   <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-// </tr>
+function updateLoc(id,loc) {
+ 
+  fetch("/updatepermitlocation", {
+    method: "POST",
+    body: JSON.stringify({ id: id,location: loc}),
+  }).then((_res) => {
+    window.location.href = "/";
+  });
+}

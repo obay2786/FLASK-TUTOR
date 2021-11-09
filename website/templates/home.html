@@ -269,12 +269,19 @@
                 <tbody>
                   <tr>
                   {%for permit in permit.items %}
-                    <td><select class="form-select form-select-danger" id="floatingSelect" aria-label="Floating label select example">
+                    <td>
+                      <select onchange="updateLoc('{{permit.id}}',this.options[this.selectedIndex].value)" class="form-select form-select-danger" id="floatingSelect" aria-label="Floating label select example">
+                      {% if permit.location == '' %}
                       <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
+                      {% else %}
+                      <option selected>{{permit.location}}</option>
+                      {% endif %}
+                      {%for locations in location %}
+                      <option value="{{locations.location}}">{{locations.location}}</option>
+                    
+                      {% endfor %}
+                      </select>
+                  </td>
                     <td>
                       <span class="flag flag-country-us"></span>
                       {{permit.namaVendor}}
