@@ -194,7 +194,7 @@ def getJFpermit():
                     #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
                 
                 dataDbVisitor = getDbVisitor(a['NIK'])
-                if dataDbVisitor != "":
+                if "nik" in dataDbVisitor:
                     a['Register'] = 'Terdaftar'
                 # if a['NIK'] == dataDbVisitor['nik']:
                 else:
