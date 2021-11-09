@@ -90,20 +90,20 @@ def insertCovid(data):
             data
             )
         conn.commit()
-        # delSub(data['id'])
+        delSub(data['id'])
         print("data inserted")
 
 def updateCovid(data):
-    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:123456@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
-            text("UPDATE covid SET nik=:nik, nama=:nama, q1=:q1, q2=:q2, q3=:q3, q3b=:q3b, q4=:q4, q5=:q5, q6=:q6, sign=:sign WHERE nik=:nik"),
+            text("UPDATE visitor SET date=:date, nik=:nik, nama=:nama, namaVendor=:namaVendor, asalVendor=:asalVendor, email=:email, gender=:gender, jabatan=:jabatan, photo=:photo WHERE nik=:nik"),
             data
             )
         conn.commit()
         # delSub(data['id'])
-        print('update '+data['nik']+" : "+ data['nama'])
+        print('update'+data['nik']+ data['nama'])
 
 
 def getJFvisitor():
@@ -156,6 +156,8 @@ def getJFvisitor():
             
 def getJFpermit():
     r = requests.get(f'https://api.jotform.com/form/213014916686458/submissions?apiKey={jfToken}')
+    rVis = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
+    rCov = requests.get(f'https://api.jotform.com/form/212706072902045/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
     dictJF = {}
     listJF =[]
@@ -179,14 +181,17 @@ def getJFpermit():
 
             dictJF['sign'] = data['answers']['47']['answer'] 
 
+            #bikin func anggota mulai disini
             anggota = json.loads(data['answers']['51']['answer'])
-            listAnggota = []
-            for a in anggota:
-                a['Register']=''
-                a['Covid']=''
-                    #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
-                listAnggota.append(a)
-               
+            
+            
+
+            # listAnggota = []
+            # for a in range(10):
+            #     if a >= len(anggota):
+            #         listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
+            #     else:
+            #         listAnggota.append(anggota[a])
 
             dictJF['anggota'] = json.dumps(listAnggota)
 
@@ -249,10 +254,8 @@ def getJFcovid():
 
             dictJF['sign'] = data['answers']['15']['answer'] 
 
-            try:
-                insertCovid(dictJF)
-            except:
-                updateCovid(dictJF)
+           
+            insertCovid(dictJF)
             
             
             # listJF.append(dictJF.copy())
@@ -269,7 +272,10 @@ def getJFcovid():
 
 
             
-
+    #listJF.reverse()  
+    #for hasil in listJF:
+        
+        #updateData(hasil)
 
 # getJFvisitor()
 
@@ -279,3 +285,15 @@ getJFcovid()
 
 
 
+'''
+
+    nik = db.Column(db.String(150),unique=True)
+    nama = db.Column(db.String(150))
+    namaVendor = db.Column(db.String(150))
+    asalVendor = db.Column(db.String(150))
+    email = db.Column(db.String(150))
+    gender = db.Column(db.String(150))
+    jabatan = db.Column(db.String(150))
+    photo = db.Column(db.String(250))
+
+  '''
