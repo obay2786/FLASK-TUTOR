@@ -174,10 +174,16 @@ function getPermitdetail(id){
       newCell5.appendChild(newCovid);
     }
 
+    let tableRef2 = document.getElementById('permitBarangBawaan');
+    var tableHeaderRowCount2 = 1;
+    var rowCount2 = tableRef2.rows.length;
+    for (var i = tableHeaderRowCount2; i < rowCount2; i++) {
+        tableRef2.deleteRow(tableHeaderRowCount2);
+    }
     let noUrut2 = 0
     for (barang of data.barangBawaan) {
     // Insert a row at the end of the table
-      let newRow = tableRef.insertRow(-1);
+      let newRow = tableRef2.insertRow(-1);
 
       // Insert a cell in the row at index 0
       let newCell = newRow.insertCell(0);
