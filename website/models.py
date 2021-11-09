@@ -33,6 +33,7 @@ class Permit(db.Model):
     host = db.Column(db.String(150))
     bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
     barangBawaan = db.Column(db.String(500)) #dict
+    status = db.Column(db.String(150))
     sign = db.Column(db.Text())
     
 
