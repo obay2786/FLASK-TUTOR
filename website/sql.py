@@ -9,6 +9,7 @@ import os
 import secrets
 
 
+
 def saveB(photo):
   
     img = Image.open(photo)
@@ -178,7 +179,7 @@ def getJFpermit():
 
             dictJF['email'] = data['answers']['28']['answer'] 
 
-            dictJF['startDate'] = data['answers']['46']['prettyFormat'] 
+            dictJF['startDate'] = datetime.datetime.strptime(data['answers']['46']['prettyFormat'], '%d-%m-%Y %H:%M') 
 
             dictJF['sign'] = data['answers']['47']['answer'] 
 
@@ -220,7 +221,7 @@ def getJFpermit():
             else:
                 dictJF['barangBawaan'] = ""
 
-            dictJF['endDate'] = data['answers']['56']['prettyFormat'] 
+            dictJF['endDate'] = datetime.datetime.strptime(data['answers']['56']['prettyFormat'], '%d-%m-%Y %H:%M') #data['answers']['56']['prettyFormat'] 
 
             dictJF['purpose'] = data['answers']['59']['answer'] 
 
