@@ -265,7 +265,7 @@ def genxls():
     sheet['C9'] = permit.startDate  #startdata dan enddate
     sheet['C10'] = permit.startDate 
     sheet['E10'] = permit.endDate
-    sheet['A11'] = permit.pupose
+    sheet['A11'] = permit.purpose
 
     # buffer = BytesIO()
     wb.save(urlFolder)
