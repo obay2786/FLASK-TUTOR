@@ -285,7 +285,7 @@ def genxls():
     sheet['A11'] = permit.desk
  
     for i,h in enumerate(permit.anggota, start=7):
-        sheet[f'H{i}'] = permit.desk
+        sheet[f'H{i}'] = h.nama
 
 
 
