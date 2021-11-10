@@ -1,3 +1,4 @@
+import os
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect
 from flask_login import login_required, current_user
 from .models import Badge, Visitor,User, Permit, Location
@@ -245,6 +246,7 @@ def updatepermitlocation():
 
 @views.route('/genxls', methods=['POST'])
 @login_required
+
 def genxls():
     data = json.loads(request.data)
     print(data)
@@ -252,20 +254,21 @@ def genxls():
     permit = Permit.query.filter_by(id=permitId).first()
     
 
-    sourcefile = r'VisitorApprovalBT.xlsx';
+    sourceFile = r'VisitorApprovalBT.xlsx';
+    urlFolder = os.path.join(current_app.root_path,'static',sourceFile)
 
-    wb = load_workbook(sourcefile);
+    wb = load_workbook(urlFolder);
 
     sheet = wb['Visitor Approval'];
-    sheet['C5'] = permit.namaVendor
-    # sheet['C6'] = design
-    sheet['C7'] = data.namaVendor
-    sheet['C9'] = data.subDate
-    sheet['C10'] = data.startDate
-    sheet['E10'] = data.endDate
+    sheet['C5'] = permit.namaVendor  #nama Anggota pertama 
+    sheet['C6'] = design #location
+    sheet['C7'] = permit.namaVendor #namavendor
+    sheet['C9'] = permit.startDate  #startdata dan enddate
+    sheet['C10'] = permit.startDate 
+    sheet['E10'] = permit.endDate
     sheet['A11'] = purpose.pupose
 
-    wb.save(sourcefile)
+    # buffer = BytesIO()
+    wb.save(urlFolder)
 
-    return sourcefile
-genPermitXLS(2)
+    return jsonify({})
