@@ -114,7 +114,8 @@ def genPermitXLS(id):
     sheet['C9'] = data['subDate']
     sheet['C10'] = data['startDate']
     sheet['E10'] = data['endDate']
-    # sheet['A11'] = purpose 
+    sheet['A11'] = purpose['pupose'] 
+    
 
     # wb.save(sourcefile)
 
