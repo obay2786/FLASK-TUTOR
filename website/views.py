@@ -286,7 +286,12 @@ def genxls():
     anggota = json.loads(permit.anggota)
     for i,j in enumerate(anggota, start=7):
         sheet[f'H{i}'] = j['Nama']
-        
+    
+    barang = json.loads(permit.barangBawaan)
+    for i,j in enumerate(barang, start=21):
+        sheet[f'B{i}'] = j['Jenis Media']
+        sheet[f'D{i}'] = 'v'
+        sheet[f'E{i}'] = j['Tujuan']
 
 
 
