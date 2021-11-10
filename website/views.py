@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect
+from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect,current_app
 from flask_login import login_required, current_user
 from .models import Badge, Visitor,User, Permit, Location
 from . import db
@@ -9,7 +9,7 @@ from sqlalchemy import asc, desc,text
 import requests
 from PIL import Image, ImageOps
 from io import BytesIO
-import openpyxl
+
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
 ROWS_PER_PAGE = 5
@@ -245,7 +245,6 @@ def updatepermitlocation():
 
 
 @views.route('/genxls', methods=['POST'])
-@login_required
 
 def genxls():
     data = json.loads(request.data)
@@ -261,7 +260,7 @@ def genxls():
 
     sheet = wb['Visitor Approval'];
     sheet['C5'] = permit.namaVendor  #nama Anggota pertama 
-    sheet['C6'] = design #location
+    sheet['C6'] = permit.location #location
     sheet['C7'] = permit.namaVendor #namavendor
     sheet['C9'] = permit.startDate  #startdata dan enddate
     sheet['C10'] = permit.startDate 
