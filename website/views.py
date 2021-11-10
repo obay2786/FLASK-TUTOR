@@ -262,7 +262,7 @@ def genxls():
     sheet['C5'] = permit.namaVendor  #nama Anggota pertama 
     sheet['C6'] = permit.location #location
     sheet['C7'] = permit.namaVendor #namavendor
-    sheet['C9'] = (permit.startDate)[0:10] + ' - ' +  (permit.endDate)[0:10]#startdata dan enddate
+    sheet['C9'] = str(permit.startDate)[0:10] + ' - ' +  str(permit.endDate)[0:10]#startdata dan enddate
     sheet['C10'] = permit.startDate 
     sheet['E10'] = permit.endDate
     sheet['A11'] = permit.purpose
