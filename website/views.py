@@ -269,7 +269,12 @@ def genxls():
     sheet['E10'] = ""
     sheet['A11'] = ""
     sheet['A11'] = ""
-
+    for a in range(7,16):
+        sheet[f'H{a}'] = ""
+    for b in range(21,30):
+        sheet[f'B{b}'] = ""
+        sheet[f'D{b}'] = ""
+        sheet[f'E{b}'] = ""
 
 
 
