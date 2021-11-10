@@ -259,13 +259,36 @@ def genxls():
     wb = load_workbook(urlFolder);
 
     sheet = wb['Visitor Approval'];
+
+    #hapus
+    sheet['C5'] = "" 
+    sheet['C6'] = ""
+    sheet['C7'] = ""
+    sheet['C9'] = ""
+    sheet['C10'] = ""
+    sheet['E10'] = ""
+    sheet['A11'] = ""
+    sheet['A11'] = ""
+
+
+
+
+    #isi
+
     sheet['C5'] = permit.namaVendor  #nama Anggota pertama 
     sheet['C6'] = permit.location #location
     sheet['C7'] = permit.namaVendor #namavendor
     sheet['C9'] = str(permit.startDate)[0:10] + ' - ' +  str(permit.endDate)[0:10]#startdata dan enddate
     sheet['C10'] = permit.startDate 
     sheet['E10'] = permit.endDate
-    sheet['A11'] = permit.purpose
+    sheet['A11'] = permit.desk
+    sheet['A11'] = permit.desk
+ 
+    for i,h in enumerate(permit.anggota, start=7):
+        sheet[f'H{i}'] = permit.desk
+
+
+
 
     # buffer = BytesIO()
     wb.save(urlFolder)
