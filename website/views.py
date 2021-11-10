@@ -8,6 +8,8 @@ from sqlalchemy import asc, desc,text
 import requests
 from PIL import Image, ImageOps
 from io import BytesIO
+import openpyxl
+from openpyxl import load_workbook
 views = Blueprint('views', __name__)
 ROWS_PER_PAGE = 5
 
@@ -240,3 +242,30 @@ def updatepermitlocation():
     data = {}
     return jsonify(data)
 
+
+@views.route('/genxls', methods=['POST'])
+@login_required
+def genxls():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permit = Permit.query.filter_by(id=permitId).first()
+    
+
+    sourcefile = r'VisitorApprovalBT.xlsx';
+
+    wb = load_workbook(sourcefile);
+
+    sheet = wb['Visitor Approval'];
+    sheet['C5'] = permit.namaVendor
+    # sheet['C6'] = design
+    sheet['C7'] = data.namaVendor
+    sheet['C9'] = data.subDate
+    sheet['C10'] = data.startDate
+    sheet['E10'] = data.endDate
+    sheet['A11'] = purpose.pupose
+
+    wb.save(sourcefile)
+
+    return sourcefile
+genPermitXLS(2)

@@ -1,6 +1,8 @@
 import sqlalchemy as db
 from sqlalchemy import create_engine, select, table, column,text,insert
 import json
+import openpyxl
+from openpyxl import load_workbook
 
 
 dbpana = "mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS"
@@ -85,4 +87,36 @@ def getNikVisitor(nik):
 
     print(nikVisitor)
 
-getNikVisitor('834792873489')
+# getNikVisitor('834792873489')
+
+def genPermitXLS(id):
+    nikVisitor = {}
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    with engine.connect() as conn:
+
+    # nikVisitor;
+        
+        hasil = conn.execute(text(f"SELECT * FROM permit WHERE id='{id}'"))
+
+        for h in hasil:
+            data = dict(h)
+
+    print(data)
+
+    sourcefile = r'VisitorApprovalBT.xlsx';
+
+    wb = load_workbook(sourcefile);
+
+    sheet = wb['Visitor Approval'];
+    sheet['C5'] = data['namaVendor']
+    # sheet['C6'] = design
+    sheet['C7'] = data['namaVendor']
+    sheet['C9'] = data['subDate']
+    sheet['C10'] = data['startDate']
+    sheet['E10'] = data['endDate']
+    # sheet['A11'] = purpose 
+
+    # wb.save(sourcefile)
+
+    # return sourcefile
+genPermitXLS(2)
