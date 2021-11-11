@@ -280,8 +280,8 @@ def genxls():
 
 
     #isi
-
-    sheet['C5'] = permit.namaVendor  #nama Anggota pertama 
+    anggota = json.loads(permit.anggota)
+    sheet['C5'] = anggota[0]['Nama']  #nama Anggota pertama 
     sheet['C6'] = permit.location #location
     sheet['C7'] = permit.namaVendor #namavendor
     sheet['C9'] = str(permit.startDate)[0:10] + ' - ' +  str(permit.endDate)[0:10]#startdata dan enddate
@@ -289,14 +289,14 @@ def genxls():
     sheet['E10'] = permit.endDate
     sheet['A11'] = permit.desk
     sheet['A11'] = permit.desk
-    anggota = json.loads(permit.anggota)
+    
     for i,j in enumerate(anggota, start=7):
         sheet[f'H{i}'] = j['Nama']
     
     barang = json.loads(permit.barangBawaan)
     for i,j in enumerate(barang, start=21):
         if sheet[f'B{i}'] == j['Jenis Media']:
-            sheet[f'D{i}'] = str('=CHAR(252)')
+            sheet[f'D{i}'] = str('V')
             sheet[f'E{i}'] = j['Tujuan']   
         
 
