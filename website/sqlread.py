@@ -122,16 +122,6 @@ def genPermitXLS(id):
     ws = wb['Visitor Approval']
     print(ws['B22'].value)
 
-
-
-
-
-
-    # cell = ws['B21']
-    # for row in ws.rows:
-    #     for cell in row:
-    #         print(cell.value)
-
     # wb.save(sourcefile)
 
     # return sourcefile
