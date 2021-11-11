@@ -307,8 +307,8 @@ def genxls():
         for key, value in sumber.items():
             if i['Jenis Media'] == value:
                 # hasil.add(key)
-                sheet[f'D{key}'] = str('✓')
-                sheet[f'E{key}'] = j['Tujuan']
+                sheet[f'D{key}'] = str('✅')
+                sheet[f'E{key}'] = i['Tujuan']
 
 
     # buffer = BytesIO()
