@@ -220,3 +220,13 @@ function updateLoc(id,loc) {
     window.location.href = "/";
   });
 }
+
+function generatexls(id){
+  fetch("/generatexls", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((_res) => {
+    window.location.href = "/";
+  });
+}
+
