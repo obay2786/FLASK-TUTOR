@@ -137,7 +137,7 @@ function getPermitdetail(id){
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
-    // document.getElementById("permitDetailAnggota").innerHTML = dataAnggota
+    document.getElementById("generatebuttonxls").onClick = generatexls(data.id)
 
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
