@@ -297,7 +297,7 @@ def genxls():
     barang = json.loads(permit.barangBawaan)
     for i,j in enumerate(barang, start=21):
         if sheet[f'B{i}'].value == j['Jenis Media']:
-            sheet[f'D{i}'] = str('V')
+            sheet[f'D{i}'] = str('✓')
             sheet[f'E{i}'] = j['Tujuan'] 
 
         
