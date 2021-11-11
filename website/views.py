@@ -272,7 +272,7 @@ def genxls():
     for a in range(7,16):
         sheet[f'H{a}'] = ""
     for b in range(21,30):
-        sheet[f'B{b}'] = ""
+    #     sheet[f'B{b}'] = ""
         sheet[f'D{b}'] = ""
         sheet[f'E{b}'] = ""
 
@@ -294,9 +294,10 @@ def genxls():
     
     barang = json.loads(permit.barangBawaan)
     for i,j in enumerate(barang, start=21):
-        sheet[f'B{i}'] = j['Jenis Media']
-        sheet[f'D{i}'] = str('=CHAR(252)')
-        sheet[f'E{i}'] = j['Tujuan']
+        if sheet[f'B{i}'] == j['Jenis Media']:
+            sheet[f'D{i}'] = str('=CHAR(252)')
+            sheet[f'E{i}'] = j['Tujuan']   
+        
 
 
 
