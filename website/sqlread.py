@@ -116,11 +116,14 @@ def genPermitXLS(id):
     # sheet['E10'] = data['endDate']
     # sheet['A11'] = purpose['pupose']
 
-    barang = json.loads(data['barangBawaan'])
+    # barang = json.loads(data['barangBawaan'])
     
 
     ws = wb['Visitor Approval']
-    print(ws['B22'].value)
+
+    for row in ws.iter_rows(min_row=21, min_col=2, max_col=2, max_row=30, values_only=True):
+        print(list(row))
+    # print(ws['B22'].value)
 
     # wb.save(sourcefile)
 

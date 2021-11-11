@@ -294,14 +294,21 @@ def genxls():
     for i,j in enumerate(anggota, start=7):
         sheet[f'H{i}'] = j['Nama']
 
+
+
+
+
+
+
     barang = json.loads(permit.barangBawaan)
-    for i,j in enumerate(barang, start=21):
-        if sheet[f'B{i}'].value == j['Jenis Media']:
-            sheet[f'D{i}'] = str('✓')
-            sheet[f'E{i}'] = j['Tujuan'] 
-
-        
-
+    sumber = {21:'Personal Computer / Laptop',22:'Camera (Digital or analogue)',23:'Mobilephone with camera / video',24:'Tablet with camera / video',25:'Digital Video Recorder',26:'Thumbdrive / Pendrive storage unit',27:'Memory Cards (SD/CF/MMC etc.)',28:'Audio Tape Recorder',29:'CDRW / CDR / HDD',30:'Others (pls state)'}
+    hasil = set()
+    for i in barang:
+        for key, value in sumber.items():
+            if i['Jenis Media'] == value:
+                # hasil.add(key)
+                sheet[f'D{key}'] = str('✓')
+                sheet[f'E{key}'] = j['Tujuan']
 
 
     # buffer = BytesIO()
