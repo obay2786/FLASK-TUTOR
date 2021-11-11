@@ -298,7 +298,7 @@ def genxls():
     for i,j in enumerate(barang, start=21):
         if sheet[f'B{i}'].value == j['Jenis Media']:
             sheet[f'D{i}'] = str('V')
-            sheet[f'E{i}'] = j['Tujuan']  
+            sheet[f'E{i}'] = j['Tujuan'] 
 
         
 
