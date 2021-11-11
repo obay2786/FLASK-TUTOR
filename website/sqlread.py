@@ -101,23 +101,38 @@ def genPermitXLS(id):
         for h in hasil:
             data = dict(h)
 
-    print(data)
+    # print(data)
 
-    sourcefile = r'VisitorApprovalBT.xlsx';
+    sourcefile = r'./static/VisitorApprovalBT.xlsx';
 
     wb = load_workbook(sourcefile);
 
-    sheet = wb['Visitor Approval'];
-    sheet['C5'] = data['namaVendor']
-    # sheet['C6'] = design
-    sheet['C7'] = data['namaVendor']
-    sheet['C9'] = data['subDate']
-    sheet['C10'] = data['startDate']
-    sheet['E10'] = data['endDate']
-    sheet['A11'] = purpose['pupose'] 
+    # sheet = wb['Visitor Approval'];
+    # sheet['C5'] = data['namaVendor']
+    # # sheet['C6'] = design
+    # sheet['C7'] = data['namaVendor']
+    # sheet['C9'] = data['subDate']
+    # sheet['C10'] = data['startDate']
+    # sheet['E10'] = data['endDate']
+    # sheet['A11'] = purpose['pupose']
+
+    barang = json.loads(data['barangBawaan'])
     
+
+    ws = wb['Visitor Approval']
+    print(ws['B22'].value)
+
+
+
+
+
+
+    # cell = ws['B21']
+    # for row in ws.rows:
+    #     for cell in row:
+    #         print(cell.value)
 
     # wb.save(sourcefile)
 
     # return sourcefile
-# genPermitXLS(2)
+genPermitXLS(15)
