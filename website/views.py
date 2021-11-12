@@ -273,10 +273,10 @@ def genxls():
     for a in range(7,17):
         sheet[f'H{a}'] = ""
     for b in range(21,31):
-    #     sheet[f'B{b}'] = ""
         sheet[f'D{b}'] = ""
         sheet[f'E{b}'] = ""
-
+    for c in range(36,66):
+        sheet[f'D{c}'] = ""
 
 
     #isi
@@ -312,8 +312,6 @@ def genxls():
     detaillocations = {}
     for i, v in enumerate(locations, start=36):
         detaillocations[i] = v
-
-    hasil2 = set()
     for key, values in detaillocations.items():
         if permit.location == values:
             sheet[f'D{key}'] = str('✅')
