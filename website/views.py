@@ -282,7 +282,7 @@ def genxls():
     #isi
     anggota = json.loads(permit.anggota)
     sheet['C5'] = anggota[0]['Nama']  #nama Anggota pertama 
-    sheet['C6'] = permit.location #location
+    sheet['C6'] = permit.location       #location
     sheet['C7'] = permit.namaVendor #namavendor
     sheet['C9'] = str(permit.startDate)[0:10] + ' - ' +  str(permit.endDate)[0:10]#startdata dan enddate
     sheet['C10'] = permit.startDate 
@@ -304,7 +304,7 @@ def genxls():
                 sheet[f'D{key}'] = str('✅')
                 sheet[f'E{key}'] = i['Tujuan']
 
-    s = wb['Visitor Approval']
+    ws = wb['Visitor Approval']
     locations = []
     for row in ws.iter_rows(min_row=36, min_col=3, max_col=3, max_row=65, values_only=True):
         x = locations.append(row[0])
