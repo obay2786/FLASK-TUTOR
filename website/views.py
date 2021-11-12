@@ -10,6 +10,7 @@ from sqlalchemy import asc, desc,text
 import requests
 from PIL import Image, ImageOps
 from io import BytesIO
+from mail import kirimEmail
 
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
@@ -323,4 +324,18 @@ def genxls():
     # buffer = BytesIO()
     wb.save(urlFolder)
 
+    return jsonify({})
+
+
+
+@views.route('/kirimemaildecline', methods=['POST'])
+def kirimEmailDecline():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permit = Permit.query.filter_by(id=data[id]).first()
+    email = permit.email
+    subject = 'Permit ditolak'
+    body = data['body']
+    kirimemail(email,subject,body)
     return jsonify({})

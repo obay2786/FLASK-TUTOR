@@ -456,13 +456,13 @@
             
             
             <!-- General Form Elements -->
-            <form method="POST" enctype="multipart/form-data">
-              <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
+            <form>
+              <input type="hidden" class="form-control" id="idPermitReject" name="userNamee" >
               
               <div class="row mb-3">
                 
                 <div class="col-sm-10">
-                  <textarea class="form-control" style="height: 100px"></textarea>
+                  <textarea id='emailBody' class="form-control" style="height: 100px"></textarea>
                 </div>
               </div>
           
@@ -470,7 +470,7 @@
               <div class="row mb-3">
                 
                 <div class="col-sm-10">
-                  <button type="submit" name="formEdit" value="editPhoto"class="btn btn-danger">Decline Approval</button>
+                  <button onclick='kirimEmailDecline()' name="formEdit" value="editPhoto"class="btn btn-danger">Decline Approval</button>
                 </div>
               </div>
 

@@ -134,6 +134,7 @@ function getPermitdetail(id){
     //   </tr>`
     // }
     
+    document.getElementById("idPermitReject").innerHTML = data.id
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
@@ -231,3 +232,15 @@ function generatexls(id){
   });
 }
 
+
+
+function kirimEmailDecline() {
+  let id = document.getElementById('idPermitReject').value
+  let body = document.getElementById('emailBody').value
+  fetch("/kirimemaildecline", {
+    method: "POST",
+    body: JSON.stringify({ id: id,body: body }),
+  }).then((_res) => {
+    window.location.href = "/";
+  });
+}
