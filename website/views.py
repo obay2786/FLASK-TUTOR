@@ -314,8 +314,8 @@ def genxls():
         detaillocations[i] = v
 
     hasil2 = set()
-    for i in permit.location:
-        for key, values in  detaillocations:
+    for key, values in  detaillocations:
+        if permit.location == values:
             sheet[f'D{key}'] = str('✅')
 
 
