@@ -37,5 +37,12 @@ for b in banding:
     for key, value in sumber.items():
             if b == value:
                 hasil.add(key)
-                print(key)
+                # print(key)
 # print(hasil)
+
+datas = ["a","b","c","d"]
+
+for i in range(3,7):
+	x = dict.fromkeys(str(i),datas[i-3])
+	print(x)
+# 	

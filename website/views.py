@@ -294,12 +294,6 @@ def genxls():
     for i,j in enumerate(anggota, start=7):
         sheet[f'H{i}'] = j['Nama']
 
-
-
-
-
-
-
     barang = json.loads(permit.barangBawaan)
     sumber = {21:'Personal Computer / Laptop',22:'Camera (Digital or analogue)',23:'Mobilephone with camera / video',24:'Tablet with camera / video',25:'Digital Video Recorder',26:'Thumbdrive / Pendrive storage unit',27:'Memory Cards (SD/CF/MMC etc.)',28:'Audio Tape Recorder',29:'CDRW / CDR / HDD',30:'Others (pls state)'}
     hasil = set()
@@ -309,6 +303,23 @@ def genxls():
                 # hasil.add(key)
                 sheet[f'D{key}'] = str('✅')
                 sheet[f'E{key}'] = i['Tujuan']
+
+    s = wb['Visitor Approval']
+    locations = []
+    for row in ws.iter_rows(min_row=36, min_col=3, max_col=3, max_row=65, values_only=True):
+        x = locations.append(row[0])
+
+    detaillocations = {}
+    for i, v in enumerate(locations, start=36):
+        detaillocations[i] = v
+
+    hasil2 = set()
+    for i in permit.location:
+        for key, values in  detaillocations:
+            sheet[f'D{key}'] = str('✅')
+
+
+
 
 
     # buffer = BytesIO()

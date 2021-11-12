@@ -120,11 +120,18 @@ def genPermitXLS(id):
     
 
     ws = wb['Visitor Approval']
+    locations = []
+    for row in ws.iter_rows(min_row=36, min_col=3, max_col=3, max_row=65, values_only=True):
+        x = locations.append(row[0])
 
-    for row in ws.iter_rows(min_row=21, min_col=2, max_col=2, max_row=30, values_only=True):
-        print(list(row))
-    # print(ws['B22'].value)
+    # print(locations)
 
+    detaillocations = {}
+    for i, v in enumerate(locations, start=36):
+        detaillocations[i] = v
+
+    print(detaillocations)
+        
     # wb.save(sourcefile)
 
     # return sourcefile
