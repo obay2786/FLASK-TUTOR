@@ -35,7 +35,7 @@ class Permit(db.Model):
     email = db.Column(db.String(150))
     host = db.Column(db.String(150))
     bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
-    barangBawaan = db.Column(db.String(150)) #dict
+    barangBawaan = db.Column(db.String(1000)) #dict
     sign = db.Column(db.Text())
     status = db.Column(db.String(150))
     

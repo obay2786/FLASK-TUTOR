@@ -191,7 +191,7 @@ function getPermitdetail(id){
       let newCell1 = newRow.insertCell(1);
       let newCell2 = newRow.insertCell(2);
       let newCell3 = newRow.insertCell(3);
-      let newCell3 = newRow.insertCell(4);
+      let newCell4 = newRow.insertCell(4);
 
       
       // Append a text node to the cell
