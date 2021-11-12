@@ -165,7 +165,7 @@ function getPermitdetail(id){
       let newJabatan = document.createTextNode(anggota.Jabatan);
       let newNik = document.createTextNode(anggota.NIK);
       let newRegister = document.createTextNode( centang = (anggota.Register == "ya") ? "✅":"❌")
-      let newCovid = document.createTextNode(anggota.Covid);
+      let newCovid = document.createTextNode(centang1 = (anggota.Covid == "ya") ? "✅":"❌");
       newCell.appendChild(newNo);
       newCell1.appendChild(newName);
       newCell2.appendChild(newJabatan);
