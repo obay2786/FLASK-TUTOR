@@ -196,17 +196,17 @@ def getJFpermit():
                 
                 dataDbVisitor = getDbVisitor(a['NIK'])
                 if "nik" in dataDbVisitor:
-                    a['Register'] = 'ya'
+                    a['Register'] = '✅'
                 # if a['NIK'] == dataDbVisitor['nik']:
                 else:
-                    a['Register'] = 'tidak'
+                    a['Register'] = '❌'
                 
                 dataDbCovid = getDbCovid(a['NIK'])
                 if "nik" in dataDbCovid:
-                    a['Covid'] = 'ya'
+                    a['Covid'] = '✅'
                 # if a['NIK'] == dataDbVisitor['nik']:
                 else:
-                    a['Covid'] = 'tidak'
+                    a['Covid'] = '❌'
                 
 
 

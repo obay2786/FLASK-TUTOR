@@ -124,8 +124,6 @@ def genPermitXLS(id):
     for row in ws.iter_rows(min_row=36, min_col=3, max_col=3, max_row=65, values_only=True):
         x = locations.append(row[0])
 
-    # print(locations)
-
     detaillocations = {}
     for i, v in enumerate(locations, start=36):
         detaillocations[i] = v
