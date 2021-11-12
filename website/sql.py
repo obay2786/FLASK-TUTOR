@@ -224,7 +224,7 @@ def getJFpermit():
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
                 dictJF['supplyBarang'] = data['answers']['65']['answer']
-                dictJF['status'] = "approve" 
+                dictJF['status'] = "approved" 
             else:
                 dictJF['location'] = ""
                 dictJF['supplyBarang'] = ""
