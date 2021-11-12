@@ -134,7 +134,7 @@ function getPermitdetail(id){
     //   </tr>`
     // }
     
-    document.getElementById("idPermitReject").innerHTML = data.id
+    document.getElementById("idPermitReject").value = data.id
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose

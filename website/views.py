@@ -10,7 +10,7 @@ from sqlalchemy import asc, desc,text
 import requests
 from PIL import Image, ImageOps
 from io import BytesIO
-from mail import kirimEmail
+from .mailr import kirimEmail
 
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
@@ -203,7 +203,7 @@ def delVisitor():
 def getPermitdetail():
     data = json.loads(request.data)
     permitId = data['id']
-    # print(id)
+    # print(id)data[id]
     permit = Permit.query.filter_by(id=permitId).first()
     # print(visitor)
     data = {}
@@ -333,9 +333,9 @@ def kirimEmailDecline():
     data = json.loads(request.data)
     print(data)
     permitId = data['id']
-    permit = Permit.query.filter_by(id=data[id]).first()
+    permit = Permit.query.filter_by(id=permitId).first()
     email = permit.email
     subject = 'Permit ditolak'
     body = data['body']
-    kirimemail(email,subject,body)
+    kirimEmail(email,subject,body)
     return jsonify({})
