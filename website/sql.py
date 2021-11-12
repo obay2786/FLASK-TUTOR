@@ -185,14 +185,8 @@ def getJFpermit():
 
             anggota = json.loads(data['answers']['51']['answer'])
 
-
-
-
-
             listAnggota = []
             for a in anggota:
-                
-                    #listAnggota.append({"Nama":"","NIK":"","Jabatan":""})
                 
                 dataDbVisitor = getDbVisitor(a['NIK'])
                 if "nik" in dataDbVisitor:
@@ -207,8 +201,6 @@ def getJFpermit():
                 # if a['NIK'] == dataDbVisitor['nik']:
                 else:
                     a['Covid'] = 'tidak'
-                
-
 
                 listAnggota.append(a)
 
@@ -231,10 +223,12 @@ def getJFpermit():
 
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
-                dictJF['supplyBarang'] = data['answers']['65']['answer'] 
+                dictJF['supplyBarang'] = data['answers']['65']['answer']
+                dictJF['status'] = "approve" 
             else:
                 dictJF['location'] = ""
                 dictJF['supplyBarang'] = ""
+                dictJF['status'] = ""
 
             insertPermit(dictJF)
            
