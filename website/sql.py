@@ -142,8 +142,7 @@ def getJFvisitor():
 
 
             dictJF['jabatan'] = data['answers']['98']['answer'] 
-
-            
+          
 
             dictJF['photo'] = getImage(data['answers']['100']['answer'])
 
@@ -307,11 +306,11 @@ def getDbCovid(nik):
             
 
 
-getJFvisitor()
+# getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-getJFpermit()
+# getJFpermit()
 
 
 

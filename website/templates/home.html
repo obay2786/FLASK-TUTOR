@@ -269,6 +269,7 @@
                 <tbody>
                   <tr>
                   {%for permit in permit.items %}
+                      {% if permit.status == 'meeting' || 'working' || 'overtime' %}
                     <td>
                       <select onchange="updateLoc('{{permit.id}}',this.options[this.selectedIndex].value)" class="form-select form-select-danger" id="floatingSelect" aria-label="Floating label select example">
                       {% if permit.location == '' %}
@@ -305,6 +306,7 @@
                       </div>
                     </td>
                   </tr>
+                  {% endif %}
                   
                   {% endfor %}
                   
