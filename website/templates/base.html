@@ -242,8 +242,9 @@
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+<!-- 
 <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-
+-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.min.js" integrity="sha512-he8U4ic6kf3kustvJfiERUpojM8barHoz0WYpAUDWQVn61efpm3aVAD8RWL8OloaDDzMZ1gZiubF9OSdYBqHfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
@@ -263,11 +264,7 @@
       $('#clock').html(momentNow.format('DD MMMM YYYY | hh:mm:ss'));
   }, 100);
 
-  var table_main = new simpleDatatables.DataTable("#table-visitors", {
-    searchable: false,
-    perPageSelect: false,
-    sortable: false
-  })
+  
 
   $('.selectpicker').selectpicker({'iconBase': 'bi' });
 

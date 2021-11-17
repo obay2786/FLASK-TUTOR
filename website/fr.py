@@ -20,13 +20,12 @@ def sdsb():
 
 
 def akulaku():
-        firebaseConfig={"apiKey": "AIzaSyBt7SLd-WLlPpHQcIBlzOhhIbwIjH5Du6g",
-                "authDomain": "akulaku-web-1a00b.firebaseapp.com",
-                "databaseURL": "https://akulaku-web-1a00b.firebaseio.com",
-                "projectId": "akulaku-web-1a00b",
-                "storageBucket": "akulaku-web-1a00b.appspot.com",
-                "messagingSenderId": "778102340676",
-                "appId": "1:778102340676:web:1144ee501f24a8ca81d011"}
+        firebaseConfig={"apiKey": "AIzaSyDoiC-LuZbjxszNjC0I6_3tfIywmMpVrkc",
+                "authDomain": "awesome-terra-87705.firebaseapp.com",
+                "databaseURL": "https://awesome-terra-87705.firebaseio.com",
+                "projectId": "awesome-terra-87705",
+                "storageBucket": "awesome-terra-87705.appspot.com",
+                "messagingSenderId": "480338185245"}
 
         firebase=pyrebase.initialize_app(firebaseConfig)
 
@@ -54,5 +53,5 @@ def sdsbok():
         ok = db.get()
         print(ok.val())
         
-sdsb()
+akulaku()
 
