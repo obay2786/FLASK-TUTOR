@@ -222,6 +222,8 @@ def getPermitdetail():
     data['bawaBarang'] = permit.bawaBarang
     data['barangBawaan'] = json.loads(permit.barangBawaan)
     data['sign'] = permit.sign
+    data['statusGenerate'] = permit.statusGenerate
+    data['statusUpload'] = permit.statusUpload
 
 
     return jsonify(data)
@@ -339,3 +341,22 @@ def kirimEmailDecline():
     body = data['body']
     kirimEmail(email,subject,body)
     return jsonify({})
+
+@views.route('/updateStatusGenerate', methods=['POST'])
+@login_required
+def updatepermitlocation():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permitStatusGen = data['StatusGenerate']
+    # print(id)
+    permit = Permit.query.filter_by(id=permitId).first()
+    
+    # print(visitor)
+   
+    permit.StatusGenerate = permitStatusGen
+    db.session.commit()
+    
+
+    data = {}
+    return jsonify(data)

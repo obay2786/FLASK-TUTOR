@@ -138,7 +138,7 @@ function getPermitdetail(id){
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
-    document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
+    document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); uploadButtonPermit(data.id); };
 
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
@@ -232,6 +232,16 @@ function generatexls(id){
   }).then((_res) => {
     //window.open('visitoraproval.xlsx')
     window.location.href = "/static/VisitorApprovalBT.xlsx";
+  });
+}
+
+function uploadButtonPermit(id){
+  fetch("/genxls", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((_res) => {
+    //window.open('visitoraproval.xlsx')
+    window.location.href = "/uploadButtonPermit";
   });
 }
 
