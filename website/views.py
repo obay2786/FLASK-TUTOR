@@ -24,9 +24,9 @@ def home():
     page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
     location = Location.query.order_by(Location.id).all()
-    status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    permitStatus = Permit.query.order_by(text('permitStatus')).paginate(page=page, per_page=ROWS_PER_PAGE)
 
-    return render_template("home.html", user=current_user, permit=permit,location=location,status=status)
+    return render_template("home.html", user=current_user, permit=permit,location=location,permitStatus=permitStatus)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
@@ -342,21 +342,21 @@ def kirimEmailDecline():
     kirimEmail(email,subject,body)
     return jsonify({})
 
-@views.route('/updateStatusGenerate', methods=['POST'])
-@login_required
-def updatepermitlocation():
-    data = json.loads(request.data)
-    print(data)
-    permitId = data['id']
-    permitStatusGen = data['StatusGenerate']
-    # print(id)
-    permit = Permit.query.filter_by(id=permitId).first()
+# @views.route('/uploadButtonPermit', methods=['POST'])
+# @login_required
+# def uploadButtonPermit():
+#     data = json.loads(request.data)
+#     print(data)
+#     permitId = data['id']
+#     permitStatusGen = data['StatusGenerate']
+#     # print(id)
+#     permit = Permit.query.filter_by(id=permitId).first()
     
-    # print(visitor)
+#     # print(visitor)
    
-    permit.StatusGenerate = permitStatusGen
-    db.session.commit()
+#     permit.StatusGenerate = permitStatusGen
+#     db.session.commit()
     
 
-    data = {}
-    return jsonify(data)
+#     data = {}
+#     return jsonify(data)
