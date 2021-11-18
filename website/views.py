@@ -346,4 +346,6 @@ def kirimEmailDecline():
     subject = 'Permit ditolak'
     body = data['body']
     kirimEmail(email,subject,body)
+    db.session.delete(permit)
+    db.session.commit()
     return jsonify({})
