@@ -138,13 +138,13 @@ function getPermitdetail(id){
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
-    document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
-    let buttonDisable = '<span class="badge rounded-pill bg-secondary">Generate</span>'
-    if(data.buttongenerate == 'disable'){
+    // document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
+    let buttonEnable = '<span class="badge rounded-pill bg-success">Generate</span>'
+    if(data.buttongenerate == 'enable'){
       let gb = document.getElementById("generatebuttonxls")
-      gb.innerHTML = buttonDisable
+      gb.innerHTML = buttonEnable
       // gb.href =  'javascript:void(0)'
-      gb.removeAttribute("onclick")
+      gb.onclick = function () { generatexls(data.id); };
     }
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
