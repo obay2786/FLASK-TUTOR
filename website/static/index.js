@@ -139,7 +139,10 @@ function getPermitdetail(id){
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
     document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
-
+    let buttonDisable = '<span class="badge rounded-pill bg-secondary">Generate</span>'
+    if(data.buttongenerate == 'disable'){
+      document.getElementById("generatebuttonxls").innerHTML = buttonDisable
+    }
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
     var rowCount = tableRef.rows.length;
