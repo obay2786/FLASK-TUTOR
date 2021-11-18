@@ -222,8 +222,13 @@ def getPermitdetail():
     data['bawaBarang'] = permit.bawaBarang
     data['barangBawaan'] = json.loads(permit.barangBawaan)
     data['sign'] = permit.sign
+    data['buttongenerate'] = ""
+    if 'tidak' in data['anggota']['covid'] and data['anggota']['covid']:
+        data['buttongenerate'] = 'disable'
+    else:
+        data['buttongenerate'] = 'enable' 
 
-
+    print('ini hasil dari' + data['buttongenerate'])
     return jsonify(data)
 
 @views.route('/updatepermitlocation', methods=['POST'])
