@@ -220,7 +220,7 @@ def getPermitdetail():
     data['email'] = permit.email
     data['host'] = permit.host
     data['bawaBarang'] = permit.bawaBarang
-    if permit.bawaBarang == 'tidak':
+    if permit.bawaBarang == 'TIDAK':
         data['barangBawaan'] = ''
     else:
         data['barangBawaan'] = json.loads(permit.barangBawaan)
