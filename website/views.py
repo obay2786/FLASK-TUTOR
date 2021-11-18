@@ -339,8 +339,7 @@ def kirimEmailDecline():
     body = data['body']
     kirimEmail(email,subject,body)
     return jsonify({})
-<<<<<<< HEAD
-=======
+
 
 # @views.route('/uploadButtonPermit', methods=['POST'])
 # @login_required
@@ -360,4 +359,3 @@ def kirimEmailDecline():
 
 #     data = {}
 #     return jsonify(data)
->>>>>>> ac87bb2522c4a818b5ee2ee9bb58c74f643061e7

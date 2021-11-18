@@ -48,7 +48,7 @@ def delSub(id):
     print(r.text)
 
 def insertData(data):
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -61,7 +61,7 @@ def insertData(data):
 
 
 def updateData(data):
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -73,7 +73,7 @@ def updateData(data):
         print('update'+data['nik']+ data['nama'])
 
 def insertPermit(data):
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -85,8 +85,8 @@ def insertPermit(data):
         print("permit inserted")
 
 def insertCovid(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    # engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -98,8 +98,8 @@ def insertCovid(data):
         print("data inserted")
 
 def updateCovid(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    # engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -291,7 +291,7 @@ def getJFcovid():
 def getDbVisitor(nik):
     nikVisitor = {}
     # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM visitor WHERE nik='{nik}'"))
@@ -304,7 +304,7 @@ def getDbVisitor(nik):
 def getDbCovid(nik):
     nikVisitor = {}
     # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM covid WHERE nik='{nik}'"))
