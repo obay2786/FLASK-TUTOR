@@ -297,11 +297,14 @@
                     </td>
                     <td>{{permit.startDate}} - {{permit.endDate}}</td>
                     <td >
-                      <span data-bs-toggle="modal" data-bs-target="#detailPermit">
-                        
+                      <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
-                        
+                      
+                      <span data-bs-toggle="modal" data-bs-target="#uploadGambarPermit">  
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Upload</span></a>
+                      </span>
+
                       </div>
                     </td>
                   </tr>
@@ -336,6 +339,62 @@
         
         
       </div>
+
+
+      <!-- Modal editphoto -->
+      <div class="modal fade" id="uploadGambarPermit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            
+            <div class="modal-body">
+              <div class="card">
+                <div class="card-body">
+                  <h5 id ="edit" class="card-title"></h5>
+                  <h5 id ="editH2" class="card-title"></h5>
+                  
+                  <!-- General Form Elements -->
+                  <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                    <img src="" id = "editPhoto" style="height: 200px;" alt="Profile" class="rounded-circle">
+                    
+                    </div>
+                    <div class="row mb-3">
+                      <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                      <div class="col-sm-10">
+                        <input type="file"  class="form-control" id="photo" name="photo" accept=".jpg, .jpeg" required>
+                      </div>
+                    </div>
+                
+
+                    <div class="row mb-3">
+                      
+                      <div class="col-sm-10">
+                        <button type="submit" name="formEdit" value="editPhoto"class="btn btn-primary">Submit Form</button>
+                      </div>
+                    </div>
+
+                  </form><!-- End General Form Elements -->
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
        <!--Lihat Detail -->
        <div class="modal fade" id="detailPermit" tabindex="-1">
         <div class="modal-dialog modal-xl">
