@@ -1,6 +1,3 @@
-
-
-
 function delStaff(id) {
  
   fetch("/delstaff", {
