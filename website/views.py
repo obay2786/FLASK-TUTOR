@@ -223,7 +223,7 @@ def getPermitdetail():
     data['barangBawaan'] = json.loads(permit.barangBawaan)
     data['sign'] = permit.sign
     data['buttongenerate'] = ""
-    if 'tidak' in data['anggota']['covid'] and data['anggota']['covid']:
+    if "'tidak'" in str(data['anggota']):
         data['buttongenerate'] = 'disable'
     else:
         data['buttongenerate'] = 'enable' 
