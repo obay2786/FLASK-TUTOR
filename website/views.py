@@ -315,8 +315,8 @@ def genxls():
                     sheet[f'E{key}'] = i['Tujuan']
     else:
         for b in range(21,31):
-        sheet[f'D{b}'] = ""
-        sheet[f'E{b}'] = ""
+            sheet[f'D{b}'] = ""
+            sheet[f'E{b}'] = ""
 
     ws = wb['Visitor Approval']
     locations = []
