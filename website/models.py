@@ -39,6 +39,7 @@ class Permit(db.Model):
     sign = db.Column(db.Text())
     status = db.Column(db.String(150))  #status Permit Approved/ '' / waiting permition from host/security
     statusGenerate = db.Column(db.String(150))
+    UploadPermit = db.Column(db.Text())
 
 
     
