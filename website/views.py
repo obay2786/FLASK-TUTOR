@@ -330,12 +330,12 @@ def genxls():
         if permit.location == values:
             sheet[f'D{key}'] = str('✅')
 
-
-
-
-
     # buffer = BytesIO()
     wb.save(urlFolder)
+
+    permit.statusGenerate = 'ok'
+    db.session.commit()
+
 
     return jsonify({})
 
