@@ -24,9 +24,9 @@ def home():
     page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
     location = Location.query.order_by(Location.id).all()
-    status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
 
-    return render_template("home.html", user=current_user, permit=permit,location=location,status=status)
+    return render_template("home.html", user=current_user, permit=permit,location=location)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
