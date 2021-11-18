@@ -5,8 +5,7 @@ import openpyxl
 from openpyxl import load_workbook
 
 
-# dbpana = "mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS"
-dbpana = "mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS"
+dbpana = "mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS"
 
 def readsql():
     engine = db.create_engine(dbpana)
@@ -50,7 +49,7 @@ def readsql():
 
     print(listDb)
 
-# readsql()
+
 
 def findDatapermit(cari):
     engine = db.create_engine(dbpana)
@@ -134,9 +133,4 @@ def genPermitXLS(id):
     # wb.save(sourcefile)
 
     # return sourcefile
-# genPermitXLS(15)
-
-
-
-
-datapermit = [{'no': 1, 'subDate': datetime.datetime(2021, 11, 12, 14, 50, 55), 'namaVendor': 'CV. ANINDYATRANS ', 'startDate': datetime.datetime(2021, 11, 23, 8, 0), 'endDate': datetime.datetime(2021, 11, 23, 13, 59), 'purpose': 'SUPPLY', 'location': 'Workshop & Machine shop', 'supplyBarang': '[{"Item Description":"Buku","Quantity":"3"},{"Item Description":"pulpen","Quantity":"100"}]', 'permitNo': '', 'desk': '', 'anggota': '[{"Nama": "Faris", "Jabatan": "Manager", "NIK": "23784205723407", "Register": "tidak", "Covid": "tidak"}]', 'email': 'blgr182@gmail.com', 'barangBawaan': 'UMI', 'sign': 'TIDAK'}, {'no': 2, 'subDate': datetime.datetime(2021, 11, 11, 11, 50, 52), 'namaVendor': 'PT. AIK MOH CHEMICALS INDONESIA', 'startDate': datetime.datetime(2021, 11, 13, 8, 0), 'endDate': datetime.datetime(2021, 11, 18, 13, 59), 'purpose': 'WORKING', 'location': 'Resistor production', 'supplyBarang': '', 'permitNo': '5647754647', 'desk': 'fghdfhgdfhd', 'anggota': '[{"Nama": "Novel", "Jabatan": "Komisaris", "NIK": "83423849028", "Register": "tidak", "Covid": "tidak"}, {"Nama": "Faris", "Jabatan": "Manager", "NIK": "982982897873", "Register": "tidak", "Covid": "tidak"}]', 'email': 'novel@martin.harianto', 'barangBawaan': 'FITRIANSYAH', 'sign': 'YA'}, {'no': 3, 'subDate': datetime.datetime(2021, 11, 12, 14, 50, 55), 'namaVendor': 'CV. ANINDYATRANS ', 'startDate': datetime.datetime(2021, 11, 23, 8, 0), 'endDate': datetime.datetime(2021, 11, 23, 13, 59), 'purpose': 'SUPPLY', 'location': 'LOGISTIC', 'supplyBarang': '[{"Item Description":"Buku","Quantity":"3"},{"Item Description":"pulpen","Quantity":"100"}]', 'permitNo': '', 'desk': '', 'anggota': '[{"Nama": "Faris", "Jabatan": "Manager", "NIK": "23784205723407", "Register": "tidak", "Covid": "tidak"}]', 'email': 'blgr182@gmail.com', 'barangBawaan': 'UMI', 'sign': 'TIDAK'}, {'no': 4, 'subDate': datetime.datetime(2021, 11, 11, 11, 50, 52), 'namaVendor': 'PT. AIK MOH CHEMICALS INDONESIA', 'startDate': datetime.datetime(2021, 11, 13, 8, 0), 'endDate': datetime.datetime(2021, 11, 18, 13, 59), 'purpose': 'WORKING', 'location': 'Workshop & Machine shop', 'supplyBarang': '', 'permitNo': '5647754647', 'desk': 'fghdfhgdfhd', 'anggota': '[{"Nama": "Novel", "Jabatan": "Komisaris", "NIK": "83423849028", "Register": "tidak", "Covid": "tidak"}, {"Nama": "Faris", "Jabatan": "Manager", "NIK": "982982897873", "Register": "tidak", "Covid": "tidak"}]', 'email': 'novel@martin.harianto', 'barangBawaan': 'FITRIANSYAH', 'sign': 'YA'}, {'no': 5, 'subDate': datetime.datetime(2021, 11, 12, 14, 50, 55), 'namaVendor': 'CV. ANINDYATRANS ', 'startDate': datetime.datetime(2021, 11, 23, 8, 0), 'endDate': datetime.datetime(2021, 11, 23, 13, 59), 'purpose': 'SUPPLY', 'location': 'IT Server Room', 'supplyBarang': '[{"Item Description":"Buku","Quantity":"3"},{"Item Description":"pulpen","Quantity":"100"}]', 'permitNo': '', 'desk': '', 'anggota': '[{"Nama": "Faris", "Jabatan": "Manager", "NIK": "23784205723407", "Register": "tidak", "Covid": "tidak"}]', 'email': 'blgr182@gmail.com', 'barangBawaan': 'UMI', 'sign': 'TIDAK'}, {'no': 6, 'subDate': datetime.datetime(2021, 11, 11, 11, 50, 52), 'namaVendor': 'PT. AIK MOH CHEMICALS INDONESIA', 'startDate': datetime.datetime(2021, 11, 13, 8, 0), 'endDate': datetime.datetime(2021, 11, 18, 13, 59), 'purpose': 'WORKING', 'location': 'Resistor Office', 'supplyBarang': '', 'permitNo': '5647754647', 'desk': 'fghdfhgdfhd', 'anggota': '[{"Nama": "Novel", "Jabatan": "Komisaris", "NIK": "83423849028", "Register": "tidak", "Covid": "tidak"}, {"Nama": "Faris", "Jabatan": "Manager", "NIK": "982982897873", "Register": "tidak", "Covid": "tidak"}]', 'email': 'novel@martin.harianto', 'barangBawaan': 'FITRIANSYAH', 'sign': 'YA'}]
+genPermitXLS(15)

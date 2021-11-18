@@ -38,10 +38,6 @@ class Permit(db.Model):
     barangBawaan = db.Column(db.String(1000)) #dict
     sign = db.Column(db.Text())
     status = db.Column(db.String(150))
-    permitStatus = db.Column(db.String(150))
-    statusGenerate = db.Column(db.String(150))
-    dataUpload = db.Column(db.Text())
-
     
 
 class User(db.Model, UserMixin):

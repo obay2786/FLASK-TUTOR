@@ -77,7 +77,7 @@ def insertPermit(data):
     with engine.connect() as conn:
         
         conn.execute(
-            text("INSERT INTO permit (subDate, namaVendor, startDate, endDate, purpose, location, supplyBarang, permitNo, desk, anggota, email, host, bawaBarang, barangBawaan, sign, permitStatus) VALUES (:subDate, :namaVendor, :startDate, :endDate, :purpose, :location, :supplyBarang, :permitNo,:desk,:anggota,:email,:host,:bawaBarang,:barangBawaan,:sign, :permitStatus)"),
+            text("INSERT INTO permit (subDate, namaVendor, startDate, endDate, purpose, location, supplyBarang, permitNo, desk, anggota, email, host, bawaBarang, barangBawaan, sign, status) VALUES (:subDate, :namaVendor, :startDate, :endDate, :purpose, :location, :supplyBarang, :permitNo,:desk,:anggota,:email,:host,:bawaBarang,:barangBawaan,:sign, :status)"),
             data
             )
         conn.commit()
@@ -86,7 +86,6 @@ def insertPermit(data):
 
 def insertCovid(data):
     engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -99,7 +98,6 @@ def insertCovid(data):
 
 def updateCovid(data):
     engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         conn.execute(
@@ -144,8 +142,7 @@ def getJFvisitor():
 
 
             dictJF['jabatan'] = data['answers']['98']['answer'] 
-
-            
+          
 
             dictJF['photo'] = getImage(data['answers']['100']['answer'])
 
@@ -226,16 +223,11 @@ def getJFpermit():
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
                 dictJF['supplyBarang'] = data['answers']['65']['answer']
-<<<<<<< HEAD
-                dictJF['status'] = "approve" 
-=======
-                dictJF['permitStatus'] = "approved" 
->>>>>>> ac87bb2522c4a818b5ee2ee9bb58c74f643061e7
+                dictJF['status'] = "approved" 
             else:
                 dictJF['location'] = ""
                 dictJF['supplyBarang'] = ""
-                dictJF['permitStatus'] = ""
-
+                dictJF['status'] = ""
 
             insertPermit(dictJF)
            
@@ -290,7 +282,6 @@ def getJFcovid():
 
 def getDbVisitor(nik):
     nikVisitor = {}
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
@@ -303,7 +294,6 @@ def getDbVisitor(nik):
 
 def getDbCovid(nik):
     nikVisitor = {}
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
     with engine.connect() as conn:
         
@@ -318,9 +308,8 @@ def getDbCovid(nik):
 
 getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-getJFpermit()
-
+# getJFpermit()
 
 
