@@ -37,7 +37,14 @@ class Permit(db.Model):
     bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
     barangBawaan = db.Column(db.String(1000)) #dict
     sign = db.Column(db.Text())
+<<<<<<< HEAD
     status = db.Column(db.String(150))
+=======
+    permitStatus = db.Column(db.String(150))
+    statusGenerate = db.Column(db.String(150))
+    dataUpload = db.Column(db.Text())
+
+>>>>>>> ac87bb2522c4a818b5ee2ee9bb58c74f643061e7
     
 
 class User(db.Model, UserMixin):

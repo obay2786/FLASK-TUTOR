@@ -138,7 +138,12 @@ function getPermitdetail(id){
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
+<<<<<<< HEAD
     document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
+=======
+    document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id);  };
+    // uploadButtonPermit(data.id)
+>>>>>>> ac87bb2522c4a818b5ee2ee9bb58c74f643061e7
 
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
@@ -235,6 +240,19 @@ function generatexls(id){
   });
 }
 
+<<<<<<< HEAD
+=======
+// function uploadButtonPermit(id){
+//   fetch("/genxls", {
+//     method: "POST",
+//     body: JSON.stringify({ id: id }),
+//   }).then((_res) => {
+//     //window.open('visitoraproval.xlsx')
+//     window.location.href = "/uploadButtonPermit";
+//   });
+// }
+
+>>>>>>> ac87bb2522c4a818b5ee2ee9bb58c74f643061e7
 
 
 function kirimEmailDecline() {
