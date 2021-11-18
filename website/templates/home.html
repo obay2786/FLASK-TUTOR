@@ -300,7 +300,11 @@
                       <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
-                        
+                      
+                      <span data-bs-toggle="modal" data-bs-target="#uploadGambarPermit">  
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Upload</span></a>
+                      </span>
+
                       </div>
                     </td>
                   </tr>
@@ -345,8 +349,8 @@
             <div class="modal-body">
               <div class="card">
                 <div class="card-body">
-                  <h5 id ="edit" class="card-title">Edit Photo</h5>
-                  <h5 id ="editH2" class="card-title">Edit Account</h5>
+                  <h5 id ="edit" class="card-title"></h5>
+                  <h5 id ="editH2" class="card-title"></h5>
                   
                   <!-- General Form Elements -->
                   <form method="POST" enctype="multipart/form-data">
