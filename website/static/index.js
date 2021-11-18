@@ -141,7 +141,9 @@ function getPermitdetail(id){
     document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
     let buttonDisable = '<span class="badge rounded-pill bg-secondary">Generate</span>'
     if(data.buttongenerate == 'disable'){
-      document.getElementById("generatebuttonxls").innerHTML = buttonDisable
+      let gb = document.getElementById("generatebuttonxls")
+      gb.innerHTML = buttonDisable
+      gb.href =  'javascript:void(0)'
     }
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
