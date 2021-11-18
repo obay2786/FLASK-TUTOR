@@ -143,7 +143,8 @@ function getPermitdetail(id){
     if(data.buttongenerate == 'disable'){
       let gb = document.getElementById("generatebuttonxls")
       gb.innerHTML = buttonDisable
-      gb.href =  'javascript:void(0)'
+      // gb.href =  'javascript:void(0)'
+      gb.removeAttribute("onclick")
     }
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
