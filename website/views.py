@@ -24,7 +24,7 @@ def home():
     page = request.args.get('page', 1, type=int)
     permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
     location = Location.query.order_by(Location.id).all()
-    status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
 
     return render_template("home.html", user=current_user, permit=permit,location=location,status=status)
 
@@ -302,16 +302,21 @@ def genxls():
     
     for i,j in enumerate(anggota, start=7):
         sheet[f'H{i}'] = j['Nama']
-
-    barang = json.loads(permit.barangBawaan)
-    sumber = {21:'Personal Computer / Laptop',22:'Camera (Digital or analogue)',23:'Mobilephone with camera / video',24:'Tablet with camera / video',25:'Digital Video Recorder',26:'Thumbdrive / Pendrive storage unit',27:'Memory Cards (SD/CF/MMC etc.)',28:'Audio Tape Recorder',29:'CDRW / CDR / HDD',30:'Others (pls state)'}
-    hasil = set()
-    for i in barang:
-        for key, value in sumber.items():
-            if i['Jenis Media'] == value:
-                # hasil.add(key)
-                sheet[f'D{key}'] = str('✅')
-                sheet[f'E{key}'] = i['Tujuan']
+   
+    if permit.bawaBarang == 'ya':
+        barang = json.loads(permit.barangBawaan)
+        sumber = {21:'Personal Computer / Laptop',22:'Camera (Digital or analogue)',23:'Mobilephone with camera / video',24:'Tablet with camera / video',25:'Digital Video Recorder',26:'Thumbdrive / Pendrive storage unit',27:'Memory Cards (SD/CF/MMC etc.)',28:'Audio Tape Recorder',29:'CDRW / CDR / HDD',30:'Others (pls state)'}
+        hasil = set()
+        for i in barang:
+            for key, value in sumber.items():
+                if i['Jenis Media'] == value:
+                    # hasil.add(key)
+                    sheet[f'D{key}'] = str('✅')
+                    sheet[f'E{key}'] = i['Tujuan']
+    else:
+        for b in range(21,31):
+        sheet[f'D{b}'] = ""
+        sheet[f'E{b}'] = ""
 
     ws = wb['Visitor Approval']
     locations = []
