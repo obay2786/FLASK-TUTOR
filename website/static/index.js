@@ -238,6 +238,7 @@ function generatexls(id){
   }).then((_res) => {
     //window.open('visitoraproval.xlsx')
     window.location.href = "/static/VisitorApprovalBT.xlsx";
+    window.location.href = "/";
   });
 }
 
