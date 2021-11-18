@@ -220,7 +220,10 @@ def getPermitdetail():
     data['email'] = permit.email
     data['host'] = permit.host
     data['bawaBarang'] = permit.bawaBarang
-    data['barangBawaan'] = json.loads(permit.barangBawaan)
+    if permit.bawaBarang == 'tidak':
+        data['barangBawaan'] = ''
+    else:
+        data['barangBawaan'] = json.loads(permit.barangBawaan)
     data['sign'] = permit.sign
     data['buttongenerate'] = ""
     if "'tidak'" in str(data['anggota']):
