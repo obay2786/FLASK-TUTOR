@@ -240,8 +240,9 @@ def getPermitdetail():
     data['location'] = permit.location
     data['supplyBarang'] = permit.supplyBarang
     data['email'] = permit.email
-    data['namaHost'] = permit.host[0]
-    data['empId'] = permit.host[1]
+    jsonHost = permit.host
+    data['namaHost'] = jsonHost[0]
+    data['empId'] = jsonHost[1]
     data['bawaBarang'] = permit.bawaBarang
     if permit.bawaBarang == 'TIDAK':
         data['barangBawaan'] = ''
