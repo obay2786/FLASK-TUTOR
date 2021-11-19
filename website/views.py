@@ -33,7 +33,8 @@ def home():
         return redirect(url_for('views.home'))
     else:
         page = request.args.get('page', 1, type=int)
-        permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        host = current_user.firstName + ':' +current_user.empID
+        permit = Permit.query.filter_by(host=host, purpose='waitingHost').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
@@ -240,9 +241,7 @@ def getPermitdetail():
     data['location'] = permit.location
     data['supplyBarang'] = permit.supplyBarang
     data['email'] = permit.email
-    jsonHost = permit.host
-    data['namaHost'] = jsonHost[0]
-    data['empId'] = jsonHost[1]
+    data['host'] = permit.host
     data['bawaBarang'] = permit.bawaBarang
     if permit.bawaBarang == 'TIDAK':
         data['barangBawaan'] = ''

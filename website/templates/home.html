@@ -218,8 +218,9 @@
                     <td>
                       {{permit.email}}
                     </td>
+                    {% set namaHost = permit.host.split(':') %}
                     <td>
-                      {{ permit.namaHost }}
+                      {{ namaHost[0] }}
                     </td>
                     <td>
                       <span class="badge bg-success me-1"></span> {{permit.purpose}}
