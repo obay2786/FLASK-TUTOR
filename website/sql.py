@@ -8,7 +8,8 @@ from io import BytesIO,StringIO
 import os 
 import secrets
 
-
+engineLocal = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+enginePublic = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
 
 def saveB(photo):
   
@@ -48,8 +49,7 @@ def delSub(id):
     print(r.text)
 
 def insertData(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.1.89.11:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         conn.execute(
@@ -62,8 +62,7 @@ def insertData(data):
 
 
 def updateData(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.1.89.11:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         conn.execute(
@@ -75,8 +74,7 @@ def updateData(data):
         print('update'+data['nik']+ data['nama'])
 
 def insertPermit(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.1.89.11:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         conn.execute(
@@ -88,8 +86,7 @@ def insertPermit(data):
         print("permit inserted")
 
 def insertCovid(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.1.89.11:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         conn.execute(
@@ -101,8 +98,7 @@ def insertCovid(data):
         print("data inserted")
 
 def updateCovid(data):
-    # engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.1.89.11:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         conn.execute(
@@ -316,10 +312,10 @@ def getDbCovid(nik):
             
 
 
-getJFvisitor()
+# getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
