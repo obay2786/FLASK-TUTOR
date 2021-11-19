@@ -24,7 +24,7 @@ def home():
     if request.method == 'POST':
         if request.form.get('formEdit') == 'uploadGambarApproval':
             print(request.form)
-            gambarPermit = saveB(request.files['photo'])
+            gambarPermit = saveGambar(request.files['photo'])
             permitId = request.form.get('idPermit')
             permit = Permit.query.filter_by(id=permitId).first()
             permit.UploadPermit = gambarPermit
@@ -33,7 +33,7 @@ def home():
         return redirect(url_for('views.home'))
     else:
         page = request.args.get('page', 1, type=int)
-        permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        permit = Permit.query.order_by(text('id desc')).filter_by(host=current_user.).paginate(page=page, per_page=ROWS_PER_PAGE)
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
 
@@ -68,6 +68,17 @@ def saveB(photo):
     
     return img_str
 
+def saveGambar(photo):
+  
+    img = Image.open(photo)
+    img = ImageOps.exif_transpose(img)
+    output_size = (1300, 1300)
+    img.thumbnail(output_size)
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+    
+    return img_str
 
 
 @views.route('/visitor',methods=['GET', 'POST'])
@@ -241,6 +252,8 @@ def getPermitdetail():
         data['buttongenerate'] = 'disable'
     else:
         data['buttongenerate'] = 'enable' 
+
+    data['uploadGambar'] = permit.UploadPermit
 
     print('ini hasil dari' + data['buttongenerate'])
     return jsonify(data)
