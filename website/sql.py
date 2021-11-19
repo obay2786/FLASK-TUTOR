@@ -221,7 +221,7 @@ def getJFpermit():
             dictJF['host'] = []
             namaHost = data['answers']['66']['answer']
             EmpId = data['answers']['71']['answer']
-            host = f"'{{{namaHost}}':'{EmpId}}}'"
+            host = f"'{{{namaHost}':'{EmpId}}}'"
             dictJF['host'] = host
 
             if data['answers']['59']['answer'] == 'SUPPLY':
@@ -311,10 +311,10 @@ def getDbCovid(nik):
             
 
 
-getJFvisitor()
+# getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
