@@ -1,5 +1,5 @@
 
-{% extends "base.html" %} {% block title %}History{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Approval List{% endblock %} {% block content
     %}
     
     <section class="section dashboard">
@@ -10,103 +10,51 @@
                     <h3 class="card-title">Working Approval</h3>
                   </div>
                   
-                  <div class="table-responsive">
+                  <div >
                     <table class="table card-table table-vcenter text-nowrap datatable">
                       <thead>
-                        <tr>
-                          
-                          
-                        
-                         
+                        <tr >
                           <th>Host</th>
                           <th>Compay Name</th>
                           <th>Date</th>
-                          <th></th>
                         </tr>
                       </thead>
+                    </table>
+                  </div>
+
+                  <div  class="table-responsive" style= "background-color: white; height: 800px; width: 100%; overflow-y: scroll;" >
+                    <table class="table card-table table-vcenter text-nowrap datatable">
+                      
                       <tbody>
+                        {% for working in permitWorking.items %}
+                        {% set namaHost = working.host.split(':') %}
                         <tr>
                
                         
                           <td>
-                            Subiyanto
+                            {{namaHost[0]}}
                           </td>
                           <td>
-                            2134123412
+                            {{working.namaVendor}}
                           </td>
-                          <td>
-                            <span class="badge bg-success me-1"></span> Working
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
+                          <td>{{working.startDate}} - {{working.endDate}}</td>
                           <td class="text-end">
+
                             <div class="d-flex align-items-center gap-3 fs-6">
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropPass">
-                                <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Change Password" aria-label="Views"><i class="bi bi-file-earmark-lock2"></i></a>
-                              </span>
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropEdit">
-                                <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom"   onclick="" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                              </span>
-                                <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete" onClick=""><i class="bi bi-trash-fill"></i></a>
-                              </div>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          
-                          <td>
-                            Ayong
-                          </td>
-                          <td>
-                            23412341234
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Meeting
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          
-                          <td>
-                            test
-                          </td>
-                          <td>
-                            123413243124123
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Overtime
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
-                            </span>
+                                
+                                  <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
+                                    <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="View Detail" aria-label="Views"><span class="badge rounded-pill bg-success">View Detail</span></a>
+                                  </span>
+                              
+                                
+                              
                           </td>
                         </tr>
                         
+                        {%endfor%}
                         
                       </tbody>
+                    
                     </table>
                   </div>
                   
@@ -117,104 +65,42 @@
                   <div class="card-header">
                     <h3 class="card-title">Overtime Approval</h3>
                   </div>
-                 
-                  <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap datatable">
+                  
+                  <div>
+                    <table class="table card-table table-vcenter text-nowrap datatable" >
                       <thead>
                         <tr>
-                          
-                          
-                        
-                         
+
                           <th>Host</th>
                           <th>Compay Name</th>
                           <th>Date</th>
-                          <th></th>
+  
                         </tr>
                       </thead>
-                      <tbody>
+                    </table>
+                  </div>
+                  <div class="table-responsive" style= "background-color: white; height: 800px; width: 100%; overflow-y: scroll;" >
+                    <table class="table card-table table-vcenter text-nowrap datatable" >
+                      <tbody overflow-y: scroll>
+                        {% for overtime in permitOvertime.items %}
+                        {% set namaHost = overtime.host.split(':') %}
                         <tr>
-               
-                        
                           <td>
-                            Subiyanto
+                            {{namaHost[0]}}
                           </td>
                           <td>
-                            2134123412
+                            {{overtime.namaVendor}}
                           </td>
-                          <td>
-                            <span class="badge bg-success me-1"></span> Working
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
+                          <td>{{overtime.startDate}} - {{overtime.endDate}} </td>
                           <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Status
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  View Detail
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          
-                          <td>
-                            Ayong
-                          </td>
-                          <td>
-                            23412341234
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Meeting
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
-                            </span>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                          
-                          <td>
-                            test
-                          </td>
-                          <td>
-                            123413243124123
-                          </td>
-                          <td>
-                            <span class="badge bg-warning me-1"></span> Overtime
-                          </td>
-                          <td>4 Feb 2018 - 4 Feb 2018 </td>
-                          <td class="text-end">
-                            <span class="dropdown">
-                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
-                              <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#">
-                                  Action
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                  Another action
-                                </a>
-                              </div>
+                            <!-- button lihat detail -->
+                            <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
+                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="View Detail" aria-label="Views"><span class="badge rounded-pill bg-success">View Detail</span></a>
                             </span>
                           </td>
                         </tr>
                         
+                        {% endfor %}
                         
                       </tbody>
                     </table>
@@ -225,4 +111,99 @@
     </div>
         </div>
     </section>
+
+    <!--Lihat Detail -->
+    <div class="modal fade" id="detailPermit" tabindex="-1">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button onclick="reloadPage('approval')" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Aproval Detail</h5>
+                <div class="text-end">
+                <p style="color: red;font-weight:900;">Waiting approval from HR Dept</p>
+              </div>
+                <!-- Small tables -->
+                <div class="col-lg-8">
+                  <table class="table table-borderless">
+  
+                    <tbody>
+                      <tr>
+                        <th scope="row" style="width:150px">Nama Company</th>
+                        <td scope="row" style="width:3px">:</td>
+                        <td id="permitDetailVendor"></td>
+  
+                      </tr>
+                      <tr>
+                        <th scope="row">Date</th>
+                        <td scope="row">:</td>
+                        <td id="permitDetailDate"></td>
+  
+                      </tr>
+                      <tr>
+                        <th scope="row">Purpose</th>
+                        <td scope="row">:</td>
+                        <td id="permitDetailPurpose"></td>
+  
+                      </tr>
+  
+                    </tbody>
+                  </table>
+                  <!-- End small tables -->
+                  </div>
+                <div class="col-lg-10">
+                  <h5 class="card-title">List Anggota Kerja</h5>
+                <table class="table table-sm" id="permitDetailAnggota">
+                  <thead>
+                    <tr>
+                      <th scope="col" >#</th>
+                      <th scope="col">Nama</th>
+                      <th scope="col">Jabatan</th>
+                      <th scope="col">NIK</th>
+                      <th scope="col">Registrasi</th>
+                      <th scope="col">Self Assessment Risiko COVID-19</th>
+                    </tr>
+                  </thead>
+
+
+                  <tbody>
+                  </tbody>
+                </table>
+                <!-- End small tables -->
+                <div class="col-lg-5">
+                  <h5 class="card-title">Bring Recordable Media :</h5>  
+                <table class="table table-borderless col-lg-3" id="permitBarangBawaan">
+                  
+                  <tbody>
+                    
+  
+                  </tbody>
+                </table>
+              </div>
+                <div class="text-end">
+                  <span data-bs-toggle="modal" data-bs-target="#staticApprovalDecline">
+                      
+                    <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Decline" aria-label="Views"><span class="badge rounded-pill bg-danger">Decline</span></a>
+                  </span>
+                
+                <a id="generatebuttonxls" href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Generate" aria-label="Views"><span class="badge rounded-pill bg-secondary">Approve</span></a>
+                
+              </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button onclick="reloadPage('approval')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+           
+          </div>
+        </div>
+      </div>
+    </div><!-- End Extra Large Modal-->
+
+
     {% endblock %}

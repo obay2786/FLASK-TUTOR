@@ -109,7 +109,7 @@
               </div>
 
              
-              <!-- Table with stripped rows -->
+              <!-- Tabel Transaksi -->
               <table class="table datatable" id="table-visitors">
                 <thead>
                   <tr>
@@ -161,7 +161,9 @@
         
       </div>
       {% else %}
-      <!-- Host -->
+
+
+      <!-- Halaman Host -->
       <div class="row">
 
         
@@ -180,6 +182,10 @@
                 </div>
               </div>
             </div>
+
+
+            <!-- Table Aprove Host -->
+
             <div class="table-responsive">
               <table class="table card-table table-vcenter text-nowrap datatable">
                 <thead>
@@ -344,15 +350,14 @@
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Extra Large Modal</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button onclick="reloadPage('\')" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Aproval Detail</h5>
                   <div class="text-end">
-                  <p style="color: red;font-weight:900;">Waiting approval from HR Dept</p>
+                 
                 </div>
                   <!-- Small tables -->
                   <div class="col-lg-8">
@@ -375,6 +380,18 @@
                           <th scope="row">Purpose</th>
                           <td scope="row">:</td>
                           <td id="permitDetailPurpose"></td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Task</th>
+                          <td scope="row">:</td>
+                          <td id="permitDetailtask"></td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Permit No.</th>
+                          <td scope="row">:</td>
+                          <td id="permitDetailPermitNo"></td>
     
                         </tr>
     
@@ -409,18 +426,9 @@
                   </table>
                   <!-- End small tables -->
                   <div class="col-lg-5">
-                    <h5 class="card-title">Bring Recordable Media :</h5>
+                    <h5 class="card-title">Bring Recordable Media :</h5>  
                   <table class="table table-borderless col-lg-3" id="permitBarangBawaan">
-                    <thead>
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">NIK</th>
-                        <th scope="col">Controlled Items</th>
-                        <th scope="col">SN</th>
-    
-                      </tr>
-                    </thead>
+                    
                     <tbody>
                       
     
@@ -442,13 +450,15 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button onclick="reloadPage('\')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
              
             </div>
           </div>
         </div>
       </div><!-- End Extra Large Modal-->
-       <!-- Modal Approval Keterangan -->
+
+
+       <!-- Modal Komentar Decline -->
 <div class="modal fade" id="staticApprovalDecline" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -490,7 +500,8 @@
     </div>
   </div>
 </div>
-    <!-- Modal Approval Sukses -->
+
+    <!-- Modal Upload Sukses -->
     <div class="modal fade" id="staticApprovalSuccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -519,53 +530,9 @@
         </div>
       </div>
     </div>
-      <!-- Modal editphoto -->
-<div class="modal fade" id="staticBackdropPhoto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-            <h5 id ="edit" class="card-title">Upload Aproval</h5>
-            
-            
-            <!-- General Form Elements -->
-            <form method="POST" enctype="multipart/form-data">
-              <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
-              
-              <div class="row mb-3">
-                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
-                <div class="col-sm-10">
-                  <input type="file"  class="form-control" id="photo" name="photo" accept=".jpg, .jpeg" required>
-                </div>
-              </div>
-          
 
-              <div class="row mb-3">
-                
-                <div class="col-sm-10">
-                  <!--
-                  <button type="submit" name="formEdit" value="editPhoto"class="btn btn-primary">Submit Form</button>
-                  -->
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticApprovalSuccess">
-                    Submit Approval
-                  </button>
-                </div>
-              </div>
 
-            </form><!-- End General Form Elements -->
-
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
      
-      </div>
-    </div>
-  </div>
-</div>
       {% endif %}
     </section>
     {% endblock %}

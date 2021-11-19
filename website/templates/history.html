@@ -1,6 +1,8 @@
 
 {% extends "base.html" %} {% block title %}History{% endblock %} {% block content
     %}
+
+
  <div class="row">
         <div class="col-12">
           <div class="card">
@@ -17,15 +19,17 @@
                 </div>
               </div>
             </div>
+
+            <!-- Tabel Histori Approval -->
             <div class="table-responsive">
               <table class="table card-table table-vcenter text-nowrap datatable">
                 <thead>
                   <tr>
-
+                    
                     <th>Location</th>
                     <th>Company Name</th>
-                    <th>Requestor Name</th>
-                    <th>NIK</th>
+                    <th>Email</th>
+                    <th>Host</th>
                     <th>Purpose</th>
                     <th>Date</th>
                     <th></th>
@@ -33,110 +37,45 @@
                 </thead>
                 <tbody>
                   <tr>
-
-                    <td><select class="form-select form-select-danger" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
-                    <td>
-                      <span class="flag flag-country-us"></span>
-                      PT. Dharma Pasific
-                    </td>
-                    <td>
-                      Subiyanto
-                    </td>
-                    <td>
-                      2134123412
-                    </td>
-                    <td>
-                      <span class="badge bg-success me-1"></span> Working
-                    </td>
-                    <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td >
-                      
-                      <span class="badge rounded-pill bg-success">Completed</span>
-                      
-                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
+                    {%for permit in permit.items %}
+                      <td>
+                        {{permit.location}}
+                      </td>
+                      <td>
+                        <span class="flag flag-country-us"></span>
+                        {{permit.namaVendor}}
+                      </td>
+                      <td>
+                        {{permit.email}}
+                      </td>
+                      {% set namaHost = permit.host.split(':') %}
+                      <td>
+                        {{ namaHost[0] }}
+                      </td>
+                      <td>
+                        <span class="badge bg-success me-1"></span> {{permit.purpose}}
+                      </td>
+                      <td>{{permit.startDate}} - {{permit.endDate}}</td>
+                      <td >
                         
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
+                      <!-- tombole completed-->
+                      
+                      <span data-bs-toggle="modal" data-bs-target="#viewImageEApproval">  
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="viewUploadPermit('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
+                          <span class="badge rounded-pill bg-success">Complated</span></a>
+                      </span>
+                      
+                      <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitDetailHistory('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
+                          <span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
                       
                         
                       </div>
                     </td>
                   </tr>
-                  <tr>
-
-                    <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
-                    <td>
-                      <span class="flag flag-country-gb"></span>
-                      CV. SIV Furniture
-                    </td>
-                    <td>
-                      Ayong
-                    </td>
-                    <td>
-                      23412341234
-                    </td>
-                    <td>
-                      <span class="badge bg-warning me-1"></span> Meeting
-                    </td>
-                    <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td >
-                      <span class="badge rounded-pill bg-success">Completed</span>
-                     
-                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
-                        
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
-                      </span>
-                      
-                        
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-
-                    <td><select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                      <option selected>SELECT LOCATION</option>
-                      <option value="1">Loby A</option>
-                      <option value="2">Medan Room</option>
-                      <option value="3">Loby B</option>
-                    </select></td>
-                    <td>
-                      <span class="flag flag-country-de"></span>
-                      Bluewolf
-                    </td>
-                    <td>
-                      test
-                    </td>
-                    <td>
-                      123413243124123
-                    </td>
-                    <td>
-                      <span class="badge bg-warning me-1"></span> Overtime
-                    </td>
-                    <td>4 Feb 2018 - 4 Feb 2018 </td>
-                    <td >
-                      
-                      <span class="badge rounded-pill bg-success">Completed</span>
-                      
-                      <span data-bs-toggle="modal" data-bs-target="#ExtralargeModal">
-                        
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
-                      </span>
-                     
-                        
-                      </div>
-                    </td>
-                  </tr>
-
+                  
+                  {% endfor %}
 
                 </tbody>
               </table>
@@ -168,8 +107,8 @@
         </div>
       </div>
 
-      <!-- Modal Detail -->
-      <div class="modal fade" id="ExtralargeModal" tabindex="-1">
+      <!--Lihat Detail -->
+      <div class="modal fade" id="detailPermit" tabindex="-1">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -181,7 +120,7 @@
                 <div class="card-body">
                   <h5 class="card-title">Aproval Detail</h5>
                   <div class="text-end">
-                  <p style="color: red;font-weight:900;">Waiting approval from HR Dept</p>
+                
                 </div>
                   <!-- Small tables -->
                   <div class="col-lg-8">
@@ -191,19 +130,19 @@
                         <tr>
                           <th scope="row" style="width:150px">Nama Company</th>
                           <td scope="row" style="width:3px">:</td>
-                          <td>PANASONIC</td>
+                          <td id="permitDetailVendor"></td>
     
                         </tr>
                         <tr>
                           <th scope="row">Date</th>
                           <td scope="row">:</td>
-                          <td>7 September 2021</td>
+                          <td id="permitDetailDate"></td>
     
                         </tr>
                         <tr>
                           <th scope="row">Purpose</th>
                           <td scope="row">:</td>
-                          <td>Meeting</td>
+                          <td id="permitDetailPurpose"></td>
     
                         </tr>
     
@@ -213,10 +152,10 @@
                     </div>
                   <div class="col-lg-10">
                     <h5 class="card-title">List Anggota Kerja</h5>
-                  <table class="table table-sm">
+                  <table class="table table-sm" id="permitDetailAnggota">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col" >#</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Jabatan</th>
                         <th scope="col">NIK</th>
@@ -224,77 +163,43 @@
                         <th scope="col">Self Assessment Risiko COVID-19</th>
                       </tr>
                     </thead>
+
+
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-                        <td>2832423456543134</td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Bridie Kessler</td>
-                        <td>Developer</td>
-                        <td>35</td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Ashleigh Langosh</td>
-                        <td>Finance</td>
-                        <td>45</td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>Angus Grady</td>
-                        <td>HR</td>
-                        <td>34</td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>Raheem Lehner</td>
-                        <td>Dynamic</td>
-                        <td>47</td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                        <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-                      </tr>
+
+
+
+                      
+                      
+
+
                     </tbody>
                   </table>
                   <!-- End small tables -->
                   <div class="col-lg-5">
                     <h5 class="card-title">Bring Recordable Media :</h5>
-                  <table class="table table-borderless col-lg-3" >
+                    {% if permit.bawaBarang == 'YA' %}
+                  <table class="table table-borderless col-lg-3" id="permitBarangBawaan">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">NIK</th>
                         <th scope="col">Controlled Items</th>
-                        <th scope="col">Detail</th>
+                        <th scope="col">SN</th>
     
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-    
-    
-                      </tr>
+                      
     
                     </tbody>
                   </table>
+                  {%else%}
+                  <p> -</p>
+                  {%endif%}
                 </div>
-                  <div class="text-end">
-                  <span class="badge rounded-pill bg-danger">Decline</span>
-                  <span class="badge rounded-pill bg-success">Generate</span>
-                </div>
+                  
                   </div>
     
                 </div>
@@ -302,7 +207,28 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+             
+            </div>
+          </div>
+        </div>
+      </div><!-- End Extra Large Modal-->
+
+
+
+      <!--modal tombol completed -->
+      <div class="modal fade" id="viewImageEApproval" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Extra Large Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img src="" id = "imgUploadPermit" style="height: 400px;" alt="Profile" >
+                
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+             
             </div>
           </div>
         </div>
