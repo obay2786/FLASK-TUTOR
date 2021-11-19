@@ -217,17 +217,22 @@ def getJFpermit():
             dictJF['purpose'] = data['answers']['59']['answer'] 
 
             dictJF['namaVendor'] = data['answers']['63']['answer'] 
-
-            dictJF['host'] = data['answers']['66']['answer'] 
+            
+            dictJF['host'] = []
+            namaHost = data['answers']['66']['answer']
+            EmpId = data['answers']['71']['answer']
+            host = f"'{namaHost}':'{EmpId}'"
+            dictJF['host'] = host
 
             if data['answers']['59']['answer'] == 'SUPPLY':
                 dictJF['location'] = data['answers']['64']['answer']
                 dictJF['supplyBarang'] = data['answers']['65']['answer']
                 dictJF['status'] = "approved" 
-            else:
-                dictJF['location'] = ""
-                dictJF['supplyBarang'] = ""
-                dictJF['status'] = ""
+            elif data['answers']['59']['answer'] == 'MEETING':
+                dictJF['status'] = "waitinghost"
+            else:               
+                dictJF['status'] = "waitingadmin"
+
 
             insertPermit(dictJF)
            
@@ -308,7 +313,7 @@ def getDbCovid(nik):
 
 getJFvisitor()
 
-# getJFcovid()
+getJFcovid()
 
 # getJFpermit()
 

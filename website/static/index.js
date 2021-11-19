@@ -254,4 +254,19 @@ function kirimEmailDecline() {
 
 function getIdUpload(id){
   document.getElementById('idPermitUpload').value = id
+  fetch("/permitdetail", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+   
+    document.getElementById("uploadGambarDbPermit").src = "data:image/png;base64,"+ data.uploadGambar;
+    
+    
+    
+    
+  });
+
 }
+
