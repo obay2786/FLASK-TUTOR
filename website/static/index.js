@@ -135,6 +135,8 @@ function getPermitdetail(id){
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
     document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
     document.getElementById("permitDetailPurpose").innerHTML = data.purpose
+    document.getElementById("permitDetailtask").innerHTML = (data.desk == null || 'empty' ) ? "-" : data.desk 
+    document.getElementById("permitDetailPermitNo").innerHTML = (data.permitNo == null || 'empty' ) ? "-" : data.permitNo
     // document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
     let buttonEnable = '<span class="badge rounded-pill bg-success">Generate</span>'
     if(data.buttongenerate == 'enable'){
@@ -143,6 +145,111 @@ function getPermitdetail(id){
       // gb.href =  'javascript:void(0)'
       gb.onclick = function () { generatexls(data.id); };
     }
+    let tableRef = document.getElementById('permitDetailAnggota');
+    var tableHeaderRowCount = 1;
+    var rowCount = tableRef.rows.length;
+    for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        tableRef.deleteRow(tableHeaderRowCount);
+    }
+    let noUrut = 0
+    for (anggota of data.anggota) {
+    // Insert a row at the end of the table
+      let newRow = tableRef.insertRow(-1);
+
+      // Insert a cell in the row at index 0
+      let newCell = newRow.insertCell(0);
+      let newCell1 = newRow.insertCell(1);
+      let newCell2 = newRow.insertCell(2);
+      let newCell3 = newRow.insertCell(3);
+      let newCell4 = newRow.insertCell(4)
+      let newCell5 = newRow.insertCell(5)
+      // Append a text node to the cell
+      noUrut += 1
+      let newNo = document.createTextNode(noUrut);
+
+      let newName = document.createTextNode(anggota.Nama);
+      let newJabatan = document.createTextNode(anggota.Jabatan);
+      let newNik = document.createTextNode(anggota.NIK);
+      let newRegister = document.createTextNode( centang = (anggota.Register == "ya") ? "✅":"❌")
+      let newCovid = document.createTextNode(centang1 = (anggota.Covid == "ya") ? "✅":"❌");
+      newCell.appendChild(newNo);
+      newCell1.appendChild(newName);
+      newCell2.appendChild(newJabatan);
+      newCell3.appendChild(newNik);
+      newCell4.appendChild(newRegister);
+      newCell5.appendChild(newCovid);
+    }
+
+    let tableRef2 = document.getElementById('permitBarangBawaan');
+    let tabelHeader = `<tr>
+    <th scope="col">No</th>
+    <th scope="col">Name</th>
+    <th scope="col">NIK</th>
+    <th scope="col">Controlled Items</th>
+    <th scope="col">SN</th>
+
+  </tr>`
+    if(data.bawaBarang == 'YA'){
+      document.getElementById('permitBarangBawaan').innerHTML = tabelHeader
+      var tableHeaderRowCount2 = 1;
+      var rowCount2 = tableRef2.rows.length;
+      for (var i = tableHeaderRowCount2; i < rowCount2; i++) {
+          tableRef2.deleteRow(tableHeaderRowCount2);
+      }
+      let noUrut2 = 0
+      for (barang of data.barangBawaan) {
+      // Insert a row at the end of the table
+        let newRow = tableRef2.insertRow(-1);
+
+        // Insert a cell in the row at index 0
+        let newCell = newRow.insertCell(0);
+        let newCell1 = newRow.insertCell(1);
+        let newCell2 = newRow.insertCell(2);
+        let newCell3 = newRow.insertCell(3);
+        let newCell4 = newRow.insertCell(4);
+
+        
+        // Append a text node to the cell
+        noUrut2 += 1
+        let newNo = document.createTextNode(noUrut2);
+
+        let newName = document.createTextNode(barang['Nama Pemilik']);
+        let newNik = document.createTextNode(barang['NIK']);
+        let newItem = document.createTextNode(barang['Jenis Media']);
+        let newDetail = document.createTextNode(barang.SN);
+        
+        newCell.appendChild(newNo);
+        newCell1.appendChild(newName);
+        newCell2.appendChild(newNik);
+        newCell3.appendChild(newItem);
+        newCell4.appendChild(newDetail);
+    
+      }
+    } else{
+      document.getElementById('permitBarangBawaan').innerHTML = '-'
+
+    } 
+
+  });
+}
+
+function getPermitDetailHistory(id){
+  
+  fetch("/permitdetail", {
+
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    
+    
+    
+    document.getElementById("permitDetailVendor").innerHTML = data.vendor
+    document.getElementById("permitDetailDate").innerHTML = data.startDate + " until " + data.endDate
+    document.getElementById("permitDetailPurpose").innerHTML = data.purpose
+    // document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
+    
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
     var rowCount = tableRef.rows.length;
@@ -218,6 +325,25 @@ function getPermitdetail(id){
   });
 }
 
+function reloadPage(Url){
+  window.location.href = Url;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function updateLoc(id,loc) {
  
   fetch("/updatepermitlocation", {
@@ -235,7 +361,7 @@ function generatexls(id){
   }).then((_res) => {
     //window.open('visitoraproval.xlsx')
     window.location.href = "/static/VisitorApprovalBT.xlsx";
-    window.location.href = "/";
+    //window.location.href = "/";
   });
 }
 
@@ -270,3 +396,21 @@ function getIdUpload(id){
 
 }
 
+function viewUploadPermit(id){
+
+ 
+  fetch("/permitdetail", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+   
+    document.getElementById("imgUploadPermit").src = "data:image/png;base64,"+ data.uploadGambar;
+    
+    
+    
+    
+  });
+
+}

@@ -28,13 +28,14 @@ def home():
             permitId = request.form.get('idPermit')
             permit = Permit.query.filter_by(id=permitId).first()
             permit.UploadPermit = gambarPermit
+            permit.status = 'approved'
             db.session.commit()
 
         return redirect(url_for('views.home'))
     else:
         page = request.args.get('page', 1, type=int)
         host = current_user.firstName + ':' +current_user.empID
-        permit = Permit.query.filter_by(host=host, purpose='waitingHost').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        permit = Permit.query.filter_by(host=host, status='waitinghost').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
@@ -49,13 +50,20 @@ def waiting():
 @views.route('/history', methods=['GET', 'POST'])
 @login_required
 def history():
+    page = request.args.get('page', 1, type=int)
+    host = current_user.firstName + ':' +current_user.empID
+    permit = Permit.query.filter_by(host=host,status='approved').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    return render_template("history.html", user=current_user, permit=permit)
 
-    return render_template("history.html", user=current_user)
+
+
 @views.route('/approval', methods=['GET', 'POST'])
 @login_required
 def approval():
-
-    return render_template("approval.html", user=current_user)
+    page = request.args.get('page', 1, type=int)
+    permitWorking = Permit.query.filter_by(purpose='WORKING',status='waitingadmin').order_by(text('id desc')).paginate(page=page)
+    permitOvertime = Permit.query.filter_by(purpose='OVERTIME',status='waitingadmin').order_by(text('id desc')).paginate(page=page)
+    return render_template("approval.html", user=current_user, permitWorking=permitWorking, permitOvertime=permitOvertime)
 
 def saveB(photo):
   
@@ -106,9 +114,33 @@ def visitor():
         elif request.form.get('formEdit') == 'editPhoto':
             print(request.form)
             data ={}
+            dataQ.nik = data['nik']
+            dataQ.namaVendor = data['company']
+           
+            db.session.commit()
+            print('okeeeee')
+        elif request.form.get('formEdit') == 'editPhoto':
+            print(request.form)
+            dataQ.nik = data['nik']
+            dataQ.namaVendor = data['company']
+           
+            db.session.commit()
+            print('okeeeee')
+        elif request.form.get('formEdit') == 'editPhoto':
+            print(request.form)
+            data ={}
+            data['id'] = request.form.get('id')
+            data['photo'] = saveB(request.files['photo'])
+            data ={}
+            data['id'] = request.form.get('id')
+            data['photo'] = saveB(request.files['photo'])
             data['id'] = request.form.get('id')
             data['photo'] = saveB(request.files['photo'])
             
+            data['id'] = request.form.get('id')
+            data['photo'] = saveB(request.files['photo'])
+            data['id'] = request.form.get('id')
+            data['photo'] = saveB(request.files['photo'])
             
             print(data)
             dataQ = Visitor.query.filter_by(id=data['id']).first()
@@ -238,6 +270,7 @@ def getPermitdetail():
     data['purpose'] = permit.purpose
     data['anggota'] = json.loads(permit.anggota)
     data['permitNo'] = permit.permitNo
+    data['desk'] = permit.desk
     data['location'] = permit.location
     data['supplyBarang'] = permit.supplyBarang
     data['email'] = permit.email
@@ -322,7 +355,7 @@ def genxls():
     sheet['C10'] = permit.startDate 
     sheet['E10'] = permit.endDate
     sheet['A11'] = permit.desk
-    sheet['A11'] = permit.desk
+    # sheet['A11'] = permit.desk
     
     
     for i,j in enumerate(anggota, start=7):
