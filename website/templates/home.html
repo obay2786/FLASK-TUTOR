@@ -303,7 +303,7 @@
                       
                       {% if permit.statusGenerate == 'ok' %}
                       <span data-bs-toggle="modal" data-bs-target="#uploadGambarPermit">  
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Upload E-Approval" aria-label="Views"><span class="badge rounded-pill bg-success">Upload</span></a>
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getIdUpload('{{permit.id}}')" data-bs-original-title="Upload E-Approval" aria-label="Views"><span class="badge rounded-pill bg-success">Upload</span></a>
                       </span>
                       {% else %} 
                       <span data-bs-toggle="modal">  
@@ -360,7 +360,7 @@
                   
                   <!-- General Form Elements -->
                   <form method="POST" enctype="multipart/form-data">
-                    <input type="hidden" class="form-control" id="userNamePhoto" name="userNamee" >
+                    <input type="hidden" class="form-control" id="idPermitUpload" name="idPermit" >
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     
                     

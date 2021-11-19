@@ -24,7 +24,13 @@ def home():
     if request.method == 'POST':
         if request.form.get('formEdit') == 'uploadGambarApproval':
             print(request.form)
-        
+            gambarPermit = saveB(request.files['photo'])
+            permitId = request.form.get('idPermit')
+            permit = Permit.query.filter_by(id=permitId).first()
+            permit.UploadPermit = gambarPermit
+            db.session.commit()
+
+        return redirect(url_for('views.home'))
     else:
         page = request.args.get('page', 1, type=int)
         permit = Permit.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
@@ -340,7 +346,8 @@ def genxls():
 
     permit.statusGenerate = 'ok'
     db.session.commit()
-
+    
+    
 
     return jsonify({})
 
@@ -359,3 +366,5 @@ def kirimEmailDecline():
     db.session.delete(permit)
     db.session.commit()
     return jsonify({})
+
+

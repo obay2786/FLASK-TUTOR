@@ -251,3 +251,7 @@ function kirimEmailDecline() {
     window.location.href = "/";
   });
 }
+
+function getIdUpload(id){
+  document.getElementById('idPermitUpload').value = id
+}
