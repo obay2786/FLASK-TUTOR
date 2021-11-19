@@ -311,10 +311,10 @@ def getDbCovid(nik):
             
 
 
-getJFvisitor()
+# getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
