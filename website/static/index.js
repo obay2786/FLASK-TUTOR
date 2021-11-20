@@ -109,7 +109,7 @@ function editPhotoV(id){
   });
 }
 
-
+// Halaman Home User Host
 function getPermitdetail(id){
   
   fetch("/permitdetail", {
@@ -234,7 +234,7 @@ function getPermitdetail(id){
 }
 
 
-
+// Halaman admin Approval List
 function getApprovalList(id){
   
   fetch("/permitdetail", {
@@ -244,17 +244,6 @@ function getApprovalList(id){
   }).then((response) => {
     return response.json()
   }).then((data) => {
-    // let dataAnggota = "" 
-    // for anggota of data.anggota{
-    //   dataAnggota += `<tr >
-    //     <th scope="row">1</th>
-    //     <td>${anggota.nama}</td>
-    //     <td>Jabatan</td>
-    //     <td>${anggota.nik}</td>
-    //     <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-    //     <td style="text-align: center; vertical-align: middle;"><i class="ri-checkbox-circle-line"></i></td>
-    //   </tr>`
-    // }
     
     document.getElementById("idPermitReject").value = data.id
     document.getElementById("permitDetailVendor").innerHTML = data.vendor
@@ -263,12 +252,17 @@ function getApprovalList(id){
     document.getElementById("permitDetailtask").innerHTML = (data.desk == null || 'empty' ) ? "-" : data.desk 
     document.getElementById("permitDetailPermitNo").innerHTML = (data.permitNo == null || 'empty' ) ? "-" : data.permitNo
     // document.getElementById("generatebuttonxls").onclick = function () { generatexls(data.id); };
-    let buttonEnable = '<span class="badge rounded-pill bg-success">Generate</span>'
+    let buttonEnable = '<span class="badge rounded-pill bg-success">Approve</span>'
     if(data.buttongenerate == 'enable'){
-      let gb = document.getElementById("generatebuttonxls")
+      let gb = document.getElementById("buttonAdminApprove")
       gb.innerHTML = buttonEnable
       // gb.href =  'javascript:void(0)'
-      gb.onclick = function () { generatexls(data.id); };
+      if(data.purpose == 'WORKING'){
+      gb.onclick = function () { approveWorkingAdmin(data.id) };
+      }
+      if(data.purpose == 'OVERTIME'){
+      gb.onclick = function () { approveOvertimeAdmin(data.id) };
+      }
     }
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
@@ -452,8 +446,13 @@ function getPermitAprovalHistory(id){
   });
 }
 
-function reloadPage(Url){
-  window.location.href = Url;
+function reloadPage(){
+  // if(Url == undefined){
+  // window.location.href = '/';
+  // } else{
+  //   window.location.href = '/'+Url;
+  // }
+  window.reloadPage()
 }
 
 
@@ -487,7 +486,7 @@ function kirimEmailDecline() {
     method: "POST",
     body: JSON.stringify({ id: id,body: body }),
   }).then((_res) => {
-    window.location.href = "/";
+    window.location.reload()
   });
 }
 
@@ -497,7 +496,7 @@ function getIdUpload(id){
     method: "POST",
     body: JSON.stringify({ id: id }),
   }).then((response) => {
-    return response.json()userNamee=74&formEdit=editPhoto
+    return response.json()
   }).then((data) => {
    
     document.getElementById("uploadGambarDbPermit").src = "data:image/png;base64,"+ data.uploadGambar;
@@ -521,6 +520,28 @@ function viewUploadPermit(id){
     
   });
 
+}
+
+function approveWorkingAdmin(id){
+  fetch("/approveworkingadmin", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => { 
+    window.location.reload()  
+  });
+}
+
+function approveOvertimeAdmin(id){
+  fetch("/approveovertimeadmin", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => { 
+    window.location.reload()  
+  });
 }
 
 

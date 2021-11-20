@@ -81,3 +81,15 @@ def kirim():
 # 	x = dict.fromkeys(str(i),datas[i-3])
 # 	print(x)
 # # 	
+
+def qrGen(id,nik,nama):
+    qr = f'https://chart.apis.google.com/chart?chl={id}:{nik}&chs=150x150&cht=qr&chld=H%7C0'
+    
+    return {nama:qr}
+
+anggota = [{"Nama": "Novel", "Jabatan": "Komisaris", "NIK": "83423849028", "Register": "tidak", "Covid": "tidak"},{"Nama": "Novel", "Jabatan": "Komisaris", "NIK": "83423849028", "Register": "tidak", "Covid": "tidak"}, {"Nama": "Faris", "Jabatan": "Manager", "NIK": "982982897873", "Register": "tidak", "Covid": "tidak"}]
+listQR =[]
+for person in anggota:
+    listQR.append(qrGen('124',person['NIK'],person['Nama']))
+
+print(listQR)

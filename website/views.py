@@ -11,7 +11,7 @@ import requests
 from PIL import Image, ImageOps
 from io import BytesIO
 from .mailr import kirimEmail
-import qrcode
+
 
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
@@ -89,15 +89,11 @@ def saveGambar(photo):
     img_str = base64.b64encode(buffered.getvalue())
     
     return img_str
-
-def qrGen(id,nik):
-    img = qrcode.make(f'{id}:{nik}')
-    type(img)  # qrcode.image.pil.PilImage
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    return saveB(qrcode)
-
-
+def qrGen(id,nik,nama):
+    qr = f'https://chart.apis.google.com/chart?chl={id}:{nik}&chs=150x150&cht=qr&chld=H%7C0'
+    
+    return {nama:qr}
+    
 @views.route('/visitor',methods=['GET', 'POST'])
 @login_required
 def visitor():
@@ -119,36 +115,13 @@ def visitor():
            
             db.session.commit()
             print('okeeeee')
-        elif request.form.get('formEdit') == 'editPhoto':
+       
+        if request.form.get('formEdit') == 'editPhoto':
             print(request.form)
             data ={}
-            dataQ.nik = data['nik']
-            dataQ.namaVendor = data['company']
-           
-            db.session.commit()
-            print('okeeeee')
-        elif request.form.get('formEdit') == 'editPhoto':
-            print(request.form)
-            dataQ.nik = data['nik']
-            dataQ.namaVendor = data['company']
-           
-            db.session.commit()
-            print('okeeeee')
-        elif request.form.get('formEdit') == 'editPhoto':
-            print(request.form)
-            data ={}
-            data['id'] = request.form.get('id')
-            data['photo'] = saveB(request.files['photo'])
-            data ={}
-            data['id'] = request.form.get('id')
-            data['photo'] = saveB(request.files['photo'])
             data['id'] = request.form.get('id')
             data['photo'] = saveB(request.files['photo'])
             
-            data['id'] = request.form.get('id')
-            data['photo'] = saveB(request.files['photo'])
-            data['id'] = request.form.get('id')
-            data['photo'] = saveB(request.files['photo'])
             
             print(data)
             dataQ = Visitor.query.filter_by(id=data['id']).first()
@@ -420,6 +393,29 @@ def kirimEmailDecline():
     kirimEmail(email,subject,body)
     db.session.delete(permit)
     db.session.commit()
+    return jsonify({})
+
+@views.route('/kirimemailapprove', methods=['POST'])
+def kirimEmailApprove():
+    data = json.loads(request.data)
+    print(data)
+    id = data['id']
+    anggota = json.loads(data['aggota'])
+    listQR = []
+    for person in anggota:
+        listQR.append(qrGen('124',person['NIK'],person['Nama']))
+
+    print(listQR)
+    permit = Permit.query.filter_by(id=id).first()
+    email = permit.email
+    subject = 'Permit disetujui'
+    tableQR = '' 
+    for QR in listQR:
+        pass #INI BELUM SIAP
+    pesan = f'Pengajuan anda telah di Setujui. silahkan Gunakan QRCODE di bawah ini '
+    
+    kirimEmail(email,subject,body)
+   
     return jsonify({})
 
 @views.route('/approveworkingadmin', methods=['POST'])
