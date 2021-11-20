@@ -66,7 +66,7 @@
                       </span>
                       
                       <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitDetailHistory('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitAprovalHistory('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
                           <span class="badge rounded-pill bg-success">Lihat Detail</span></a>
                       </span>
                       
@@ -143,6 +143,18 @@
                           <th scope="row">Purpose</th>
                           <td scope="row">:</td>
                           <td id="permitDetailPurpose"></td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Task</th>
+                          <td scope="row">:</td>
+                          <td id="permitDetailtask"></td>
+    
+                        </tr>
+                        <tr>
+                          <th scope="row">Permit No.</th>
+                          <td scope="row">:</td>
+                          <td id="permitDetailPermitNo"></td>
     
                         </tr>
     
