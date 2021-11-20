@@ -11,10 +11,11 @@ import requests
 from PIL import Image, ImageOps
 from io import BytesIO
 from .mailr import kirimEmail
+import qrcode
 
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
-ROWS_PER_PAGE = 5
+ROWS_PER_PAGE = 10
 
 
 
@@ -88,6 +89,13 @@ def saveGambar(photo):
     img_str = base64.b64encode(buffered.getvalue())
     
     return img_str
+
+def qrGen(id,nik):
+    img = qrcode.make(f'{id}:{nik}')
+    type(img)  # qrcode.image.pil.PilImage
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    return saveB(qrcode)
 
 
 @views.route('/visitor',methods=['GET', 'POST'])
@@ -414,4 +422,23 @@ def kirimEmailDecline():
     db.session.commit()
     return jsonify({})
 
+@views.route('/approveworkingadmin', methods=['POST'])
+def approveWorkingAdmin():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permit = Permit.query.filter_by(id=permitId).first()
+    permit.status = 'waitinghost'
+    db.session.commit()
+    return jsonify({})
+
+@views.route('/approveovertimeadmin', methods=['POST'])
+def approveOvertimeAdmin():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permit = Permit.query.filter_by(id=permitId).first()
+    permit.status = 'approved'
+    db.session.commit()
+    return jsonify({})
 
