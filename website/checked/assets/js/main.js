@@ -115,6 +115,7 @@ function rl(){
   location.reload(); 
 }
 
+//step 1b untuk kirim data ke HIKVISION
 function upload(photo,nama) {
  
   fetch("/upload", {
@@ -125,6 +126,7 @@ function upload(photo,nama) {
   });
 }
 
+//step 3 Menampilkan data di html dan menyimpan data ke DB Transaksi
 function ok(){
 
 
@@ -154,6 +156,7 @@ function ok(){
 
 }
 
+//step 1a 
 function getVisitor(nik){
   fetch("/getvisitor", {
     method: "POST",
@@ -193,3 +196,14 @@ function getVisitor(nik){
 }
 
 
+function getId(){
+  fetch("/permitdetail", {
+    method: "POST",
+    body: JSON.stringify({ nik: nik.value }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+    console.log(data)
+}
+
+get
