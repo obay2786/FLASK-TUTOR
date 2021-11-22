@@ -445,7 +445,7 @@ def kirimEmailApprove():
         pass #INI BELUM SIAP
     pesan = f'Pengajuan anda telah di Setujui. silahkan Gunakan QRCODE di bawah ini '
     
-    kirimEmail(email,subject,body)
+    kirimEmail(email,subject,tableQR)
    
     return jsonify({})
 
