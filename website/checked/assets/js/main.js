@@ -157,10 +157,11 @@ function ok(){
 }
 
 //step 1a 
-function getVisitor(nik){
+function getVisitor(qr){
+  let qrCode = qr.split(':')
   fetch("/getvisitor", {
     method: "POST",
-    body: JSON.stringify({ nik: nik.value }),
+    body: JSON.stringify({ qr:qrCode[1]  }),
   }).then((response) => {
     return response.json()
   }).then((data) => {
@@ -196,14 +197,13 @@ function getVisitor(nik){
 }
 
 
-function getId(){
+function dataPermit(id){
   fetch("/permitdetail", {
     method: "POST",
-    body: JSON.stringify({ nik: nik.value }),
+    body: JSON.stringify({ id:id}),
   }).then((response) => {
     return response.json()
   }).then((data) => {
-    console.log(data)
+    
+})
 }
-
-get
