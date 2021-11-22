@@ -293,6 +293,29 @@ def sukses():
     if request.method == 'POST':
         print('tesssssssssssssss')
 
+        data = json.loads(request.data)
+        print(data)
+        permitId = data['id']
+
+        badge = Badge.query.order_by(id=data['id']).first()
+        badge.status = 'used'
+        
+        transaksi = Transaksi.query.filter_by(id=permitId).first()
+        transaksi.namaVisitor = data['namaVisitor']
+        transaksi.nik = data['nik']
+        transaksi.purpose = data['purpose']
+        transaksi.vendor = data['vendor']
+        transaksi.host = data['host']
+        transaksi.timeCheckin = datetime.datetime.now()
+        transaksi.timeCheckot = datetime.datetime.now()
+        transaksi.statusPermit = data['statusPermit']
+        transaksi.badge = data['badge']
+        transaksi.status = data['status']
+
+
+    
+        db.session.commit()
+   
         personID = hik.List.list(current_app.root_path+'/hik/')
         #hik.Delete.delete(current_app.root_path+'/hik/',ok)
 
@@ -304,6 +327,6 @@ def sukses():
                 hik.Apply.apply(current_app.root_path+'/hik/')
                 print(perid['personId'])
         
-    
+        
 
     return jsonify({})
