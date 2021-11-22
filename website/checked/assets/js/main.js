@@ -145,29 +145,39 @@ function ok(){
   document.getElementById("bubble-3").classList.add('green-text');
   document.getElementById("step-3").classList.add('current');
 
+  
   fetch("/sukses", {
     method: "POST",
     body: JSON.stringify({ photo: 'ok'}),
   }).then((_res) => {
     
   });
+  
   setTimeout(rl,10000)
+
 
 
 }
 
 //step 1a 
 function getVisitor(qr){
-  let qrCode = qr.split(':')
-  fetch("/getvisitor", {
+  // let qrCode = qr.split(':')
+  fetch("/getcheckindata", {
     method: "POST",
-    body: JSON.stringify({ qr:qrCode[1]  }),
+    body: JSON.stringify({ qr:qr.value }),
   }).then((response) => {
     return response.json()
   }).then((data) => {
+    if(data.nik == undefined){
+      document.getElementById("statusB1").innerHTML = "Tidak Ada Permit";
+      document.getElementById("statusB1").style.fontSize = "5rem";
+      document.getElementById("imgC1").src = "assets/img/nopermit.png";
+      setTimeout(rl,10000)
+    } else {
     upload(data.photo,data.nama)
     document.getElementById("name1").innerHTML = data.nama;
     document.getElementById("nik1").innerHTML = data.nik;
+    document.getElementById("badge1").innerHTML = data.badge;
     document.getElementById("vendor1").innerHTML = data.company
     document.getElementById("photo1").src = "data:image/png;base64,"+data.photo;
     document.getElementById("txtBox1").value = "";
@@ -192,7 +202,7 @@ function getVisitor(qr){
     document.getElementById('txtBox2').onchange =  function () { ok(); };
     setTimeout(rl,10000)
 
-    
+    }
   });
 }
 

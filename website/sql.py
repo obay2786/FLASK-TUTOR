@@ -8,7 +8,7 @@ from io import BytesIO,StringIO
 import os 
 import secrets
 
-engineLocal = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+engineLocal = create_engine("mssql+pymssql://sa:Batam2021@192.168.0.50:1433/VMS",future=True)
 enginePublic = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
 
 def saveB(photo):
@@ -108,6 +108,18 @@ def updateCovid(data):
         conn.commit()
         # delSub(data['id'])
         print('update '+data['nik']+" : "+ data['nama'])
+
+def insertTransaksi():
+    engine = engineLocal
+    with engine.connect() as conn:
+        
+        conn.execute(
+            text("INSERT INTO transaksi (timeCheckin, timeCheckout, badge, nik, status ) VALUES (:timeCheckin, :timeCheckout, :badge, :nik, :status)"),
+            data
+            )
+        conn.commit()
+        # delSub(data['id'])
+        print("data Transaksi inserted")
 
 
 def getJFvisitor():
@@ -316,6 +328,6 @@ def getDbCovid(nik):
 
 # getJFcovid()
 
-getJFpermit()
+# getJFpermit()
 
 

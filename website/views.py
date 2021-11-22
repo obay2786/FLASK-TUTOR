@@ -1,8 +1,8 @@
 import os
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect,current_app,url_for
 from flask_login import login_required, current_user
-
-from .models import Badge, Visitor,User, Permit, Location
+import datetime
+from .models import Badge, Visitor,User, Permit, Location, Transaksi
 from . import db
 import json
 import base64
@@ -11,7 +11,6 @@ import requests
 from PIL import Image, ImageOps
 from io import BytesIO
 from .mailr import kirimEmail
-
 
 from openpyxl import load_workbook
 views = Blueprint('views', __name__)
@@ -222,6 +221,38 @@ def getVisitor():
     data['photo'] = visitor.photo
     
     return jsonify(data)
+
+@views.route('/getcheckindata', methods=['POST'])
+def getcheckindata():
+    data = json.loads(request.data)
+    print(':' in data)
+    dataQ = {} 
+    if ':' in data['qr']:
+
+        qr = data['qr'].split(':')
+        print(qr)
+        permitId = qr[0]
+        nik = qr[1]
+        
+        permit = Permit.query.filter_by(id=permitId).first()
+        anggota = json.loads(permit.anggota)
+        
+        if nik in str(permit.anggota):
+            
+            visitor = Visitor.query.filter_by(nik=nik).first()
+            print(visitor)
+
+            badge = Badge.query.filter_by(status='free').order_by(text('id asc')).first()
+
+            
+            dataQ['id'] = visitor.id
+            dataQ['nik'] = visitor.nik
+            dataQ['nama'] = visitor.nama
+            dataQ['badge'] = badge.no
+            dataQ['company'] = visitor.namaVendor
+            dataQ['photo'] = visitor.photo
+    
+    return jsonify(dataQ)
 
 @views.route('/delvisitor', methods=['POST'])
 def delVisitor():
@@ -435,6 +466,32 @@ def approveOvertimeAdmin():
     permitId = data['id']
     permit = Permit.query.filter_by(id=permitId).first()
     permit.status = 'approved'
+    db.session.commit()
+    return jsonify({})
+
+@views.route('/savetotransaksicheckin', methods=['POST'])
+def savetotransaksicheckin():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+
+    badge = Badge.query.order_by(id=data['id']).first()
+    badge.status = 'used'
+    
+    transaksi = Transaksi.query.filter_by(id=permitId).first()
+    transaksi.namaVisitor = data['namaVisitor']
+    transaksi.nik = data['nik']
+    transaksi.purpose = data['purpose']
+    transaksi.vendor = data['vendor']
+    transaksi.host = data['host']
+    transaksi.timeCheckin = datetime.datetime.now()
+    transaksi.timeCheckot = datetime.datetime.now()
+    transaksi.statusPermit = data['statusPermit']
+    transaksi.badge = data['badge']
+    transaksi.status = data['status']
+
+
+    
     db.session.commit()
     return jsonify({})
 

@@ -5,6 +5,7 @@ from sqlalchemy.sql import func
 
 class Badge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    no = db.Column(db.String(100))
     rfid = db.Column(db.String(100))
     status = db.Column(db.String(100))
     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -14,11 +15,19 @@ class Location(db.Model):
     
 class Transaksi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    namaVisitor = badge = db.Column(db.String(150))
+    nik = db.Column(db.String(150))
+    purpose = db.Column(db.String(150))
+    vendor = db.Column(db.String(150))
+    host = db.Column(db.String(150))
     timeCheckin = db.Column(db.DateTime, default=func.now())
     timeCheckout = db.Column(db.DateTime, default=func.now())
+    statusPermit = db.Column(db.String(150))
     badge = db.Column(db.String(150))
-    nik = db.Column(db.String(150))
     status = db.Column(db.String(150))
+    location = db.Column(db.String(150))
+
+
 
 class Permit(db.Model):
     id = db.Column(db.Integer, primary_key=True)

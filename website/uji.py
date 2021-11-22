@@ -93,3 +93,6 @@ for person in anggota:
     listQR.append(qrGen('124',person['NIK'],person['Nama']))
 
 print(listQR)
+
+
+    
