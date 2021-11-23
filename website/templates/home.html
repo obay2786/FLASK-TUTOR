@@ -131,25 +131,37 @@
                 </thead>
                 <tbody>
                   <tr>
+                    {%for transaksi in transaksi.items %}
+                    {% if (transaksi.status == 'checkin') or (transaksi.status == 'checkout')   %}
                     <td>
                       
+                      {% if transaksi.status == 'checkin' %}
                       <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-green" data-color="#19ed19"" selected>CHECKED IN</option>
-                        
+                        <option data-icon="bi-box-arrow-in-right" class="text-green" data-color="#19ed19"" selected>{{transaksi.status}}</option>
+                        {% else %}
+                        <select class="selectpicker form-control">
+                          <option data-icon="bi-box-arrow-in-left" class="text-green" data-color="#ed2719"" selected>{{transaksi.status}}</option>
+                        {% endif %}
                         
                       </select>                      
                     </td>
                     <td>
-                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Brandon Jacob</span>
+                      <img src="" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> {{ transaksi.namaVisitor }}</span>
                     </td>
-                    <td>Designer</td>
-                    <td>Darma</td>
-                    <td>2016-05-25</td>
-                    <td>2016-05-25</td>
-                    <td>PANASONIC</td>
+                    <td>{{ transaksi.purpose }}</td>
+                    {% set dataHost = transaksi.host.split(':') %}
+                    <td>{{ dataHost[0] }}</td>
+                    <td>{{ transaksi.timeCheckin }}</td>
+                    {% if transaksi.timeCheckout == None %}
+                    <td> - </td>
+                    {% else %}
+                    <td>{{ transaksi.timeCheckout }}</td>
+                    {% endif %}
+                    <td>{{ transaksi.vendor }}</td>
                   </tr>
-                  
+                  {% endif %}
+                  {% endfor %}
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -350,7 +362,7 @@
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
-              <button onclick="reloadPage('\')" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button onclick="reloadPage()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="card">
@@ -450,7 +462,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button onclick="reloadPage('\')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button onclick="reloadPage()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
              
             </div>
           </div>
@@ -509,8 +521,8 @@
           <div class="modal-body">
             <div class="card">
               <div class="card-body">
-                <h4 id ="edit" class="card-title text-center pb-0 fs-4"">Approval has been uploaded successfully.</h4>
-                <h3 id ="edit2" class="card-title text-center pb-0 fs-4"">The QR code has been sent to the requestor's email.</h3>
+                <h4 id ="edit" class="card-title text-center pb-0 fs-4">Approval has been uploaded successfully.</h4>
+                <h3 id ="edit2" class="card-title text-center pb-0 fs-4">The QR code has been sent to the requestor's email.</h3>
                 
                 
                 

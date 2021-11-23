@@ -84,7 +84,7 @@
           <div class="card">
             <div class="card-body p-0">
               <div class="d-flex p-5">
-                <h3 class="me-auto">Recent Visitors</h3>
+                <h3 class="me-auto">Transaction Visitors</h3>
 
                 <div class="row w-75 ms-auto">
                   
@@ -130,95 +130,43 @@
                     <th scope="col">Host</th>
                     <th scope="col">Time In</th>
                     <th scope="col">Time Out</th>
+                    <th scope="col">Company Name</th>
                   </tr>
                 </thead>
                 <tbody>
+                  
                   <tr>
+                    {% for transaksi in transaksi.items %}
+                    {% if (transaksi.status == 'checkin') or (transaksi.status == 'checkout')   %}
                     <td>
                       
+                      {% if transaksi.status == 'checkin' %}
                       <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-green" data-color="#19ed19"" selected>CHECKED IN</option>
-                        
+                        <option data-icon="bi-box-arrow-in-right" class="text-green" data-color="#19ed19"" selected>{{transaksi.status}}</option>
+                        {% else %}
+                        <select class="selectpicker form-control">
+                          <option data-icon="bi-box-arrow-in-left" class="text-green" data-color="#ed2719"" selected>{{transaksi.status}}</option>
+                        {% endif %}
                         
                       </select>                      
                     </td>
                     <td>
                       <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Brandon Jacob</span>
+                      <span>{{ transaksi.namaVisitor }}</span>
                     </td>
-                    <td>Designer</td>
-                    <td>Darma</td>
-                    <td>2016-05-25</td>
-                    <td>2016-05-25</td>
+                    <td>{{ transaksi.purpose }}</td>
+                    {% set dataHost = transaksi.host.split(':') %}
+                    <td>{{ dataHost[0] }}</td>
+                    <td>{{ transaksi.timeCheckin }}</td>
+                    {% if transaksi.timeCheckout == None %}
+                    <td> - </td>
+                    {% else %}
+                    <td>{{ transaksi.timeCheckout }}</td>
+                    {% endif %}
+                    <td>{{ transaksi.vendor }}</td>
                   </tr>
-                  <tr>
-                    <td>
-                      <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
-                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
-                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19">EXPECTED</option>
-                      </select>
-                    </td>
-                    <td>
-                      <img src="assets/img/messages-1.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Bridie Kessler</span>
-                    </td>
-                    <td>Developer</td>
-                    <td>Dharma</td>
-                    <td>2014-12-05</td>
-                    <td>2014-12-05</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
-                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey" selected>CHECKED OUT</option>
-                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19">EXPECTED</option>
-                      </select>
-                    </td>
-                    <td>
-                      <img src="assets/img/messages-2.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Ashleigh Langosh</span>
-                    </td>
-                    <td>Finance</td>
-                    <td>Dharma</td>
-                    <td>2011-08-12</td>
-                    <td>2011-08-12</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
-                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
-                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19" selected>EXPECTED</option>
-                      </select>
-                    </td>
-                    <td>
-                      <img src="assets/img/messages-3.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Angus Grady</span>
-                    </td>
-                    <td>HR</td>
-                    <td>34</td>
-                    <td>2012-06-11</td>
-                    <td>2012-06-11</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <select class="selectpicker form-control">
-                        <option data-icon="bi-box-arrow-in-left" class="text-blue" data-color="blue">CHECKED IN</option>
-                        <option data-icon="bi-box-arrow-right" class="text-grey" data-color="grey">CHECKED OUT</option>
-                        <option data-icon="bi-clock" class="text-green" data-color="#19ed19" selected>EXPECTED</option>
-                      </select>
-                    </td>
-                    <td>
-                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Raheem Lehner</span>
-                    </td>
-                    <td>Dynamic Division Officer</td>
-                    <td>47</td>
-                    <td>2011-04-19</td>
-                    <td>2011-04-19</td>
-                  </tr>
+                  {% endif %}
+                  {% endfor %}
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
@@ -232,7 +180,33 @@
             <div class="card-header text-center font-weight-bold" style="font-size: 23px;line-height: 23px;letter-spacing: -0.003em;font-weight: 900;font-style: normal;">
               Waiting List
             </div>
+
+            
             <div style= "height: 500px;width: 600px; overflow-y: scroll;">
+              {% for transaksi in transaksiw %}
+              <div class="card-body position-relative d-flex" >
+              <div class="col-md-5">
+                <img src="checked/assets/img/scan.png" height="200">
+              </div>
+              <div class="col-md-5">
+                <h5 class="visitor-content">{{ transaksi.namaVisitor }}</h5>
+                <h5 class="visitor-content">{{ transaksi.nik }}</h5>
+                <h5 class="visitor-content">{{ transaksi.vendor }}</h5>
+                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
+                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
+              </div>
+              <div class="col-md-3">
+                <p>
+                  <small>Badge no:</small>
+                </p>
+                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">{{transaksi.badge}}</span>
+                <br>
+                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
+              </div>
+              {% endfor %}
+            <!--
+            <div style= "height: 500px;width: 600px; overflow-y: scroll;">
+               
               <div class="card-body position-relative d-flex" >
               <div class="col-md-5">
                 <img src="checked/assets/img/scan.png" height="200">
@@ -280,6 +254,7 @@
                 <img src="checked/assets/img/scan.png" height="200">
               </div>
               <div class="col-md-5">
+                
                 <h5 id="name1" class="visitor-content">NAME</h5>
                 <h5 id="nik1"class="visitor-content">NIK</h5>
                 <h5 id="vendor1"class="visitor-content">COMPANY</h5>
@@ -315,9 +290,12 @@
                 <br>
                 <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
               </div>
+              -->
+
 
             </div>
             </div>
+
       </div>
           </div>
 

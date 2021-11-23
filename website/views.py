@@ -36,16 +36,20 @@ def home():
         page = request.args.get('page', 1, type=int)
         host = current_user.firstName + ':' +current_user.empID
         permit = Permit.query.filter_by(host=host, status='waitinghost').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
-        return render_template("home.html", user=current_user, permit=permit,location=location)
+        return render_template("home.html", user=current_user, permit=permit,location=location,transaksi=transaksi)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
 def waiting():
+    page = request.args.get('page', 1, type=int)
+    transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+    transaksiw = Transaksi.query.order_by(text('id desc'))
 
-    return render_template("waiting.html", user=current_user)
+    return render_template("waiting.html", user=current_user, transaksi=transaksi, transaksiw=transaksiw)
 
 @views.route('/history', methods=['GET', 'POST'])
 @login_required
@@ -222,37 +226,7 @@ def getVisitor():
     
     return jsonify(data)
 
-@views.route('/getcheckindata', methods=['POST'])
-def getcheckindata():
-    data = json.loads(request.data)
-    print(':' in data)
-    dataQ = {} 
-    if ':' in data['qr']:
 
-        qr = data['qr'].split(':')
-        print(qr)
-        permitId = qr[0]
-        nik = qr[1]
-        
-        permit = Permit.query.filter_by(id=permitId).first()
-        anggota = json.loads(permit.anggota)
-        
-        if nik in str(permit.anggota):
-            
-            visitor = Visitor.query.filter_by(nik=nik).first()
-            print(visitor)
-
-            badge = Badge.query.filter_by(status='free').order_by(text('id asc')).first()
-
-            
-            dataQ['id'] = visitor.id
-            dataQ['nik'] = visitor.nik
-            dataQ['nama'] = visitor.nama
-            dataQ['badge'] = badge.no
-            dataQ['company'] = visitor.namaVendor
-            dataQ['photo'] = visitor.photo
-    
-    return jsonify(dataQ)
 
 @views.route('/delvisitor', methods=['POST'])
 def delVisitor():
@@ -469,28 +443,78 @@ def approveOvertimeAdmin():
     db.session.commit()
     return jsonify({})
 
+@views.route('/getcheckindata', methods=['POST'])
+def getcheckindata():
+    data = json.loads(request.data)
+    print(':' in data)
+    dataQ = {} 
+    if ':' in data['qr']:
+
+        qr = data['qr'].split(':')
+        print(qr)
+        permitId = qr[0]
+        nik = qr[1]
+        
+        permit = Permit.query.filter_by(id=permitId).first()
+       
+        
+        if (nik in str(permit.anggota)) and (permit.status =='approved') :
+            
+            visitor = Visitor.query.filter_by(nik=nik).first()
+            Host = permit.host.split(':')
+            empID = Host[1]
+            user = User.query.filter_by(empID=empID).first()
+            print(visitor)
+
+            badge = Badge.query.filter_by(status='free').order_by(text('id asc')).first()
+
+            print(badge)
+            
+            dataQ['nama'] = visitor.nama
+            dataQ['nik'] = visitor.nik
+            dataQ['purpose'] = permit.purpose
+            dataQ['company'] = permit.namaVendor
+            dataQ['host'] = user.empID
+            dataQ['statusPermit'] = permit.status 
+           
+            try:
+                dataQ['badge'] = badge.no
+            except:
+                dataQ['badge'] = '0'
+            dataQ['photo'] = visitor.photo
+            dataQ['qr'] = data['qr']
+            print(data['qr'])
+    
+    return jsonify(dataQ)
+
 @views.route('/savetotransaksicheckin', methods=['POST'])
 def savetotransaksicheckin():
     data = json.loads(request.data)
+       
     print(data)
-    permitId = data['id']
 
-    badge = Badge.query.order_by(id=data['id']).first()
+    qr = data['qr'].split(':')
+    print(qr)
+    permitId = qr[0]
+    nik = qr[1]
+    no = data['badge']
+    visitor = Visitor.query.filter_by(nik=nik).first()
+    badge = Badge.query.filter_by(no=no).first()
     badge.status = 'used'
-    
-    transaksi = Transaksi.query.filter_by(id=permitId).first()
-    transaksi.namaVisitor = data['namaVisitor']
-    transaksi.nik = data['nik']
-    transaksi.purpose = data['purpose']
-    transaksi.vendor = data['vendor']
-    transaksi.host = data['host']
-    transaksi.timeCheckin = datetime.datetime.now()
-    transaksi.timeCheckot = datetime.datetime.now()
-    transaksi.statusPermit = data['statusPermit']
-    transaksi.badge = data['badge']
-    transaksi.status = data['status']
-
-
+    permit = Permit.query.filter_by(id=permitId).first()
+    dataTransaksi = {}
+    dataTransaksi['namaVisitor'] = visitor.nama
+    dataTransaksi['nik'] = nik
+    dataTransaksi['purpose'] = permit.purpose
+    dataTransaksi['vendor'] = permit.namaVendor
+    dataTransaksi['host'] = permit.host
+    dataTransaksi['timeCheckin'] = data['time']
+    dataTransaksi['statusPermit'] = permit.status
+    dataTransaksi['badge'] = data['badge']
+    dataTransaksi['status'] = 'waiting'
+    dataTransaksi['location'] = permit.location
+    transaksi = Transaksi(**dataTransaksi)
+    db.session.add(transaksi)
     
     db.session.commit()
     return jsonify({})

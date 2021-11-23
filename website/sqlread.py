@@ -5,7 +5,7 @@ import openpyxl
 from openpyxl import load_workbook
 
 
-dbpana = "mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS"
+dbpana = "mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS"
 
 def readsql():
     engine = db.create_engine(dbpana)

@@ -144,11 +144,12 @@ function ok(){
   document.getElementById("step-2").classList.remove('current');
   document.getElementById("bubble-3").classList.add('green-text');
   document.getElementById("step-3").classList.add('current');
-
-  
-  fetch("/sukses", {
+  let badge = document.getElementById("badge1").innerHTML; 
+  let qrdata = document.getElementById("dataqr").innerHTML;
+  let time2 = document.getElementById("today").innerHTML;
+  fetch("/savetotransaksicheckin", {
     method: "POST",
-    body: JSON.stringify({ photo: 'ok'}),
+    body: JSON.stringify({ time:time2, qr: qrdata, badge:badge}),
   }).then((_res) => {
     
   });
@@ -175,6 +176,7 @@ function getVisitor(qr){
       setTimeout(rl,10000)
     } else {
     upload(data.photo,data.nama)
+    document.getElementById("dataqr").innerHTML = data.qr;
     document.getElementById("name1").innerHTML = data.nama;
     document.getElementById("nik1").innerHTML = data.nik;
     document.getElementById("badge1").innerHTML = data.badge;
@@ -186,6 +188,7 @@ function getVisitor(qr){
     var today = new Date();
     var time = today.toTimeString().split(' ')[0];
     document.getElementById("time1").innerHTML = time;
+    document.getElementById("today").innerHTML = today.toISOString()
 
     document.getElementById("statusA1").innerHTML = "Visitor need to scan their face at thermal \<br\> camera to check temperature";
     document.getElementById("imgA1").src = "assets/img/step2A.png";
