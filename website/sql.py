@@ -332,7 +332,7 @@ def getDbCovid(nik):
             
 
 
-getJFvisitor()
+# getJFvisitor()
 
 # getJFcovid()
 
