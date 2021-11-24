@@ -8,8 +8,7 @@ from io import BytesIO,StringIO
 import os 
 import secrets
 
-engineLocal = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
-enginePublic = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+engineLocal = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
 # proxypana = '10.77.8.70:8080'
 prox = {"http":"http://47.74.152.29:8888"}
 
@@ -309,7 +308,7 @@ def getJFcovid():
 
 def getDbVisitor(nik):
     nikVisitor = {}
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM visitor WHERE nik='{nik}'"))
@@ -321,7 +320,7 @@ def getDbVisitor(nik):
 
 def getDbCovid(nik):
     nikVisitor = {}
-    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
+    engine = engineLocal
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM covid WHERE nik='{nik}'"))
@@ -335,7 +334,7 @@ def getDbCovid(nik):
 
 # getJFvisitor()
 
-# getJFcovid()
+getJFcovid()
 
 # getJFpermit()
 
