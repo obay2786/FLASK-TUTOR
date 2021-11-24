@@ -8,7 +8,7 @@ from io import BytesIO,StringIO
 import os 
 import secrets
 
-engineLocal = create_engine("mssql+pymssql://sa:Batam2021@192.168.0.50:1433/VMS",future=True)
+engineLocal = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
 enginePublic = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
 
 def saveB(photo):
@@ -243,8 +243,12 @@ def getJFpermit():
                 dictJF['status'] = "approved" 
             elif data['answers']['59']['answer'] == 'MEETING':
                 dictJF['status'] = "waitinghost"
+                dictJF['location'] = ""
+                dictJF['supplyBarang'] = ''
             else:               
                 dictJF['status'] = "waitingadmin"
+                dictJF['location'] = ""
+                dictJF['supplyBarang'] = ''
 
 
             insertPermit(dictJF)
@@ -300,7 +304,7 @@ def getJFcovid():
 
 def getDbVisitor(nik):
     nikVisitor = {}
-    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM visitor WHERE nik='{nik}'"))
@@ -312,7 +316,7 @@ def getDbVisitor(nik):
 
 def getDbCovid(nik):
     nikVisitor = {}
-    engine = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+    engine = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
     with engine.connect() as conn:
         
         hasil = conn.execute(text(f"SELECT nik FROM covid WHERE nik='{nik}'"))
@@ -328,6 +332,6 @@ def getDbCovid(nik):
 
 # getJFcovid()
 
-# getJFpermit()
+getJFpermit()
 
 
