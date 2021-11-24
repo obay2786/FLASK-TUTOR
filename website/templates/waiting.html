@@ -104,9 +104,9 @@
                   </div>
                   <div class="col-md-3 d-flex">
                     <div class="my-auto mx-auto">
-                      <i class="bi bi-chevron-left"></i>
-                      <span class="mx-2">Sept. 10, 2018</span>
-                      <i class="bi bi-chevron-right"></i>
+                      <!--<i class="bi bi-chevron-left"></i>
+                       <span class="mx-2">Sept. 10, 2018</span>
+                      <i class="bi bi-chevron-right"></i>-->
                     </div>
                   </div>
                 </div>
@@ -137,10 +137,10 @@
                   
                   <tr>
                     {% for transaksi in transaksi.items %}
-                    {% if (transaksi.status == 'checkin') or (transaksi.status == 'checkout')   %}
+                    {% if (transaksi.status == "checkin") or (transaksi.status == "checkout")   %}
                     <td>
                       
-                      {% if transaksi.status == 'checkin' %}
+                      <!-- {% if transaksi.status == 'checkin' %} -->
                       <select class="selectpicker form-control">
                         <option data-icon="bi-box-arrow-in-right" class="text-green" data-color="#19ed19"" selected>{{transaksi.status}}</option>
                         {% else %}
@@ -151,7 +151,7 @@
                       </select>                      
                     </td>
                     <td>
-                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <img src="data:image/png;base64,{{transaksi.photo}}" alt="Profile" class="rounded-circle me-2" width="35"> 
                       <span>{{ transaksi.namaVisitor }}</span>
                     </td>
                     <td>{{ transaksi.purpose }}</td>
@@ -182,122 +182,61 @@
             </div>
 
             
-            <div style= "height: 500px;width: 600px; overflow-y: scroll;">
-              {% for transaksi in transaksiw %}
-              <div class="card-body position-relative d-flex" >
-              <div class="col-md-5">
-                <img src="checked/assets/img/scan.png" height="200">
-              </div>
-              <div class="col-md-5">
-                <h5 class="visitor-content">{{ transaksi.namaVisitor }}</h5>
-                <h5 class="visitor-content">{{ transaksi.nik }}</h5>
-                <h5 class="visitor-content">{{ transaksi.vendor }}</h5>
-                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
-                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
-              </div>
-              <div class="col-md-3">
-                <p>
-                  <small>Badge no:</small>
-                </p>
-                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">{{transaksi.badge}}</span>
-                <br>
-                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
-              </div>
-              {% endfor %}
-            <!--
-            <div style= "height: 500px;width: 600px; overflow-y: scroll;">
-               
-              <div class="card-body position-relative d-flex" >
-              <div class="col-md-5">
-                <img src="checked/assets/img/scan.png" height="200">
-              </div>
-              <div class="col-md-5">
-                <h5 id="name1" class="visitor-content">NAME</h5>
-                <h5 id="nik1"class="visitor-content">NIK</h5>
-                <h5 id="vendor1"class="visitor-content">COMPANY</h5>
-                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
-                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
-              </div>
-              <div class="col-md-3">
-                <p>
-                  <small>Badge no:</small>
-                </p>
-                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">21</span>
-                <br>
-                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
-              </div>
+          
+              <div id="kolomWaitingList"></div>
 
-            </div>
-              <div class="card-body position-relative d-flex" >
-              <div class="col-md-5">
-                <img src="checked/assets/img/scan.png" height="200">
-              </div>
-              <div class="col-md-5">
-                <h5 id="name1" class="visitor-content">NAME</h5>
-                <h5 id="nik1"class="visitor-content">NIK</h5>
-                <h5 id="vendor1"class="visitor-content">COMPANY</h5>
-                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
-                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
-              </div>
-              <div class="col-md-3">
-                <p>
-                  <small>Badge no:</small>
-                </p>
-                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">21</span>
-                <br>
-                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
-              </div>
-
-            </div>
-              <div class="card-body position-relative d-flex" >
-              <div class="col-md-5">
-                <img src="checked/assets/img/scan.png" height="200">
-              </div>
-              <div class="col-md-5">
-                
-                <h5 id="name1" class="visitor-content">NAME</h5>
-                <h5 id="nik1"class="visitor-content">NIK</h5>
-                <h5 id="vendor1"class="visitor-content">COMPANY</h5>
-                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
-                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
-              </div>
-              <div class="col-md-3">
-                <p>
-                  <small>Badge no:</small>
-                </p>
-                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">21</span>
-                <br>
-                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
-              </div>
-
-            </div>
-              <div class="card-body position-relative d-flex" >
-              <div class="col-md-5">
-                <img src="checked/assets/img/scan.png" height="200">
-              </div>
-              <div class="col-md-5">
-                <h5 id="name1" class="visitor-content">NAME</h5>
-                <h5 id="nik1"class="visitor-content">NIK</h5>
-                <h5 id="vendor1"class="visitor-content">COMPANY</h5>
-                <h5 class="visitor-content">To: <span>LOCATION</span> </h5>
-                <button type="button" class="btn btn-outline-success" style="margin-top: 60px;">APPROVED</button>
-              </div>
-              <div class="col-md-3">
-                <p>
-                  <small>Badge no:</small>
-                </p>
-                <img src="checked/assets/img/id-card.png"  alt=""> <span id="badge1" class="badge-number">21</span>
-                <br>
-                <button type="button" class="btn btn-primary btn-sm" style="border-top-width: 1px;margin-top: 100px;">Check-In</button>
-              </div>
-              -->
+              
 
 
             </div>
-            </div>
+            
 
       </div>
           </div>
 
     </section>
+    <script type = "text/javascript">
+      function waitingList(){
+  
+        fetch("/waitinglist", {
+          method: "GET",
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          
+          let kolomWaitingList = '';
+          document.getElementById('kolomWaitingList').innerHTML = '';
+          
+          for (ok of data){
+            kolomWaitingList += `
+            <div class="card info-card">
+            <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="card-icon d-flex align-items-center justify-content-center">
+                <img src="data:image/png;base64,${ok.photo}" alt="Profile" style="padding-left: 30px;" class=" me-3" height="70">
+              </div>
+              <div class="ps-3" style="margin-left: 20px;">
+                <h6 style="color:#5e5d5d;">${ok.nama}</h6>
+                <h8 style="color:#5e5d5d;" class="small pt-2 ps-1">${ok.nik}</h8><br>
+                <h8 style="color:#5e5d5d;" class="small pt-2 ps-1">${ok.company}</h8><br>
+                <h8 style="color:#5e5d5d;" class="small pt-2 ps-1">${ok.location}</h8><br>
+                <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="tombolCheckin('${ok.id}')" data-bs-original-title="" aria-label="Views"><span class="badge rounded-pill bg-success">Approve</span> <span class="badge rounded-pill bg-primary">Checkin</span></a>
+            </div> 
+                <div class="ps-3">
+            <img src="checked/assets/img/id-card.png" alt="Profile" class=" me-2" style="border-top-style: solid;padding-bottom: 60px;">
+            <span style="font-size: 4em;line-height: 0;letter-spacing: -0.095em;font-weight: 500;font-style: normal;border-bottom-style: solid;border-top-style: solid;" class="text-primary">${ok.badge}</span>
+            </div>
+            </div>
+            </div>
+          </div>  
+        `
+        
+          }
+          
+          document.getElementById('kolomWaitingList').innerHTML = kolomWaitingList;
+          
+        })
+        }
+        setInterval(waitingList,1000)
+    </script>
     {% endblock %}

@@ -47,9 +47,39 @@ def home():
 def waiting():
     page = request.args.get('page', 1, type=int)
     transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
-    transaksiw = Transaksi.query.order_by(text('id desc'))
 
-    return render_template("waiting.html", user=current_user, transaksi=transaksi, transaksiw=transaksiw)
+    return render_template("waiting.html", user=current_user, transaksi=transaksi)
+
+@views.route('/waitinglist', methods=['GET', 'POST'])
+#@login_required
+def waitinglist():
+    if request.method == 'POST':
+        ts = json.loads(request.data)
+        tsId = ts['tsid']
+        transaksi = Transaksi.query.filter_by(id=tsId).first()
+        transaksi.status = 'checkin'
+        db.session.commit()
+        return jsonify({})
+
+
+    else:
+        transaksi = Transaksi.query.filter_by(status= 'waiting').order_by(text('id desc')).all()
+        
+        data = []
+        dataDict ={}
+        for i in transaksi:
+            dataDict['id'] = i.id
+            dataDict['nama'] = i.namaVisitor
+            dataDict['nik'] = i.nik
+            dataDict['company'] = i.vendor
+            dataDict['location'] = i.location
+            dataDict['photo'] = i.photo
+            dataDict['badge'] = i.badge
+            
+            data.append(dataDict.copy())
+        #print(data)
+        return jsonify(data)
+
 
 @views.route('/history', methods=['GET', 'POST'])
 @login_required
@@ -513,6 +543,7 @@ def savetotransaksicheckin():
     dataTransaksi['badge'] = data['badge']
     dataTransaksi['status'] = 'waiting'
     dataTransaksi['location'] = permit.location
+    dataTransaksi['photo'] = visitor.photo
     transaksi = Transaksi(**dataTransaksi)
     db.session.add(transaksi)
     

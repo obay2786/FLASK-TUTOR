@@ -545,4 +545,17 @@ function approveOvertimeAdmin(id){
 }
 
 
+function tombolCheckin(id){
+  fetch("/waitinglist", {
+    method: "POST",
+    body: JSON.stringify({ tsid:id}),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => {
+
+    window.location.reload()
+    
+})
+}
+
 

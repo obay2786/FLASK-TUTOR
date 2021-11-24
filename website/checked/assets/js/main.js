@@ -220,3 +220,7 @@ function dataPermit(id){
     
 })
 }
+
+
+
+
