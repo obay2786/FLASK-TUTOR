@@ -20,12 +20,13 @@ class Transaksi(db.Model):
     purpose = db.Column(db.String(150))
     vendor = db.Column(db.String(150))
     host = db.Column(db.String(150))
-    timeCheckin = db.Column(db.String(150))
-    timeCheckout = db.Column(db.String(150))
+    timeCheckin = db.Column(db.DateTime())
+    timeCheckout = db.Column(db.DateTime())
     statusPermit = db.Column(db.String(150))
     badge = db.Column(db.String(150))
     status = db.Column(db.String(150))
     location = db.Column(db.String(150))
+    photo = db.Column(db.Text())
 
 
 

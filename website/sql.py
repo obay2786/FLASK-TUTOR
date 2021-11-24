@@ -175,7 +175,7 @@ def getJFvisitor():
 
             
 def getJFpermit():
-    r = requests.get(f'https://api.jotform.com/form/213273981895469/submissions?apiKey={jfToken}')
+    r = requests.get(f'https://api.jotform.com/form/213273981895469/submissions?apiKey={jfToken}',proxies=prox)
     hasil = json.loads(r.text)
     dictJF = {}
     listJF =[]
@@ -260,7 +260,7 @@ def getJFpermit():
             
       
 def getJFcovid():
-    r = requests.get(f'https://api.jotform.com/form/213274129635456/submissions?apiKey={jfToken}')
+    r = requests.get(f'https://api.jotform.com/form/213274129635456/submissions?apiKey={jfToken}',proxies=prox)
     hasil = json.loads(r.text)
     
     dictJF = {}
@@ -332,9 +332,9 @@ def getDbCovid(nik):
             
 
 
-# getJFvisitor()
+getJFvisitor()
 
-getJFcovid()
+# getJFcovid()
 
 # getJFpermit()
 
