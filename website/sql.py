@@ -10,6 +10,10 @@ import secrets
 
 engineLocal = create_engine("mssql+pymssql://sa:Batam2021@10.89.1.50:1433/VMS",future=True)
 enginePublic = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
+# proxypana = '10.77.8.70:8080'
+prox = {"http":"http://47.74.152.29:8888"}
+
+
 
 def saveB(photo):
   
@@ -38,14 +42,15 @@ def saveImages(nik,photo):
 '''
 
 
-jfToken = '1c003a23731a647ba58829de69911ea8'
+jfToken = '75f10c2850b81307489bac1d4fc7ad54'
 
 def getImage(url):
     r = requests.get(url)
     return saveB(BytesIO(r.content))
     
 def delSub(id):
-    r = requests.delete(f"https://api.jotform.com/submission/{id}?apiKey={jfToken}")
+    # r = requests.delete(f"https://api.jotform.com/submission/{id}?apiKey={jfToken}")
+    r = requests.delete(f"https://api.jotform.com/submission/{id}?apiKey={jfToken}",proxies=prox)
     print(r.text)
 
 def insertData(data):
@@ -123,7 +128,7 @@ def insertTransaksi():
 
 
 def getJFvisitor():
-    r = requests.get(f'https://api.jotform.com/form/212702351856453/submissions?apiKey={jfToken}')
+    r = requests.get(f'https://api.jotform.com/form/213273805198460/submissions?apiKey={jfToken}',proxies=prox)
     hasil = json.loads(r.text)
     print(hasil)
     
@@ -171,7 +176,7 @@ def getJFvisitor():
 
             
 def getJFpermit():
-    r = requests.get(f'https://api.jotform.com/form/213014916686458/submissions?apiKey={jfToken}')
+    r = requests.get(f'https://api.jotform.com/form/213273981895469/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
     dictJF = {}
     listJF =[]
@@ -256,7 +261,7 @@ def getJFpermit():
             
       
 def getJFcovid():
-    r = requests.get(f'https://api.jotform.com/form/212706072902045/submissions?apiKey={jfToken}')
+    r = requests.get(f'https://api.jotform.com/form/213274129635456/submissions?apiKey={jfToken}')
     hasil = json.loads(r.text)
     
     dictJF = {}
@@ -332,6 +337,6 @@ def getDbCovid(nik):
 
 # getJFcovid()
 
-getJFpermit()
+# getJFpermit()
 
 
