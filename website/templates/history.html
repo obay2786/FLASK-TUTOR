@@ -61,13 +61,13 @@
                       <!-- tombole completed-->
                       
                       <span data-bs-toggle="modal" data-bs-target="#viewImageEApproval">  
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="viewUploadPermit('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="viewUploadPermit('{{permit.id}}')" data-bs-original-title="View Detail" aria-label="Views">
                           <span class="badge rounded-pill bg-success">Complated</span></a>
                       </span>
                       
                       <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitAprovalHistory('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views">
-                          <span class="badge rounded-pill bg-success">Lihat Detail</span></a>
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitAprovalHistory('{{permit.id}}')" data-bs-original-title="View Detail" aria-label="Views">
+                          <span class="badge rounded-pill bg-success">View Detail</span></a>
                       </span>
                       
                         
@@ -108,7 +108,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">Extra Large Modal</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button onclick="reloadHalaman()"type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="card">
@@ -185,7 +185,7 @@
                   <!-- End small tables -->
                   <div class="col-lg-5">
                     <h5 class="card-title">Bring Recordable Media :</h5>
-                    {% if permit.bawaBarang == 'YA' %}
+                   
                   <table class="table table-borderless col-lg-3" id="permitBarangBawaan">
                    
                     <tbody>
@@ -193,9 +193,7 @@
     
                     </tbody>
                   </table>
-                  {%else%}
-                  <p> -</p>
-                  {%endif%}
+                 
                 </div>
                   
                   </div>
@@ -204,7 +202,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button onclick="reloadHalaman()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
              
             </div>
           </div>

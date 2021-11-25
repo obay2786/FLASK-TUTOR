@@ -306,7 +306,6 @@ function getApprovalList(id){
     <th scope="col">NIK</th>
     <th scope="col">Controlled Items</th>
     <th scope="col">SN</th>
-
   </tr>`
     if(data.bawaBarang == 'YA'){
       document.getElementById('permitBarangBawaan').innerHTML = tabelHeader
@@ -374,6 +373,7 @@ function getPermitAprovalHistory(id){
     let tableRef = document.getElementById('permitDetailAnggota');
     var tableHeaderRowCount = 1;
     var rowCount = tableRef.rows.length;
+    
     for (var i = tableHeaderRowCount; i < rowCount; i++) {
         tableRef.deleteRow(tableHeaderRowCount);
     }
@@ -405,54 +405,67 @@ function getPermitAprovalHistory(id){
       newCell4.appendChild(newRegister);
       newCell5.appendChild(newCovid);
     }
-
+    
     let tableRef2 = document.getElementById('permitBarangBawaan');
-    var tableHeaderRowCount2 = 1;
-    var rowCount2 = tableRef2.rows.length;
-    for (var i = tableHeaderRowCount2; i < rowCount2; i++) {
-        tableRef2.deleteRow(tableHeaderRowCount2);
-    }
-    let noUrut2 = 0
-    for (barang of data.barangBawaan) {
-    // Insert a row at the end of the table
-      let newRow = tableRef2.insertRow(-1);
+    let tabelHeader = `<tr>
+    <th scope="col">No</th>
+    <th scope="col">Name</th>
+    <th scope="col">NIK</th>
+    <th scope="col">Controlled Items</th>
+    <th scope="col">SN</th>
+  </tr>`
+    if(data.bawaBarang == 'YA'){
+      document.getElementById('permitBarangBawaan').innerHTML = tabelHeader
+      var tableHeaderRowCount2 = 1;
+      var rowCount2 = tableRef2.rows.length;
+      for (var i = tableHeaderRowCount2; i < rowCount2; i++) {
+          tableRef2.deleteRow(tableHeaderRowCount2);
+      }
+      let noUrut2 = 0
+      for (barang of data.barangBawaan) {
+      // Insert a row at the end of the table
+        let newRow = tableRef2.insertRow(-1);
 
-      // Insert a cell in the row at index 0
-      let newCell = newRow.insertCell(0);
-      let newCell1 = newRow.insertCell(1);
-      let newCell2 = newRow.insertCell(2);
-      let newCell3 = newRow.insertCell(3);
-      let newCell4 = newRow.insertCell(4);
+        // Insert a cell in the row at index 0
+        let newCell = newRow.insertCell(0);
+        let newCell1 = newRow.insertCell(1);
+        let newCell2 = newRow.insertCell(2);
+        let newCell3 = newRow.insertCell(3);
+        let newCell4 = newRow.insertCell(4);
 
-      
-      // Append a text node to the cell
-      noUrut2 += 1
-      let newNo = document.createTextNode(noUrut2);
+        
+        // Append a text node to the cell
+        noUrut2 += 1
+        let newNo = document.createTextNode(noUrut2);
 
-      let newName = document.createTextNode(barang['Nama Pemilik']);
-      let newNik = document.createTextNode(barang['NIK']);
-      let newItem = document.createTextNode(barang['Jenis Media']);
-      let newDetail = document.createTextNode(barang.SN);
-      
-      newCell.appendChild(newNo);
-      newCell1.appendChild(newName);
-      newCell2.appendChild(newNik);
-      newCell3.appendChild(newItem);
-      newCell4.appendChild(newDetail);
-  
-    }
+        let newName = document.createTextNode(barang['Nama Pemilik']);
+        let newNik = document.createTextNode(barang['NIK']);
+        let newItem = document.createTextNode(barang['Jenis Media']);
+        let newDetail = document.createTextNode(barang.SN);
+        
+        newCell.appendChild(newNo);
+        newCell1.appendChild(newName);
+        newCell2.appendChild(newNik);
+        newCell3.appendChild(newItem);
+        newCell4.appendChild(newDetail);
+    
+      }
+    } else{
+      document.getElementById('permitBarangBawaan').innerHTML = '-'
+
+    } 
 
 
   });
 }
 
-function reloadPage(){
+function reloadHalaman(){
   // if(Url == undefined){
   // window.location.href = '/';
   // } else{
   //   window.location.href = '/'+Url;
   // }
-  window.reloadPage()
+  window.location.reload()
 }
 
 
