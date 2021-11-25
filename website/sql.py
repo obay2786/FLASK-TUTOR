@@ -10,7 +10,7 @@ import secrets
 
 engineLocal = create_engine("mssql+pymssql://sa:Batam2021@103.142.240.134:1433/VMS",future=True)
 # proxypana = '10.77.8.70:8080'
-prox = {"http":"http://47.74.152.29:8888"}
+prox = {"http":"http://47.74.152.29:8888991"}
 
 
 
