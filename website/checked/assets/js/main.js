@@ -273,7 +273,7 @@ async function getStaffCO(empTransaksi,empId){
   })
   const data = await res.json();
   if(empTransaksi != data.empID){
-    document.getElementById("statusA1").innerHTML = "Host Bersalah";
+    document.getElementById("statusA1").innerHTML = "different hosts";
     setTimeout(rl,10000)
   }
   else{
