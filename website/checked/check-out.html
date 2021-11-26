@@ -92,20 +92,20 @@
               VISITOR
             </div>
             <div class="card-body position-relative d-flex">
-              <img src="assets/img/scan.png" alt="" class="scan-img">
+              <img id="photo2" src="assets/img/scan.png" alt="" class="scan-img">
               <div class="p-3">
-                <h4 class="visitor-content">NAME</h4>
-                <h4 class="visitor-content">NIK</h4>
-                <h4 class="visitor-content">COMPANY</h4>
+                <h4 id="name2" class="visitor-content">NAME</h4>
+                <h4 id="nik2" class="visitor-content">NIK</h4>
+                <h4 id="company2" class="visitor-content">COMPANY</h4>
 
-                <h2 class="visitor-checkin-time">Check out time: <span class="green-text-2">16:21:00</span> </h2>
+                <h2 class="visitor-checkin-time">Check out time: <span id="time2" class="green-text-2"></span> <span id="today"  style="opacity: 0"class="green-text-2"></span></h2>
               </div>
 
               <div class="badge-id">
                 <p>
-                  <small>Badge no:</small>
+                  <small >Badge no:</small>
                 </p>
-                <img src="assets/img/id-card.png" alt=""> <span class="badge-number">23</span>
+                <img src="assets/img/id-card.png" alt=""> <span id="badgeno2" class="badge-number">23</span>
               </div>
             </div>
           </div>
@@ -117,30 +117,31 @@
               STATUS
             </div>
             <div class="card-body">
-              <h5 class="card-title">Waiting . . . <br> Visitor please tap the badge</h5>
+              <h5 id="statusA1" class="card-title">Waiting . . . <br> Visitor please tap the badge</h5>
               <div class="d-flex px-4 mt-4">
-                <img src="assets/img/group-therapy-illustration_74855-5516.jpg" alt="" class="mx-auto img-status">
-                <img src="assets/img/TapIn.png" alt="" class="mx-auto img-status">
+                <img id="imgA1" src="assets/img/group-therapy-illustration_74855-5516.jpg" alt="" class="mx-auto img-status">
+                <img id="imgB1"src="assets/img/TapIn.png" alt="" class="mx-auto img-status">
               </div>
             </div>
           </div>
+          <input type="text" id="txtBox1" style="opacity: 1" onchange="getCheckout(this)" autofocus/>
         </div>
 
         <!-- Row 2 -->
 
-        <div class="col-12 col-lg-7">
+        <div id="cardhost" style="opacity: 1" class="col-12 col-lg-7">
           <div class="card card-checkin">
             <div class="card-header text-center font-weight-bold">
               HOST
             </div>
             <div class="card-body position-relative d-flex">
-              <img src="assets/img/scan.png" alt="" class="scan-img">
+              <img id="photo" src="assets/img/scan.png" alt="" class="scan-img">
               <div class="p-3">
-                <h4 class="visitor-content">NAME</h4>
-                <h4 class="visitor-content">EE</h4>
-                <h4 class="visitor-content">DEPT</h4>
+                <h4 id="namaHost" class="visitor-content">NAME</h4>
+                <h4 id="empID" class="visitor-content">EE</h4>
+                <h4 id="depart" class="visitor-content">DEPT</h4>
 
-                <h2 class="visitor-checkin-time">Confirmation time: <span class="green-text-2">16:21:00</span> </h2>
+                <h2  class="visitor-checkin-time">Confirmation time: <span id="timeHost" class="green-text-2" >16:21:00</span> </h2>
               </div>
             </div>
           </div>
@@ -171,13 +172,13 @@
                 </div>
               </div>
   
-              <!-- Arrow step demo -->
+              <!-- Arrow step demo 
               <div class="nav clearfix">
                 <p>demo: </p> <br>
                 <a href="javascipt:void(0)" class="prev me-2">Previous</a>
                 <a href="javascipt:void(0)" class="next pull-right">Next</a>
               </div>
-              <!-- Arrow step demo -->
+               Arrow step demo -->
   
             </div>
           </center>

@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect,current_app,url_for
 from flask_login import login_required, current_user
 import datetime
@@ -45,8 +46,8 @@ def home():
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
 def waiting():
-    page = request.args.get('page', 1, type=int)
-    transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+ 
+    transaksi = Transaksi.query.order_by(text('id desc')).all()
 
     return render_template("waiting.html", user=current_user, transaksi=transaksi)
 
@@ -172,13 +173,14 @@ def visitor():
 
 
 
-@views.route('/report')
+@views.route('/report',methods=['GET', 'POST'])
 @login_required
 def report():
     if current_user.role == 'Admin' or current_user.role == 'Security':
         return render_template("report.html", user=current_user)
     else:
         return render_template("login.html", user=current_user)
+
 @views.route('/nama')
 @login_required
 def namadelete_note():
@@ -238,6 +240,29 @@ def getStaff():
     data['depart'] = staff.depart
     data['photo'] = staff.photo
     return jsonify(data)
+
+@views.route('/getstaffco', methods=['POST'])
+def getStaffco():
+    data = json.loads(request.data)
+    staffID = data['empID']
+    print(staffID)
+    staff = User.query.filter_by(empID=staffID).first()
+    # print('ooookkkkkkiiii'+staff)
+
+    if staff:
+        data = {}
+        data['id'] = staff.id
+        data['userName'] = staff.userName
+        data['firstName'] = staff.firstName
+        data['email'] = staff.email
+        data['empID'] = staff.empID
+        data['badgeID'] = staff.badgeID
+        data['role'] = staff.role
+        data['depart'] = staff.depart
+        data['photo'] = staff.photo
+        return jsonify(data)
+    else:
+        return jsonify({"empID":"tidak"})
 
 @views.route('/getvisitor', methods=['POST'])
 def getVisitor():
@@ -550,3 +575,98 @@ def savetotransaksicheckin():
     db.session.commit()
     return jsonify({})
 
+@views.route('/getcheckoutdatatransaksi', methods=['POST'])
+def getcheckoutdatatransaksi():
+    data = json.loads(request.data)
+    print(data)
+    badge = Badge.query.filter_by(rfid=data['rfid']).first()
+    
+    if badge:
+        transaksi = Transaksi.query.filter_by(status='checkin',badge=badge.no).first()
+        if transaksi:
+                dataQ = {}
+                dataQ['id'] = transaksi.id
+                dataQ['namaVisitor'] = transaksi.namaVisitor
+                dataQ['nik'] = transaksi.nik
+                dataQ['purpose'] = transaksi.purpose
+                dataQ['vendor'] = transaksi.vendor
+                dataQ['host'] = transaksi.host
+                dataQ['statusPermit'] = transaksi.statusPermit
+                dataQ['badge'] = transaksi.badge
+                dataQ['status'] = transaksi.status
+                dataQ['location'] = transaksi.location
+                dataQ['photo'] = transaksi.photo
+                return jsonify(dataQ)
+        else:
+            return jsonify({})
+ 
+
+    else:
+        return jsonify({})
+
+
+@views.route('/updatedatacheckout', methods=['POST'])
+def updatedatacheckout():
+    data = json.loads(request.data)
+    nik = data['Nik']
+    transaksi = Transaksi.query.filter_by(nik=nik).first()
+    tco = data['TimeCO']
+    transaksi.timeCheckout = tco
+    transaksi.status = 'checkout'
+    badgeVis = data['Badge']
+    badge = Badge.query.filter_by(status='used',no=badgeVis).first()
+    badge.status = 'free'
+
+    db.session.commit()
+    print("data checkout updated")
+    return jsonify({})
+
+@views.route('/export', methods=['POST'])
+def export():
+    data = json.loads(request.data)
+    by = data['by']
+    transaksi = Transaksi.query.order_by(by+" desc").all()
+    data = {} 
+    data['id'] = transaksi.id
+    data['namaVisitor'] = transaksi.namaVisitor
+    data['nik'] = transaksi.nik
+    data['purpose'] = transaksi.purpose
+    data['vendor'] = transaksi.vendor
+    data['host'] = transaksi.host
+    data['timeChecout'] = datetime.datetime.now()
+    data['statusPermit'] = transaksi.statusPermit
+    data['badge'] = transaksi.badge
+    data['status'] = transaksi.status
+    data['location'] = transaksi.location
+    data['photo'] = transaksi.photo
+
+
+    return jsonify(data)
+
+@views.route('/exportxls', methods=['POST'])
+def exportxls():
+    data = json.loads(request.data)
+    By = data['by']
+    order = By + ' desc'
+    transaksi = Transaksi.query.order_by(order).all()
+    dataQ = {} 
+    dataQ['id'] = transaksi.id
+    return jsonify(dataQ)
+    # dataQ['namaVisitor'] = transaksi.namaVisitor
+    # dataQ['nik'] = transaksi.nik
+    # dataQ['purpose'] = transaksi.purpose
+    # dataQ['vendor'] = transaksi.vendor
+    # dataQ['host'] = transaksi.host
+    # dataQ['timeChecout'] = datetime.datetime.now()
+    # dataQ['statusPermit'] = transaksi.statusPermit
+    # dataQ['badge'] = transaksi.badge
+    # dataQ['status'] = transaksi.status
+    # dataQ['location'] = transaksi.location
+    # dataQ['photo'] = transaksi.photo
+    # # for i in transaksi:
+    #     print(len(i))    
+
+    # print(dataQ)
+
+
+    

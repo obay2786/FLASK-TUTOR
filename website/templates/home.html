@@ -146,7 +146,7 @@
                       </select>                      
                     </td>
                     <td>
-                      <img src="" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <img src="data:image/png;base64,{{transaksi.photo}}" alt="Profile" class="rounded-circle me-2" width="35"> 
                       <span> {{ transaksi.namaVisitor }}</span>
                     </td>
                     <td>{{ transaksi.purpose }}</td>
@@ -246,7 +246,7 @@
                     <td>{{permit.startDate}} - {{permit.endDate}}</td>
                     <td >
                       <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
-                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="Lihat Detail" aria-label="Views"><span class="badge rounded-pill bg-success">Lihat Detail</span></a>
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="View Detail" aria-label="Views"><span class="badge rounded-pill bg-success">View Detail</span></a>
                       </span>
                       
                       {% if permit.statusGenerate == 'ok' %}

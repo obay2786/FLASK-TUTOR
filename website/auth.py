@@ -330,3 +330,30 @@ def sukses():
         
 
     return jsonify({})
+
+
+@auth.route('/settings', methods=['GET', 'POST'])
+def settings():
+    if request.method == 'POST':           
+        
+        print(request.form)
+        data ={}
+        data['userName'] = request.form.get('userName')
+        data['pass'] = request.form.get('password')
+        data['pass1'] = request.form.get('password1')
+        
+        
+        print(data)
+        user = User.query.filter_by(userName=data['userName']).first()
+        if data['pass'] != data['pass1']:
+            
+            flash('Passwords don\'t match.', category='error')
+        else:
+            user.password = password=generate_password_hash(
+            data['pass'], method='sha256')
+            db.session.commit()
+            print('okeeeee')
+    
+            return redirect(url_for('auth.settings'))
+
+    return render_template("settings.html", user=current_user)

@@ -222,5 +222,88 @@ function dataPermit(id){
 }
 
 
+async function getCheckout(rfid){
+
+  
+  const res = await fetch("/getcheckoutdatatransaksi", {
+    method: "POST",
+    body: JSON.stringify({ rfid:rfid.value }),
+  })
+  const data = await res.json()
+  if (data.nik == undefined){
+      document.getElementById("statusA1").innerHTML = "Has been Checkout or data Not Found!";
+      setTimeout(rl,5000)
+  }else{
+      let today = new Date();
+      let time = today.toTimeString().split(' ')[0];
+      document.getElementById("time2").innerHTML = time;
+      document.getElementById("today").innerHTML = today.toISOString()
+
+      document.getElementById("name2").innerHTML = data.namaVisitor;
+      document.getElementById("nik2").innerHTML = data.nik;
+      document.getElementById("badgeno2").innerHTML = data.badge;
+      document.getElementById("company2").innerHTML = data.vendor
+      document.getElementById("today").innerHTML = today.toISOString()
+      document.getElementById("photo2").src = "data:image/png;base64,"+data.photo;
+      document.getElementById("statusA1").innerHTML = "Visitor badge has read. \<br\> Host please confirm within 10 seconds";
+      document.getElementById("imgA1").src = "assets/img/step2A.png";
+      document.getElementById("bubble-1").classList.remove('green-text');
+      document.getElementById("step-1").classList.remove('current');
+      document.getElementById("bubble-2").classList.add('green-text');
+      document.getElementById("step-2").classList.add('current');
+
+      document.getElementById('txtBox1').id = "txtBox2";
+      document.getElementById("txtBox2").value = "";
+
+      let Host = data.host.split(':')
+      let empID = Host[1]
+      //console.log(Host)
+      document.getElementById('txtBox2').onchange =  function () { getStaffCO(empID,this); };
+      setTimeout(rl,10000)
+  
+  }
+ 
+}
 
 
+async function getStaffCO(empTransaksi,empId){
+  const res = await fetch("/getstaffco", {
+    method: "POST",
+    body: JSON.stringify({ empID:empId.value}),
+  })
+  const data = await res.json();
+  if(empTransaksi != data.empID){
+    document.getElementById("statusA1").innerHTML = "Host Bersalah";
+    setTimeout(rl,10000)
+  }
+  else{
+  var today = new Date();
+  document.getElementById("namaHost").innerHTML = data.firstName;
+  document.getElementById("empID").innerHTML = data.empID;
+  document.getElementById("depart").innerHTML = data.depart;
+  document.getElementById("timeHost").innerHTML = today.toISOString();
+  document.getElementById("imgB1").src = "";
+  document.getElementById("statusA1").innerHTML = "";
+  document.getElementById("imgA1").src = "assets/img/checkedout.png";
+  document.getElementById("bubble-2").classList.remove('green-text');
+  document.getElementById("step-2").classList.remove('current');
+  document.getElementById("bubble-3").classList.add('green-text');
+  document.getElementById("step-3").classList.add('current');
+  document.getElementById("photo").src = "data:image/png;base64,"+data.photo;
+  
+  let nik = document.getElementById("nik2").innerHTML
+  let badge = document.getElementById("badgeno2").innerHTML
+  let timeCheckout = document.getElementById("today").innerHTML
+
+  const res2 = await fetch("/updatedatacheckout", {
+    method: "POST",
+    body: JSON.stringify({ Nik:nik, Badge:badge, TimeCO:timeCheckout }),
+  
+    
+  })
+  setTimeout(rl,5000)
+}
+
+ 
+  
+}
