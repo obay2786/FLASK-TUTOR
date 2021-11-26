@@ -448,7 +448,7 @@ def kirimEmailDecline():
     permitId = data['id']
     permit = Permit.query.filter_by(id=permitId).first()
     email = permit.email
-    subject = 'Permit ditolak'
+    subject = 'Permit Reject'
     body = data['body']
     kirimEmail(email,subject,body)
     db.session.delete(permit)
@@ -468,7 +468,7 @@ def kirimEmailApprove():
     print(listQR)
     permit = Permit.query.filter_by(id=id).first()
     email = permit.email
-    subject = 'Permit disetujui'
+    subject = 'Permit Accepted'
     tableQR = '' 
     for QR in listQR:
         pass #INI BELUM SIAP

@@ -6,12 +6,12 @@ def kirimEmail(to,subject,body):
     msg.set_content(body)
 
     msg['Subject'] = subject
-    msg['From'] = 'info@siberkolosis.com'
+    msg['From'] = 'vms.info@sg.panasonic.com'
     msg['To'] = to
 
     # Send the message via our own SMTP server.
-    server = smtplib.SMTP_SSL('mail.privateemail.com', 465)
-    server.login("info@siberkolosis.com", "grunge75")
+    server = smtplib.SMTP_SSL('157.8.1.154', 465)
+    # server.login("info@siberkolosis.com", "grunge75")
     server.send_message(msg)
     server.quit()
 
