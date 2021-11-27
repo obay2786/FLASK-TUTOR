@@ -173,38 +173,41 @@ function getVisitor(qr){
       document.getElementById("statusB1").innerHTML = "Tidak Ada Permit";
       document.getElementById("statusB1").style.fontSize = "5rem";
       document.getElementById("imgC1").src = "assets/img/nopermit.png";
+      setTimeout(rl,5000)
+    }else if(data.status == 'checkin' || data.status == 'waiting'){
+      document.getElementById("statusB1").innerHTML = "User already Checkin"
+      setTimeout(rl,5000)
+    }else{
+      upload(data.photo,data.nama)
+      document.getElementById("dataqr").innerHTML = data.qr;
+      document.getElementById("name1").innerHTML = data.nama;
+      document.getElementById("nik1").innerHTML = data.nik;
+      document.getElementById("badge1").innerHTML = data.badge;
+      document.getElementById("vendor1").innerHTML = data.company
+      document.getElementById("photo1").src = "data:image/png;base64,"+data.photo;
+      document.getElementById("txtBox1").value = "";
+      
+    
+      var today = new Date();
+      var time = today.toTimeString().split(' ')[0];
+      document.getElementById("time1").innerHTML = time;
+      document.getElementById("today").innerHTML = today.toISOString()
+
+      document.getElementById("statusA1").innerHTML = "Visitor need to scan their face at thermal \<br\> camera to check temperature";
+      document.getElementById("imgA1").src = "assets/img/step2A.png";
+      document.getElementById("imgB1").src = "assets/img/step2B.png";
+      document.getElementById("statusB1").innerHTML = "Scan wajah anda pada \<br\> Thermal Camera \<br\> untuk cek suhu";
+      document.getElementById("statusB1").style.fontSize = "5rem"
+      document.getElementById("imgC1").src = "";
+      
+      document.getElementById("bubble-1").classList.remove('green-text');
+      document.getElementById("step-1").classList.remove('current');
+      document.getElementById("bubble-2").classList.add('green-text');
+      document.getElementById("step-2").classList.add('current');
+      document.getElementById('txtBox1').id = "txtBox2";
+      document.getElementById('txtBox2').onchange =  function () { ok(); };
       setTimeout(rl,10000)
-    } else {
-    upload(data.photo,data.nama)
-    document.getElementById("dataqr").innerHTML = data.qr;
-    document.getElementById("name1").innerHTML = data.nama;
-    document.getElementById("nik1").innerHTML = data.nik;
-    document.getElementById("badge1").innerHTML = data.badge;
-    document.getElementById("vendor1").innerHTML = data.company
-    document.getElementById("photo1").src = "data:image/png;base64,"+data.photo;
-    document.getElementById("txtBox1").value = "";
     
-	
-    var today = new Date();
-    var time = today.toTimeString().split(' ')[0];
-    document.getElementById("time1").innerHTML = time;
-    document.getElementById("today").innerHTML = today.toISOString()
-
-    document.getElementById("statusA1").innerHTML = "Visitor need to scan their face at thermal \<br\> camera to check temperature";
-    document.getElementById("imgA1").src = "assets/img/step2A.png";
-    document.getElementById("imgB1").src = "assets/img/step2B.png";
-    document.getElementById("statusB1").innerHTML = "Scan wajah anda pada \<br\> Thermal Camera \<br\> untuk cek suhu";
-    document.getElementById("statusB1").style.fontSize = "5rem"
-    document.getElementById("imgC1").src = "";
-    
-    document.getElementById("bubble-1").classList.remove('green-text');
-    document.getElementById("step-1").classList.remove('current');
-    document.getElementById("bubble-2").classList.add('green-text');
-    document.getElementById("step-2").classList.add('current');
-    document.getElementById('txtBox1').id = "txtBox2";
-    document.getElementById('txtBox2').onchange =  function () { ok(); };
-    setTimeout(rl,10000)
-
     }
   });
 }
@@ -258,18 +261,29 @@ async function getCheckout(rfid){
       let Host = data.host.split(':')
       let empID = Host[1]
       //console.log(Host)
+      let nik = data.nik
+      let badge = data.badge
+      let TimeCO = today.toISOString()
+      if(data.purpose == 'SUPPLY'){
+        const res3 = await fetch("/updatedatacheckout", {
+          method: "POST",
+          body: JSON.stringify({ Nik:nik, Badge:badge, TimeCO:timeCheckout }),
+
+        })
+        document.getElementById("imgA1").src = "assets/img/checkedout.png";
+      }else{
       document.getElementById('txtBox2').onchange =  function () { getStaffCO(empID,this); };
       setTimeout(rl,10000)
-  
+      }
   }
  
 }
 
 
-async function getStaffCO(empTransaksi,empId){
+async function getStaffCO(empTransaksi,badgeId){
   const res = await fetch("/getstaffco", {
     method: "POST",
-    body: JSON.stringify({ empID:empId.value}),
+    body: JSON.stringify({ badgeID:badgeId.value}),
   })
   const data = await res.json();
   if(empTransaksi != data.empID){

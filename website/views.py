@@ -46,8 +46,8 @@ def home():
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
 def waiting():
- 
-    transaksi = Transaksi.query.order_by(text('id desc')).all()
+    
+    transaksi = Transaksi.filter_by(timeCheckin=date()).query.order_by(text('id desc')).all()
 
     return render_template("waiting.html", user=current_user, transaksi=transaksi)
 
@@ -244,9 +244,9 @@ def getStaff():
 @views.route('/getstaffco', methods=['POST'])
 def getStaffco():
     data = json.loads(request.data)
-    staffID = data['empID']
+    staffID = data['badgeID']
     print(staffID)
-    staff = User.query.filter_by(empID=staffID).first()
+    staff = User.query.filter_by(badgeID=staffID).first()
     # print('ooookkkkkkiiii'+staff)
 
     if staff:
@@ -275,7 +275,7 @@ def getVisitor():
     data['id'] = visitor.id
     data['nik'] = visitor.nik
     data['nama'] = visitor.nama
-    data['badge'] = '111'
+
     data['company'] = visitor.namaVendor
     data['photo'] = visitor.photo
     
@@ -507,11 +507,13 @@ def getcheckindata():
 
         qr = data['qr'].split(':')
         print(qr)
-        permitId = qr[0]
         nik = qr[1]
+        permitId = qr[0]
         
+        transaksi = Transaksi.query.filter_by(nik=nik).order_by(text('id desc')).first()
+
         permit = Permit.query.filter_by(id=permitId).first()
-       
+
         
         if (nik in str(permit.anggota)) and (permit.status =='approved') :
             
@@ -520,7 +522,35 @@ def getcheckindata():
             empID = Host[1]
             user = User.query.filter_by(empID=empID).first()
             print(visitor)
+            if transaksi:
+                if transaksi.status == 'checkout':
+                    badge = Badge.query.filter_by(status='free').order_by(text('id asc')).first()
 
+                    print(badge)
+                    
+                    dataQ['nama'] = visitor.nama
+                    dataQ['nik'] = visitor.nik
+                    dataQ['purpose'] = permit.purpose
+                    dataQ['company'] = permit.namaVendor
+                    dataQ['host'] = user.empID
+                    dataQ['statusPermit'] = permit.status 
+                
+                    try:
+                        dataQ['badge'] = badge.no
+                    except:
+                        dataQ['badge'] = '0'
+                    dataQ['photo'] = visitor.photo
+                    dataQ['qr'] = data['qr']
+                    print(data['qr'])
+            
+                    return jsonify(dataQ)
+                else:
+
+                    dataT ={}
+                    dataT['status'] = transaksi.status
+                    dataT['nik'] = nik
+                    
+                    return jsonify(dataT)
             badge = Badge.query.filter_by(status='free').order_by(text('id asc')).first()
 
             print(badge)
@@ -569,6 +599,7 @@ def savetotransaksicheckin():
     dataTransaksi['status'] = 'waiting'
     dataTransaksi['location'] = permit.location
     dataTransaksi['photo'] = visitor.photo
+    # dataTransaksi['idPermit'] = permitId
     transaksi = Transaksi(**dataTransaksi)
     db.session.add(transaksi)
     
