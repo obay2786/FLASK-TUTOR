@@ -41,17 +41,26 @@
                 </thead>
                 <tbody>
                   <tr>
-                    
+                    {% for datas in transaksi %}
                     <td>
-                      <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle me-2" width="35"> 
-                      <span> Brandon Jacob</span>
+                      <img src="data:image/png;base64,{{datas.photo}}" alt="Profile" class="rounded-circle me-2" width="35"> 
+                      <span> {{datas.namaVisitor}}</span>
                     </td>
-                    <td>Designer</td>
-                    <td>Darma</td>
-                    <td>2016-05-25</td>
-                    <td>2016-05-25</td>
+                    <td>{{datas.nik}}</td>
+                    <td>{{datas.purpose}}</td>
+                    <td>{{datas.vendor}}</td>
+                    {% set dataHost = datas.host.split(':') %}
+                    <td>{{ dataHost[0] }}</td>
+                    <td>{{datas.timeCheckin.strftime('%d-%m-%Y %H:%M')}}</td>
+                    {% if datas.timeCheckout == None %}
+                    
+                    <td> - </td>
+                    {% else %}
+                    <td>{{datas.timeCheckout.strftime('%d-%m-%Y %H:%M') }}</td>
+                    {% endif %}
+                    <td>{{datas.statusPermit}}</td>
                   </tr>
-                  
+                  {% endfor %}
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->

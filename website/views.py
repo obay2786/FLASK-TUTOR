@@ -179,7 +179,23 @@ def visitor():
 @login_required
 def report():
     if current_user.role == 'Admin' or current_user.role == 'Security':
-        return render_template("report.html", user=current_user)
+        # data = json.loads(request.data)
+        # by = data['by']
+        # transaksi = Transaksi.query.order_by(text("id desc")).all()
+        ID = None
+        host = None
+        purpose = None
+        company = None
+        my_filters = {'id':ID, 'host':host, 'purpose':purpose, 'vendor':company}
+        filterz = {}
+        for i,j in my_filters.items():
+            if j != None:
+                filterz.update({i:j})
+        
+        transaksi = Transaksi.query.order_by(text('id desc')).filter_by(**filterz).all()                  #filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\''))
+
+
+        return render_template("report.html", user=current_user, transaksi=transaksi)
     else:
         return render_template("login.html", user=current_user)
 
@@ -461,22 +477,408 @@ def kirimEmailDecline():
 def kirimEmailApprove():
     data = json.loads(request.data)
     print(data)
+    
     id = data['id']
-    anggota = json.loads(data['aggota'])
+    permit = Permit.query.filter_by(id=id).first()
+    anggota = json.loads(permit.anggota)
     listQR = []
     for person in anggota:
-        listQR.append(qrGen('124',person['NIK'],person['Nama']))
+        listQR.append(qrGen(id,person['NIK'],person['Nama']))
 
     print(listQR)
-    permit = Permit.query.filter_by(id=id).first()
+    
     email = permit.email
     subject = 'Permit Accepted'
-    tableQR = '' 
-    for QR in listQR:
-        pass #INI BELUM SIAP
-    pesan = f'Pengajuan anda telah di Setujui. silahkan Gunakan QRCODE di bawah ini '
+    tableQR = []
     
-    kirimEmail(email,subject,tableQR)
+    for QR in listQR:
+        for key in QR:
+            tableQR.append(f"""<td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;border-bottom:2px solid #fff;border-left:2px solid #fff;border-right:2px solid #fff;border-top:2px solid #fff" width="33.333333333333336%">
+                                                    <table class="image_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="width:100%;padding-right:0;padding-left:0;padding-top:5px">
+                                                                <div style="line-height:10px" align="center"><img src="{QR[key]}" style="display:block;height:auto;border:0;width:183px;max-width:100%" alt="Hospital Icon" title="Hospital Icon" width="183"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="text_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word" width="100%" cellspacing="0" cellpadding="10" border="0">
+                                                        <tbody><tr>
+                                                            <td>
+                                                                <div style="font-family:Tahoma,Verdana,sans-serif">
+                                                                    <div style="font-size:12px;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;mso-line-height-alt:14.399999999999999px;color:#087200;line-height:1.2">
+                                                                        <p style="margin:0;font-size:16px;text-align:center">
+                                                                            <strong>{key}</strong></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="divider_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="10" border="0">
+                                                        <tbody><tr>
+                                                            <td>
+                                                                <div align="center">
+                                                                    <table role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                                        <tbody><tr>
+                                                                            <td class="divider_inner" style="font-size:1px;line-height:1px;border-top:1px solid #bbb">
+                                                                                <span> </span></td>
+                                                                        </tr>
+                                                                    </tbody></table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="text_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="padding-bottom:15px;padding-left:10px;padding-right:10px;padding-top:10px">
+                                                                <div style="font-family:Tahoma,Verdana,sans-serif">
+                                                                    <div style="font-size:12px;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;mso-line-height-alt:18px;color:#000;line-height:1.5">
+                                                                        <p style="margin:0;font-size:14px;text-align:center;mso-line-height-alt:24px">
+                                                                            <span style="font-size:16px">Lorem ipsum
+                                                                                dolor sit amet,</span><br><span style="font-size:16px">consectetur
+                                                                                adipiscing elit</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </td>""")
+    #print(tableQR[0])
+    rowPertama = ''
+    rowKedua = ''
+    rowKetiga = ''
+    rowKeempat = ''
+    rowKelima = ''
+    rowKeenam = ''
+    rowKetujuh = ''
+
+    listQrMail = []
+    for t in range(len(tableQR)):
+        if t < 3:
+            rowPertama += tableQR[t]
+            
+        elif t < 6:
+            rowKedua += tableQR[t]
+        elif t < 9:
+            rowKetiga += tableQR[t]
+        elif t < 12:
+            rowKeempat += tableQR[t]
+        elif t < 15:
+            rowKelima += tableQR[t]
+        elif t < 18:
+            rowKeenam += tableQR[t]
+        else:
+            rowKetujuh += tableQR[t]
+
+    #print(rowPertama)
+    tableRow =[rowPertama,rowKedua,rowKetiga,rowKeempat,rowKelima,rowKeenam,rowKetujuh]
+    tableRowFinish = []
+    for i in tableRow:
+        tableRowFinish.append(f"""<table class="row row-4" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;background-color:#fff;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                                <tbody>
+                                                    <tr>
+                                                    {i}
+                                                    </tr>
+                                                </tbody>
+                                                
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>""")
+        
+    bodyFinish = f"""<!DOCTYPE html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en"><head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
+    <!--[if !mso]><!-->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&amp;display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet" type="text/css">
+    <!--<![endif]-->
+    <style>
+        * {{
+            box-sizing: border-box
+        }}
+
+        body {{
+            margin: 0;
+            padding: 0
+        }}
+
+        a[x-apple-data-detectors] {{
+            color: inherit !important;
+            text-decoration: inherit !important
+        }}
+
+        #MessageViewBody a {{
+            color: inherit;
+            text-decoration: none
+        }}
+
+        p {{
+            line-height: inherit
+        }}
+
+        @media (max-width:700px) {{
+            .icons-inner {{
+                text-align: center
+            }}
+
+            .icons-inner td {{
+                margin: 0 auto
+            }}
+
+            .row-content {{
+                width: 100% !important
+            }}
+
+            .stack .column {{
+                width: 100%;
+                display: block
+            }}
+        }}
+    </style>
+</head>
+
+<body style="background-color:#fff7f7;margin:0;padding:0;-webkit-text-size-adjust:none;text-size-adjust:none">
+    <table class="nl-container" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;background-color:#fff7f7" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="row row-1" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0" width="100%">
+                                                    <div class="spacer_block" style="height:40px;line-height:40px;font-size:1px"> </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-2" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;background-color:#fff;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;padding-top:0;padding-bottom:0;border-top:0;border-right:0;border-bottom:0;border-left:0" width="100%">
+                                                    <table class="image_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="width:100%;padding-right:0;padding-left:0;padding-top:40px">
+                                                                <div style="line-height:10px" align="center"><img src="https://d1oco4z2z1fhwp.cloudfront.net/templates/default/5126/logo.png" style="display:block;height:auto;border:0;width:28px;max-width:100%" alt="Red Ribbon Logo Placeholder" title="Red Ribbon Logo Placeholder" width="28"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="text_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="padding-bottom:20px;padding-left:15px;padding-right:15px;padding-top:20px">
+                                                                <div style="font-family:sans-serif">
+                                                                    <div style="font-size:14px;font-family:Poppins,sans-serif;mso-line-height-alt:16.8px;color:#000;line-height:1.2">
+                                                                        <p style="margin:0;font-size:30px;text-align:center">
+                                                                            <span style="font-size:50px"><span style=""><strong>PERMIT
+                                                                                    </strong></span><span style=""><strong><span style="color:#fe000b">PANASONIC
+                                                                                        </span>BATAM</strong></span></span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="text_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="padding-bottom:10px;padding-left:15px;padding-right:15px;padding-top:10px">
+                                                                <div style="font-family:Tahoma,Verdana,sans-serif">
+                                                                    <div style="font-size:14px;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;mso-line-height-alt:21px;color:#000;line-height:1.5">
+                                                                        <p style="margin:0;text-align:center;font-size:16px;mso-line-height-alt:24px">
+                                                                            <span style="font-size:16px">Lorem ipsum
+                                                                                dolor sit amet, consectetur adipiscing
+                                                                                elit. Nunc at ornare dolor.</span></p>
+                                                                        <p style="margin:0;text-align:center;font-size:16px;mso-line-height-alt:24px">
+                                                                            <span style="font-size:16px">Aliquet lectus
+                                                                                egetullamcorper sollicitudin.&nbsp;
+                                                                                Fusce in ultricies velit, accommodo
+                                                                                quam.</span></p>
+                                                                        <p style="margin:0;text-align:center;font-size:16px;mso-line-height-alt:24px">
+                                                                            <span style="font-size:16px">Class aptent
+                                                                                taciti sociosqu ad.</span></p>
+                                                                        <p style="margin:0;text-align:center;font-size:16px;mso-line-height-alt:21px">
+                                                                            &nbsp;</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    {"".join(tableRowFinish)}
+                    
+                    
+                    
+                    <table class="row row-8" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;background-color:#fe000b;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0" width="100%">
+                                                    <table class="social_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="padding-bottom:10px;padding-left:10px;padding-right:10px;padding-top:30px;text-align:center">
+                                                                <table class="social-table" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="144px" cellspacing="0" cellpadding="0" border="0" align="center">
+                                                                    <tbody><tr>
+                                                                        <td style="padding:0 2px 0 2px"><a href="https://www.facebook.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/facebook@2x.png" alt="Facebook" title="facebook" style="display:block;height:auto;border:0" width="32" height="32"></a>
+                                                                        </td>
+                                                                        <td style="padding:0 2px 0 2px"><a href="https://www.twitter.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/twitter@2x.png" alt="Twitter" title="twitter" style="display:block;height:auto;border:0" width="32" height="32"></a>
+                                                                        </td>
+                                                                        <td style="padding:0 2px 0 2px"><a href="https://www.linkedin.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/linkedin@2x.png" alt="Linkedin" title="linkedin" style="display:block;height:auto;border:0" width="32" height="32"></a>
+                                                                        </td>
+                                                                        <td style="padding:0 2px 0 2px"><a href="https://www.instagram.com/" target="_blank"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-white/instagram@2x.png" alt="Instagram" title="instagram" style="display:block;height:auto;border:0" width="32" height="32"></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody></table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="menu_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="color:#fff;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;font-size:12px;letter-spacing:1px;text-align:center;padding-top:20px">
+                                                                <table role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                                    <tbody><tr>
+                                                                        <td style="text-align:center;font-size:0">
+                                                                            <div class="menu-links">
+                                                                                <!--[if mso]>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" style="">
+    <tr>
+    <td style="padding-top:5px;padding-right:5px;padding-bottom:5px;padding-left:5px">
+    <![endif]--><a href="wwwexample.com" style="padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px;display:inline-block;color:#fff;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;font-size:12px;text-decoration:none;letter-spacing:1px">ARCHIVE</a>
+                                                                                <!--[if mso]></td><td><![endif]--><span class="sep" style="font-size:12px;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;color:#fff">|</span>
+                                                                                <!--[if mso]></td><![endif]-->
+                                                                                <!--[if mso]></td><td style="padding-top:5px;padding-right:5px;padding-bottom:5px;padding-left:5px"><![endif]--><a href="www.example.com" style="padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:5px;display:inline-block;color:#fff;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;font-size:12px;text-decoration:none;letter-spacing:1px">SUBSCRIBE</a>
+                                                                                <!--[if mso]></td></tr></table><![endif]-->
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody></table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    <table class="text_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;word-break:break-word" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="padding-bottom:30px;padding-left:15px;padding-right:25px;padding-top:30px">
+                                                                <div style="font-family:Tahoma,Verdana,sans-serif">
+                                                                    <div style="font-size:12px;font-family:Lato,Tahoma,Verdana,Segoe,sans-serif;mso-line-height-alt:18px;color:#fff;line-height:1.5">
+                                                                        <p style="margin:0;font-size:14px;text-align:center;mso-line-height-alt:18px;letter-spacing:normal">
+                                                                            <span style="font-size:12px">This email was
+                                                                                intended for you. &nbsp;<a href="http://www.example.com" target="_blank" style="text-decoration:underline;color:#3d3d3d" rel="noopener">Unsubscribe</a> from
+                                                                                daily digest messages,</span></p>
+                                                                        <p style="margin:0;font-size:14px;text-align:center;mso-line-height-alt:18px;letter-spacing:normal">
+                                                                            <span style="font-size:12px">or visit your
+                                                                            </span><span style="font-size:12px">settings
+                                                                                to manage what emails to send
+                                                                                you.</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-9" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0" width="100%">
+                                                    <div class="spacer_block" style="height:40px;line-height:40px;font-size:1px"> </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="row row-10" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0;color:#000;width:680px" width="680" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td class="column" style="mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;padding-top:5px;padding-bottom:5px;border-top:0;border-right:0;border-bottom:0;border-left:0" width="100%">
+                                                    <table class="icons_block" role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody><tr>
+                                                            <td style="color:#9d9d9d;font-family:inherit;font-size:15px;padding-bottom:5px;padding-top:5px;text-align:center">
+                                                                <table role="presentation" style="mso-table-lspace:0;mso-table-rspace:0" width="100%" cellspacing="0" cellpadding="0">
+                                                                    <tbody><tr>
+                                                                        <td style="text-align:center">
+                                                                            <!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+                                                                            <!--[if !vml]><!-->
+                                                                            <table class="icons-inner" style="mso-table-lspace:0;mso-table-rspace:0;display:inline-block;margin-right:-4px;padding-left:0;padding-right:0" role="presentation" cellspacing="0" cellpadding="0">
+                                                                                <!--<![endif]-->
+                                                                                <tbody><tr>
+                                                                                    <td style="text-align:center;padding-top:5px;padding-bottom:5px;padding-left:5px;padding-right:6px">
+                                                                                        <a href="https://www.designedwithbee.com/"><img class="icon" alt="Designed with BEE" src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/53601_510656/Signature/bee.png" style="display:block;height:auto;border:0" width="34" height="32" align="middle"></a>
+                                                                                    </td>
+                                                                                    <td style="font-family:Arial,Helvetica Neue,Helvetica,sans-serif;font-size:15px;color:#9d9d9d;vertical-align:middle;letter-spacing:undefined;text-align:center">
+                                                                                        <a href="https://www.designedwithbee.com/" style="color:#9d9d9d;text-decoration:none">Designed
+                                                                                            with BEE</a></td>
+                                                                                </tr>
+                                                                            </tbody></table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody></table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table><!-- End -->
+
+
+</body></html>"""
+    
+    
+    kirimEmail(email,subject,bodyFinish)
    
     return jsonify({})
 

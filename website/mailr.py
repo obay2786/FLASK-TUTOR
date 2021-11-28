@@ -3,7 +3,7 @@ from email.message import EmailMessage
 
 def kirimEmail(to,subject,body):
     msg = EmailMessage()
-    msg.set_content(body)
+    msg.set_content(body,subtype='html')
 
     msg['Subject'] = subject
     msg['From'] = 'info@siberkolosis.com'
@@ -18,4 +18,5 @@ def kirimEmail(to,subject,body):
     server.quit()
 
 # kirimEmail('oby.style@gmail.com','ditolak','selamat anda di tolak')
-
+#if __name__ == "__main__":
+   
