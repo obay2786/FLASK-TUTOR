@@ -7,7 +7,7 @@ from .models import Badge, Visitor,User, Permit, Location, Transaksi
 from . import db
 import json
 import base64
-from sqlalchemy import asc, desc,text
+from sqlalchemy import asc, desc,text,func
 import requests
 from PIL import Image, ImageOps
 from io import BytesIO
@@ -18,6 +18,34 @@ views = Blueprint('views', __name__)
 ROWS_PER_PAGE = 10
 
 
+def saveB(photo):
+  
+    img = Image.open(photo)
+    img = ImageOps.exif_transpose(img)
+    output_size = (600, 600)
+    img.thumbnail(output_size)
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+    
+    return img_str
+
+def saveGambar(photo):
+  
+    img = Image.open(photo)
+    img = ImageOps.exif_transpose(img)
+    output_size = (1300, 1300)
+    img.thumbnail(output_size)
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+    
+    return img_str
+def qrGen(id,nik,nama):
+    qr = f'https://chart.apis.google.com/chart?chl={id}:{nik}&chs=150x150&cht=qr&chld=H%7C0'
+    
+    return {nama:qr}
+    
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
@@ -46,8 +74,9 @@ def home():
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
 def waiting():
-    
-    transaksi = Transaksi.filter_by(timeCheckin=date()).query.order_by(text('id desc')).all()
+    startDate = datetime.datetime.now()
+    endDate = datetime.datetime.now()
+    transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).order_by(text('id desc')).all()
 
     return render_template("waiting.html", user=current_user, transaksi=transaksi)
 
@@ -100,34 +129,7 @@ def approval():
     permitOvertime = Permit.query.filter_by(purpose='OVERTIME',status='waitingadmin').order_by(text('id desc')).paginate(page=page)
     return render_template("approval.html", user=current_user, permitWorking=permitWorking, permitOvertime=permitOvertime)
 
-def saveB(photo):
-  
-    img = Image.open(photo)
-    img = ImageOps.exif_transpose(img)
-    output_size = (600, 600)
-    img.thumbnail(output_size)
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue())
-    
-    return img_str
 
-def saveGambar(photo):
-  
-    img = Image.open(photo)
-    img = ImageOps.exif_transpose(img)
-    output_size = (1300, 1300)
-    img.thumbnail(output_size)
-    buffered = BytesIO()
-    img.save(buffered, format="PNG")
-    img_str = base64.b64encode(buffered.getvalue())
-    
-    return img_str
-def qrGen(id,nik,nama):
-    qr = f'https://chart.apis.google.com/chart?chl={id}:{nik}&chs=150x150&cht=qr&chld=H%7C0'
-    
-    return {nama:qr}
-    
 @views.route('/visitor',methods=['GET', 'POST'])
 @login_required
 def visitor():
