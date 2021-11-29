@@ -78,12 +78,13 @@ def home():
     else:
         page = request.args.get('page', 1, type=int)
         host = current_user.firstName + ':' +current_user.empID
-        permit = Permit.query.filter_by(host=host, status='waitinghost').order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        #perbaiki pagination
+        permit = Permit.query.filter(Permit.status.in_(('waitingadmin', 'waitinghost'))).filter_by(host=host).order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
-        return render_template("home.html", user=current_user, permit=permit,location=location,transaksi=transaksi)
+        return render_template("home.html", user=current_user, permit=permit,location=location, transaksi=transaksi)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
@@ -384,9 +385,8 @@ def updatepermitlocation():
     data = {}
     return jsonify(data)
 
-
+#
 @views.route('/genxls', methods=['POST'])
-
 def genxls():
     data = json.loads(request.data)
     print(data)
@@ -463,8 +463,10 @@ def genxls():
 
     # buffer = BytesIO()
     wb.save(urlFolder)
-
-    permit.statusGenerate = 'ok'
+    if permit.status == "waitingadmin":
+        permit.statusGenerate = ''
+    else:
+        permit.statusGenerate = 'ok'
     db.session.commit()
     
     
@@ -903,6 +905,7 @@ def approveWorkingAdmin():
     permitId = data['id']
     permit = Permit.query.filter_by(id=permitId).first()
     permit.status = 'waitinghost'
+    permit.statusGenerate = 'ok'
     db.session.commit()
     return jsonify({})
 

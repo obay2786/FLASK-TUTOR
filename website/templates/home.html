@@ -152,11 +152,11 @@
                     <td>{{ transaksi.purpose }}</td>
                     {% set dataHost = transaksi.host.split(':') %}
                     <td>{{ dataHost[0] }}</td>
-                    <td>{{ transaksi.timeCheckin }}</td>
+                    <td>{{ transaksi.timeCheckin.strftime('%d-%m-%Y %H:%M') }}</td>
                     {% if transaksi.timeCheckout == None %}
                     <td> - </td>
                     {% else %}
-                    <td>{{ transaksi.timeCheckout }}</td>
+                    <td>{{ transaksi.timeCheckout.strftime('%d-%m-%Y %H:%M') }}</td>
                     {% endif %}
                     <td>{{ transaksi.vendor }}</td>
                   </tr>
@@ -454,9 +454,8 @@
                         
                       <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Decline" aria-label="Views"><span class="badge rounded-pill bg-danger">Decline</span></a>
                     </span>
-                  
                   <a id="generatebuttonxls" href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="" data-bs-original-title="Generate" aria-label="Views"><span class="badge rounded-pill bg-secondary">Generate</span></a>
-                  
+                   
                 </div>
                   </div>
     
