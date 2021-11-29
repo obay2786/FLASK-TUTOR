@@ -557,6 +557,17 @@ function approveOvertimeAdmin(id){
   });
 }
 
+function hostAccept(id){
+  fetch("/accepthost", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+  }).then((response) => {
+    return response.json()
+  }).then((data) => { 
+    window.location.reload()  
+  });
+}
+
 
 function tombolCheckin(id){
   fetch("/waitinglist", {

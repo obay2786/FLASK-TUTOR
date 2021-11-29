@@ -194,10 +194,12 @@ def staff():
                     flash('Name must be greater than 1 character.', category='error')
                 elif password != password1:
                     flash('Passwords don\'t match.', category='error')
+                elif len(password) < 6:
+                    flash('password must be greater than 6 characters.', category='error')
                 elif role == '':
                     flash('Role Wajib dipilih.', category='error')
                 elif len(empID) < 6:
-                    flash('Employee ID must be greater than 3 characters.', category='error')
+                    flash('Employee ID must be greater than 6 characters.', category='error')
                 elif len(badgeID) < 6:
                     flash('Badge ID must be greater than 3 characters.', category='error')
                 elif len(depart) < 2:

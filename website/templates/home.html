@@ -131,7 +131,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    {%for transaksi in transaksi.items %}
+                    {%for transaksi in transaksi %}
                     {% if (transaksi.status == 'checkin') or (transaksi.status == 'checkout')   %}
                     <td>
                       
@@ -248,8 +248,15 @@
                       <span data-bs-toggle="modal" data-bs-target="#detailPermit">  
                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getPermitdetail('{{permit.id}}')" data-bs-original-title="View Detail" aria-label="Views"><span class="badge rounded-pill bg-success">View Detail</span></a>
                       </span>
+                      {% if permit.purpose == "OVERTIME" %}
+                      {%if permit.statusGenerate == "ok"%}
+                      <span data-bs-toggle="modal">  
+                        <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="hostAccept('{{permit.id}}')" data-bs-original-title="Accept" aria-label="Views"><span class="badge rounded-pill bg-primary">Accept</span></a>
+                      </span>
+                      {% else %}
                       
-                      {% if permit.statusGenerate == 'ok' %}
+                      {% endif %}
+                      {% elif permit.statusGenerate == 'ok' %}
                       <span data-bs-toggle="modal" data-bs-target="#uploadGambarPermit">  
                         <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" onclick="getIdUpload('{{permit.id}}')" data-bs-original-title="Upload E-Approval" aria-label="Views"><span class="badge rounded-pill bg-success">Upload</span></a>
                       </span>

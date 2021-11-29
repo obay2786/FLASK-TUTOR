@@ -80,7 +80,7 @@ def home():
         host = current_user.firstName + ':' +current_user.empID
         #perbaiki pagination
         permit = Permit.query.filter(Permit.status.in_(('waitingadmin', 'waitinghost'))).filter_by(host=host).order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
-        transaksi = Transaksi.query.order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
+        transaksi = Transaksi.query.order_by(text('id desc')).all()
         location = Location.query.order_by(Location.id).all()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
@@ -898,6 +898,17 @@ def kirimEmailApprove():
    
     return jsonify({})
 
+@views.route('/accepthost', methods=['POST'])
+def acceptHost():
+    data = json.loads(request.data)
+    print(data)
+    permitId = data['id']
+    permit = Permit.query.filter_by(id=permitId).first()
+    permit.status = 'approved'
+   
+    db.session.commit()
+    return jsonify({})
+
 @views.route('/approveworkingadmin', methods=['POST'])
 def approveWorkingAdmin():
     data = json.loads(request.data)
@@ -915,7 +926,8 @@ def approveOvertimeAdmin():
     print(data)
     permitId = data['id']
     permit = Permit.query.filter_by(id=permitId).first()
-    permit.status = 'approved'
+    permit.status = 'waitinghost'
+    permit.statusGenerate = 'ok'
     db.session.commit()
     return jsonify({})
 
