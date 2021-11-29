@@ -11,13 +11,10 @@ def readsql():
     engine = db.create_engine(dbpana)
     connection = engine.connect()
     metadata = db.MetaData()
-    census = db.Table('permit', metadata, autoload=True, autoload_with=engine)
-
+    permit = db.Table('permit', metadata, autoload=True, autoload_with=engine)
     #Equivalent to 'SELECT * FROM census'
-    query = db.select([census])
-
+    query = db.select([permit])
     ResultProxy = connection.execute(query)
-
     ResultSet = ResultProxy.fetchall()
 
 

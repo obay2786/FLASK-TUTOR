@@ -27,7 +27,7 @@ class Transaksi(db.Model):
     status = db.Column(db.String(150))
     location = db.Column(db.String(150))
     photo = db.Column(db.Text())
-
+    permitID = db.Column(db.String(150))
 
 
 class Permit(db.Model):

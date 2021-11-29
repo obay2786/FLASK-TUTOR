@@ -1017,7 +1017,7 @@ def savetotransaksicheckin():
     dataTransaksi['status'] = 'waiting'
     dataTransaksi['location'] = permit.location
     dataTransaksi['photo'] = visitor.photo
-    # dataTransaksi['idPermit'] = permitId
+    dataTransaksi['permitID'] = permitId
     transaksi = Transaksi(**dataTransaksi)
     db.session.add(transaksi)
     
