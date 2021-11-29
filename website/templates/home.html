@@ -314,8 +314,8 @@
     padding-right: 0px;
 ">
                   
-                  <!-- General Form Elements -->
-                  <form method="POST" enctype="multipart/form-data">
+                  <!-- permit upload gambar -->
+                 
                     <input type="hidden" class="form-control" id="idPermitUpload" name="idPermit" >
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                     <img src="" id = "uploadGambarDbPermit" style="height: 400px;" alt="Profile" >
@@ -324,7 +324,7 @@
                     <div class="row mb-3">
                       <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                       <div class="col-sm-10">
-                        <input type="file"  class="form-control" id="photo" name="photo" accept=".jpg, .jpeg" required>
+                        <input type="file"  class="form-control" id="photoPermit" name="photo" accept=".jpg, .jpeg" required>
                       </div>
                     </div>
                 
@@ -333,13 +333,13 @@
                       
                       <div class="col-sm-10">
                         
-                        <button type="submit" name="formEdit"  value="uploadGambarApproval"class="btn btn-primary">Upload E-Approval</button>
-                      
+                        <button  name="formEdit" class="btn btn-primary" onclick="uploadPhotoPermit()">Upload E-Approval</button> 
                       </div>
                     </div>
 
-                  </form><!-- End General Form Elements -->
-
+              
+                  
+                 
                 </div>
               </div>
             </div>
@@ -538,7 +538,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" onclick="tutupSukses()" data-bs-dismiss="modal">Close</button>
          
           </div>
         </div>
@@ -549,4 +549,5 @@
      
       {% endif %}
     </section>
+   
     {% endblock %}

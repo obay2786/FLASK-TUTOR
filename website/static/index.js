@@ -570,5 +570,41 @@ function tombolCheckin(id){
     
 })
 }
+function openModal() {
+  var ugp = document.getElementById('uploadGambarPermit')
+  ugp.style = "display: none;"
+ 
+  
+  var myModal = new bootstrap.Modal(document.getElementById('staticApprovalSuccess'), {  keyboard: false });
+  myModal.show();
+}
+async function uploadPhotoPermit(){
+  
+  
+  let idPermit = document.getElementById("idPermitUpload").value
+  let formData = new FormData()
+  formData.append("file",photoPermit.files[0])
+  formData.append("idPermit",idPermit)
+  const res = await fetch("/gambarpermit", {
+    method: "POST",
+    body: formData,
+  })
 
+  const data = await res.json()
+  
+  kirimEmailApprove(idPermit)
+  
+}
 
+async function kirimEmailApprove(idPermit){
+  const res = await fetch("/kirimemailapprove", {
+    method: "POST",
+    body: JSON.stringify({ id:idPermit }),
+  })
+  const hasil = await res.json()
+  openModal()
+}
+
+function tutupSukses(){
+  window.location.href = "/"
+}

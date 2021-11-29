@@ -47,6 +47,20 @@ def qrGen(id,nik,nama):
     return {nama:qr}
     
 
+@views.route('/gambarpermit', methods=['GET', 'POST'])
+@login_required
+def gambarpermit():
+    if request.method == 'POST':
+        print(request.form)
+        gambarPermit = saveGambar(request.files['file'])
+        permitId = request.form.get('idPermit')
+        permit = Permit.query.filter_by(id=permitId).first()
+        permit.UploadPermit = gambarPermit
+        permit.status = 'approved'
+        db.session.commit()
+        return jsonify({})
+
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
