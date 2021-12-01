@@ -246,7 +246,7 @@ async function getCheckout(rfid){
       document.getElementById("nik2").innerHTML = data.nik;
       document.getElementById("badgeno2").innerHTML = data.badge;
       document.getElementById("company2").innerHTML = data.vendor
-      document.getElementById("today").innerHTML = today.toISOString()
+     
       document.getElementById("photo2").src = "data:image/png;base64,"+data.photo;
       document.getElementById("statusA1").innerHTML = "Visitor badge has read. \<br\> Host please confirm within 10 seconds";
       document.getElementById("imgA1").src = "assets/img/step2A.png";
@@ -264,13 +264,14 @@ async function getCheckout(rfid){
       let nik = data.nik
       let badge = data.badge
       let TimeCO = today.toISOString()
-      if(data.purpose == 'SUPPLY'){
+      if(data.purpose == 'SUPPLY'|| data.purpose == 'WORKING' || data.purpose == 'OVERTIME'){
         const res3 = await fetch("/updatedatacheckout", {
           method: "POST",
-          body: JSON.stringify({ Nik:nik, Badge:badge, TimeCO:timeCheckout }),
+          body: JSON.stringify({ Nik:nik, Badge:badge, TimeCO:TimeCO }),
 
         })
         document.getElementById("imgA1").src = "assets/img/checkedout.png";
+        setTimeout(rl,10000)
       }else{
       document.getElementById('txtBox2').onchange =  function () { getStaffCO(empID,this); };
       setTimeout(rl,10000)
@@ -299,7 +300,7 @@ async function getStaffCO(empTransaksi,badgeId){
   document.getElementById("imgB1").src = "";
   document.getElementById("statusA1").innerHTML = "";
   document.getElementById("imgA1").src = "assets/img/checkedout.png";
-  document.getElementById("bubble-2").classList.remove('green-text');
+  document.getElementById("bubble-2").classList.remove('green-text');TimeCO
   document.getElementById("step-2").classList.remove('current');
   document.getElementById("bubble-3").classList.add('green-text');
   document.getElementById("step-3").classList.add('current');

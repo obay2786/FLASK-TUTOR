@@ -41,7 +41,7 @@ class Permit(db.Model):
     supplyBarang = db.Column(db.String(500)) #dict
     permitNo = db.Column(db.String(150))
     desk = db.Column(db.String(150))
-    anggota = db.Column(db.String(1000)) #dict
+    anggota = db.Column(db.String(3000)) #dict
     email = db.Column(db.String(150))
     host = db.Column(db.String(150))
     bawaBarang = db.Column(db.String(150)) #Apakah membawa media penyimpanan?   
