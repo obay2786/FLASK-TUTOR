@@ -12,25 +12,27 @@ def sdsb():
         firebase=pyrebase.initialize_app(firebaseConfig)
 
         db=firebase.database()
-
-        ok = db.child('sdsb4dnight').get()
-        print(ok.val())
-        db.child('sdsb4dnight').update({"prize1":"2544"})
-        print(ok.val())
+        print(db.get())
+        #ok = db.child('sdsb4dnight').get()
+        #print(ok.val())
+        #db.child('sdsb4dnight').update({"prize1":"2544"})
+        #print(ok.val())
 
 
 def akulaku():
-        firebaseConfig={"apiKey": "AIzaSyDoiC-LuZbjxszNjC0I6_3tfIywmMpVrkc",
-                "authDomain": "awesome-terra-87705.firebaseapp.com",
-                "databaseURL": "https://awesome-terra-87705.firebaseio.com",
-                "projectId": "awesome-terra-87705",
-                "storageBucket": "awesome-terra-87705.appspot.com",
-                "messagingSenderId": "480338185245"}
+        firebaseConfig ={"apiKey":"AIzaSyAlinPrAD7l3JS49ZqVNOebbweCyerBTWQ",
+        "authDomain":"formula-1-1236.firebaseapp.com",
+        "databaseURL":"https://formula-1-1236.firebaseio.com",
+        "projectId":"formula-1-1236",
+        "storageBucket":"formula-1-1236.appspot.com",
+        "messagingSenderId":"782337978959",
+        "appId":"1:782337978959:web:4a66738cc25744cabc303a",
+        "measurementId":"G-D9BP6Y3R6M"}
 
         firebase=pyrebase.initialize_app(firebaseConfig)
 
         db=firebase.database()
-
+        print(db.get())
         ok = db.get()
         print(ok.val())
         

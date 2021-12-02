@@ -1073,7 +1073,7 @@ def getcheckoutdatatransaksi():
 def updatedatacheckout():
     data = json.loads(request.data)
     nik = data['Nik']
-    transaksi = Transaksi.query.filter_by(nik=nik).first()
+    transaksi = Transaksi.query.filter_by(nik=nik).order_by(text('id desc')).first()
     tco = data['TimeCO']
     transaksi.timeCheckout = tco
     transaksi.status = 'checkout'

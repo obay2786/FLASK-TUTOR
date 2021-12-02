@@ -270,7 +270,13 @@ async function getCheckout(rfid){
           body: JSON.stringify({ Nik:nik, Badge:badge, TimeCO:TimeCO }),
 
         })
+        document.getElementById("statusA1").innerHTML = "";
         document.getElementById("imgA1").src = "assets/img/checkedout.png";
+        document.getElementById("imgB1").src = "";
+        document.getElementById("bubble-2").classList.remove('green-text');
+        document.getElementById("step-2").classList.remove('current');
+        document.getElementById("bubble-3").classList.add('green-text');
+        document.getElementById("step-3").classList.add('current');
         setTimeout(rl,10000)
       }else{
       document.getElementById('txtBox2').onchange =  function () { getStaffCO(empID,this); };
