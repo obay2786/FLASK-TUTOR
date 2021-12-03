@@ -619,3 +619,10 @@ async function kirimEmailApprove(idPermit){
 function tutupSukses(){
   window.location.href = "/"
 }
+
+// tombol rubah tanggal di dashboard admin
+function changeDate(){
+ document.getElementById('gantiTanggal').submit()
+
+}
+

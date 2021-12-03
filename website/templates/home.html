@@ -27,8 +27,8 @@
                       <i class="bi bi-card-checklist"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>150</h6>
-                      <span class="small pt-2 ps-1">This Month Visitors</span>
+                      <h6>{{ dailyCount }}</h6>
+                      <span class="small pt-2 ps-1">Total Visitors Today</span>
                     </div>
                   </div>
                 </div>
@@ -46,8 +46,8 @@
                       <i class="bi bi-bar-chart"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>15</h6>
-                      <span class="small pt-2 ps-1">Daily Avg. Visitors</span>
+                      <h6>{{ monthCount }}</h6>
+                      <span class="small pt-2 ps-1">Total Visitors This Month</span>
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,7 @@
                       <i class="bi bi-clipboard-data"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>250</h6>
+                      <h6>{{ lastMonthCount }}</h6>
                       <span class="small pt-2 ps-1">last Month's Visitors</span>
                     </div>
                   </div>
@@ -84,25 +84,12 @@
 
                 <div class="row w-75 ms-auto">
                   
-                  <div class="col-md-3">
-                    <div class="input-group">
-                      <input class="form-control border-end-0 border" type="search" placeholder="Search Visitor" id="example-search-input">
-                      <span class="input-group-append">
-                          <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
-                              <i class="bi bi-search"></i>
-                          </button>
-                      </span>
-                    </div>
-                    <!-- <div class="form-group has-feedback has-feedback-left">
-                      <input type="text" class="form-control" placeholder="Search Visitor">
-                      <i class="bi bi-search form-control-feedback"></i>
-                    </div> -->
-                  </div>
+                  
                   <div class="col-md-3 d-flex">
                     <div class="my-auto mx-auto">
-                      <i class="bi bi-chevron-left"></i>
-                      <span class="mx-2">Sept. 10, 2018</span>
-                      <i class="bi bi-chevron-right"></i>
+                      <form id="gantiTanggal" method="POST">
+                      <input name="tanggal" type="date" class="form-control" value={{hariIni}} onchange="changeDate()">
+                        </form>
                     </div>
                   </div>
                 </div>

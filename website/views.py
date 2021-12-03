@@ -12,8 +12,7 @@ import requests
 from PIL import Image, ImageOps
 from io import BytesIO
 from .mailr import kirimEmail
-
-from openpyxl import load_workbook
+from openpyxl import load_workbook, Workbook
 views = Blueprint('views', __name__)
 ROWS_PER_PAGE = 10
 
@@ -73,18 +72,59 @@ def home():
             permit.UploadPermit = gambarPermit
             permit.status = 'approved'
             db.session.commit()
+        else:
+            print(request.form)
+            tanggal = request.form.get('tanggal')
+            tanggal.replace('-','/')
+            transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{tanggal} 00:00:00\' AND \'{tanggal} 23:59:59\'')).order_by(text('id desc')).all()
+            
+            startDate = datetime.datetime.now()
+            endDate = datetime.datetime.now()
+            dailyCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+            
+            startDateM = datetime.datetime.now().replace(day=1)
+            endDateM = datetime.datetime.now()
+            monthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateM.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDateM.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+            
+            today = datetime.date.today()
+            first = today.replace(day=1)
+            lastMonth = first - datetime.timedelta(days=1)
+            startDateLM = lastMonth.replace(day=1)
+            endDateLM = lastMonth.strftime("%Y/%m/%d")
+            lastMonthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateLM} 00:00:00\' AND \'{endDateLM} 23:59:59\'')).count()
+            # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
+            return render_template("home.html", user=current_user, transaksi=transaksi, dailyCount=dailyCount, monthCount=monthCount, lastMonthCount=lastMonthCount,hariIni=tanggal)
 
         return redirect(url_for('views.home'))
     else:
+        #login Host
         page = request.args.get('page', 1, type=int)
         host = current_user.firstName + ':' +current_user.empID
-        #perbaiki pagination
         permit = Permit.query.filter(Permit.status.in_(('waitingadmin', 'waitinghost'))).filter_by(host=host).order_by(text('id desc')).paginate(page=page, per_page=ROWS_PER_PAGE)
-        transaksi = Transaksi.query.order_by(text('id desc')).all()
+        #login Admin
+        startDate = datetime.datetime.now()
+        endDate = datetime.datetime.now()
+        transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).order_by(text('id desc')).all()
+        # filterR = 'no'
         location = Location.query.order_by(Location.id).all()
+        #dailyVis = Transaksi.query()
+        startDate = datetime.datetime.now()
+        endDate = datetime.datetime.now()
+        dailyCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+        hariIni = startDate.strftime("%Y-%m-%d")
+        startDateM = datetime.datetime.now().replace(day=1)
+        endDateM = datetime.datetime.now()
+        monthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateM.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDateM.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+        
+        today = datetime.date.today()
+        first = today.replace(day=1)
+        lastMonth = first - datetime.timedelta(days=1)
+        startDateLM = lastMonth.replace(day=1)
+        endDateLM = lastMonth.strftime("%Y/%m/%d")
+        lastMonthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateLM} 00:00:00\' AND \'{endDateLM} 23:59:59\'')).count()
         # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
         
-        return render_template("home.html", user=current_user, permit=permit,location=location, transaksi=transaksi)
+        return render_template("home.html", user=current_user, permit=permit,location=location, transaksi=transaksi, dailyCount=dailyCount, monthCount=monthCount, lastMonthCount=lastMonthCount, hariIni=hariIni)
 
 @views.route('/waiting', methods=['GET', 'POST'])
 @login_required
@@ -193,26 +233,76 @@ def visitor():
 @views.route('/report',methods=['GET', 'POST'])
 @login_required
 def report():
-    if current_user.role == 'Admin' or current_user.role == 'Security':
-        # data = json.loads(request.data)
-        # by = data['by']
-        # transaksi = Transaksi.query.order_by(text("id desc")).all()
-        ID = None
-        host = None
-        purpose = None
-        company = None
-        my_filters = {'id':ID, 'host':host, 'purpose':purpose, 'vendor':company}
-        filterz = {}
-        for i,j in my_filters.items():
-            if j != None:
-                filterz.update({i:j})
+    if request.method == 'POST':
+        if request.form.get('filterview') == 'filterview':
+
+            print(request.form)
+            startDate = request.form.get('startDate')
+            tanggal1 = startDate
+            startDate = startDate.replace('-','/')
+            endDate = request.form.get('endDate')
+            tanggal2 = endDate
+            endDate = endDate.replace('-','/')
+            filterList = [startDate,endDate]
+            transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate} 00:00:00\' AND \'{endDate} 23:59:59\'')).order_by(text('id desc')).all()
+
+            return render_template("report.html", user=current_user, transaksi=transaksi, filterList=filterList, hariIni=tanggal1, hariIni2=tanggal2)
+        elif request.form.get('buttonfilter') == 'buttonfilter':
+            print(request.form)
+            startDate = request.form.get('startDate')
+            tanggal1 = startDate
+            startDate = startDate.replace('-','/')
+            endDate = request.form.get('endDate')
+            tanggal2 = endDate
+            endDate = endDate.replace('-','/')
+            filterList = [startDate,endDate]
+            transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate} 00:00:00\' AND \'{endDate} 23:59:59\'')).order_by(text('id desc')).all()
+            #belum selesai 03-12-2021
+            book = Workbook()
+            sheet = book.active
+            rows = []
+            [
+                [nama,nik,hos],
+                [nama,nik,hos]
+            ]
+            
+            for row in rows:
+                sheet.append(row)
+
+            book.save('appending.xlsx')
+
+
+            
+        else:
+            pass
+
+
+            
+        # purpose = None
+        # company = None
+        # my_filters = {'startDate':startDate, 'endDate':endDate}
+        # filterz = {}
+        # for i,j in my_filters.items():
+        #     if j != None:
+        #         filterz.update({i:j})
+            
+        # transaksi = Transaksi.query.order_by(text('id desc')).filter_by(**filterz).all()
         
-        transaksi = Transaksi.query.order_by(text('id desc')).filter_by(**filterz).all()                  #filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\''))
-
-
-        return render_template("report.html", user=current_user, transaksi=transaksi)
+        # pass
     else:
-        return render_template("login.html", user=current_user)
+        if current_user.role == 'Admin' or current_user.role == 'Security':
+            # data = json.loads(request.data)
+            # by = data['by']
+            # transaksi = Transaksi.query.order_by(text("id desc")).all()
+            
+            startDate = datetime.datetime.now()
+            endDate = datetime.datetime.now()
+            transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).order_by(text('id desc')).all()
+            filterR = 'no'
+            
+            return render_template("report.html", user=current_user, transaksi=transaksi, filterR=filterR)
+        else:
+            return render_template("login.html", user=current_user)
 
 @views.route('/nama')
 @login_required
@@ -1116,6 +1206,29 @@ def exportxls():
     dataQ = {} 
     dataQ['id'] = transaksi.id
     return jsonify(dataQ)
+
+
+    book = Workbook()
+    sheet = book.active
+
+    rows = (
+        (88, 46, 57),
+        (89, 38, 12),
+        (23, 59, 78),
+        (56, 21, 98),
+        (24, 18, 43),
+        (34, 15, 67)
+    )
+
+    for row in rows:
+        sheet.append(row)
+
+    book.save('appending.xlsx')
+
+
+
+
+
     # dataQ['namaVisitor'] = transaksi.namaVisitor
     # dataQ['nik'] = transaksi.nik
     # dataQ['purpose'] = transaksi.purpose
