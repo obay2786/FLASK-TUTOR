@@ -1,6 +1,6 @@
 import os
 import re
-from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect,current_app,url_for
+from flask import Blueprint, render_template, request, flash, jsonify, send_from_directory, redirect,current_app,url_for,send_file
 from flask_login import login_required, current_user
 import datetime
 from .models import Badge, Visitor,User, Permit, Location, Transaksi
@@ -258,21 +258,25 @@ def report():
             filterList = [startDate,endDate]
             transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate} 00:00:00\' AND \'{endDate} 23:59:59\'')).order_by(text('id desc')).all()
             #belum selesai 03-12-2021
-            book = Workbook()
-            sheet = book.active
-            rows = []
-            [
-                [nama,nik,hos],
-                [nama,nik,hos]
-            ]
-            
-            for row in rows:
-                sheet.append(row)
+            # headers       = ['id','rfid','status','no']
+            headers       = ['Visitor_Name','NIK','Purpose','Company','Host','Timein','Timeout','Approval_Status']
+            workbook_name = 'TabelTransaksi.xlsx'
+            wb = Workbook()
+            page = wb.active
+            page.title = 'Data'
+            page.append(headers) # write the headers to the first line
+            hasil2 = [[k.namaVisitor,k.nik] for k in transaksi]
+            print(hasil2)
+            # user = Badge.query.order_by(text('id')).all()
+            # for i in user:
+            #     page.append([i.id,i.rfid,i.status,i.no])
+            for i in transaksi:
+                page.append([i.namaVisitor,i.nik,i.purpose,i.vendor,i.host,i.timeCheckin,i.timeCheckout,i.statusPermit])
+            urlFolder = os.path.join(current_app.root_path,'static',workbook_name)
+            wb.save(filename = urlFolder)
 
-            book.save('appending.xlsx')
+            return send_file(urlFolder,attachment_filename='report.xls')
 
-
-            
         else:
             pass
 
