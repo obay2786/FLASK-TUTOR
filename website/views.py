@@ -131,9 +131,33 @@ def home():
 def waiting():
     startDate = datetime.datetime.now()
     endDate = datetime.datetime.now()
+    # status = None
+    # my_filters = {'status':status}
+    # filterz = {}
+    # for i,j in my_filters.items():
+    #     if j != None:
+    #             filterz.update({i:j})
     transaksi = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).order_by(text('id desc')).all()
 
-    return render_template("waiting.html", user=current_user, transaksi=transaksi)
+
+    startDate = datetime.datetime.now()
+    endDate = datetime.datetime.now()
+    dailyCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDate.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDate.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+    hariIni = startDate.strftime("%Y-%m-%d")
+    startDateM = datetime.datetime.now().replace(day=1)
+    endDateM = datetime.datetime.now()
+    monthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateM.strftime("%Y/%m/%d")} 00:00:00\' AND \'{endDateM.strftime("%Y/%m/%d")} 23:59:59\'')).count()
+    
+    today = datetime.date.today()
+    first = today.replace(day=1)
+    lastMonth = first - datetime.timedelta(days=1)
+    startDateLM = lastMonth.replace(day=1)
+    endDateLM = lastMonth.strftime("%Y/%m/%d")
+    lastMonthCount = Transaksi.query.filter(text(f'timeCheckin BETWEEN \'{startDateLM} 00:00:00\' AND \'{endDateLM} 23:59:59\'')).count()
+    # status = Permit.query.order_by(text('status')).paginate(page=page, per_page=ROWS_PER_PAGE)
+
+
+    return render_template("waiting.html", user=current_user, transaksi=transaksi, dailyCount=dailyCount, monthCount=monthCount, lastMonthCount=lastMonthCount,hariIni=hariIni)
 
 @views.route('/waitinglist', methods=['GET', 'POST'])
 #@login_required
